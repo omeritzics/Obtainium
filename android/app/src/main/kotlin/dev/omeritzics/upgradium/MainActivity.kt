@@ -1,4 +1,4 @@
-package dev.omeritzics.upgradium
+package dev.imranr.obtainium
 
 import io.flutter.embedding.android.FlutterActivity
 
