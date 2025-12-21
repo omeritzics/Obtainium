@@ -1,6 +1,7 @@
 name: Nightly
 permissions:
   contents: write
+  packages: write
 
 on:
   push:
