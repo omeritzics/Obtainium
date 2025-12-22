@@ -136,7 +136,7 @@ class SourceHut extends AppSource {
       }
       return apkDetailsList.first;
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 }

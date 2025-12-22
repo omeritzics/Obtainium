@@ -171,7 +171,7 @@ class APKPure extends AppSource {
       additionalSettings,
     );
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
     List<Map<String, dynamic>> apks = jsonDecode(
       res.body,

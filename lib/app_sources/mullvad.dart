@@ -69,7 +69,7 @@ class Mullvad extends AppSource {
         changeLog: changeLog,
       );
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 }

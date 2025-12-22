@@ -9,7 +9,7 @@ assignees: ''
 
 **Prerequisites**
 <!-- Please ensure your request is not part of an existing issue. -->
-<!-- Please ensure you have checked the Obtainium Wiki. -->
+<!-- Please ensure you have checked the Updatium Wiki. -->
 
 **Describe the feature**
 <!-- A clear and concise description of what you want to happen.

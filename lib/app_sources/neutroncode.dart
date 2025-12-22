@@ -116,7 +116,7 @@ class NeutronCode extends AppSource {
             : null,
       );
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 }

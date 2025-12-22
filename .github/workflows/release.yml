@@ -1,6 +1,7 @@
 name: Build and Release
 permissions:
   contents: write
+  packages: write
 
 on:
   workflow_dispatch:

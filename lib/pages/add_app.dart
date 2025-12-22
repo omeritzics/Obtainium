@@ -190,7 +190,7 @@ class AddAppPageState extends State<AddAppPage> {
               false,
             );
             if (apkUrl == null) {
-              throw ObtainiumError(tr('cancelled'));
+              throw UpdatiumError(tr('cancelled'));
             }
             app.preferredApkIndex = app.apkUrls
                 .map((e) => e.value)
@@ -212,7 +212,7 @@ class AddAppPageState extends State<AddAppPage> {
             app.id = downloadedFile?.appId ?? downloadedDir!.appId;
           }
           if (appsProvider.apps.containsKey(app.id)) {
-            throw ObtainiumError(tr('appAlreadyAdded'));
+            throw UpdatiumError(tr('appAlreadyAdded'));
           }
           if (app.additionalSettings['trackOnly'] == true ||
               app.additionalSettings['versionDetection'] != true) {
@@ -262,7 +262,7 @@ class AddAppPageState extends State<AddAppPage> {
                       } catch (e) {
                         return e is String
                             ? e
-                            : e is ObtainiumError
+                            : e is UpdatiumError
                             ? e.toString()
                             : tr('error');
                       }
@@ -416,7 +416,7 @@ class AddAppPageState extends State<AddAppPage> {
             si++;
           }
           if (res.isEmpty) {
-            throw ObtainiumError(tr('noResults'));
+            throw UpdatiumError(tr('noResults'));
           }
           List<String>? selectedUrls = res.isEmpty
               ? []

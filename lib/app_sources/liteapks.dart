@@ -73,7 +73,7 @@ class LiteAPKs extends AppSource {
       additionalSettings,
     );
     if (res1.statusCode != 200) {
-      throw getObtainiumHttpError(res1);
+      throw getUpdatiumHttpError(res1);
     }
 
     var liteAppId = jsonDecode(res1.body)[0]['id'];
@@ -86,7 +86,7 @@ class LiteAPKs extends AppSource {
       additionalSettings,
     );
     if (res2.statusCode != 200) {
-      throw getObtainiumHttpError(res2);
+      throw getUpdatiumHttpError(res2);
     }
     var json = jsonDecode(res2.body);
 

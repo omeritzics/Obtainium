@@ -11,14 +11,14 @@ class Moddroid extends AppSource {
   String sourceSpecificStandardizeURL(String url, {bool forSelection = false}) {
     var match = RegExp(r'moddroid\.com/(apps|games)/([^/]+)/([^/]+)').firstMatch(url);
     if (match != null) return 'https://moddroid.com/${match.group(1)}/${match.group(2)}/${match.group(3)}/';
-    throw ObtainiumError('Invalid URL');
+    throw UpdatiumError('Invalid URL');
   }
 
   @override
   Future<APKDetails> getLatestAPKDetails(String standardUrl, Map<String, dynamic> additionalSettings) async {
     try {
       var mainRes = await sourceRequest(standardUrl, additionalSettings);
-      if (mainRes.statusCode != 200) throw getObtainiumHttpError(mainRes);
+      if (mainRes.statusCode != 200) throw getUpdatiumHttpError(mainRes);
       
       var baseUrl = Uri.parse(standardUrl);
       var intermediateUrl = parse(mainRes.body).querySelectorAll('a')
@@ -29,7 +29,7 @@ class Moddroid extends AppSource {
               orElse: () => throw NoReleasesError(note: 'No download page found'));
 
       var intRes = await sourceRequest(intermediateUrl, additionalSettings);
-      if (intRes.statusCode != 200) throw getObtainiumHttpError(intRes);
+      if (intRes.statusCode != 200) throw getUpdatiumHttpError(intRes);
 
       var apkUrl = parse(intRes.body).querySelectorAll('a')
           .map((e) => e.attributes['href'])
@@ -42,8 +42,8 @@ class Moddroid extends AppSource {
 
       return APKDetails(version, [MapEntry(apkUrl, apkUrl)], AppNames(name, name));
     } catch (e) {
-      if (e is ObtainiumError) rethrow;
-      throw ObtainiumError('Moddroid Error: $e');
+      if (e is UpdatiumError) rethrow;
+      throw UpdatiumError('Moddroid Error: $e');
     }
   }
 }

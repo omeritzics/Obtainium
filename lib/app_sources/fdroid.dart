@@ -176,7 +176,7 @@ class FDroid extends AppSource {
       });
       return urlsWithDescriptions;
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 
@@ -285,7 +285,7 @@ class FDroid extends AppSource {
         AppNames(sourceName, Uri.parse(standardUrl).pathSegments.last),
       );
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 }

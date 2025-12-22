@@ -8,72 +8,72 @@ import 'package:obtainium/providers/logs_provider.dart';
 import 'package:obtainium/providers/source_provider.dart';
 import 'package:provider/provider.dart';
 
-class ObtainiumError {
+class UpdatiumError {
   late String message;
   bool unexpected;
-  ObtainiumError(this.message, {this.unexpected = false});
+  UpdatiumError(this.message, {this.unexpected = false});
   @override
   String toString() {
     return message;
   }
 }
 
-class RateLimitError extends ObtainiumError {
+class RateLimitError extends UpdatiumError {
   late int remainingMinutes;
   RateLimitError(this.remainingMinutes)
     : super(plural('tooManyRequestsTryAgainInMinutes', remainingMinutes));
 }
 
-class InvalidURLError extends ObtainiumError {
+class InvalidURLError extends UpdatiumError {
   InvalidURLError(String sourceName)
     : super(tr('invalidURLForSource', args: [sourceName]));
 }
 
-class CredsNeededError extends ObtainiumError {
+class CredsNeededError extends UpdatiumError {
   CredsNeededError(String sourceName)
     : super(tr('requiresCredentialsInSettings', args: [sourceName]));
 }
 
-class NoReleasesError extends ObtainiumError {
+class NoReleasesError extends UpdatiumError {
   NoReleasesError({String? note})
     : super(
         '${tr('noReleaseFound')}${note?.isNotEmpty == true ? '\n\n$note' : ''}',
       );
 }
 
-class NoAPKError extends ObtainiumError {
+class NoAPKError extends UpdatiumError {
   NoAPKError() : super(tr('noAPKFound'));
 }
 
-class NoVersionError extends ObtainiumError {
+class NoVersionError extends UpdatiumError {
   NoVersionError() : super(tr('noVersionFound'));
 }
 
-class UnsupportedURLError extends ObtainiumError {
+class UnsupportedURLError extends UpdatiumError {
   UnsupportedURLError() : super(tr('urlMatchesNoSource'));
 }
 
-class DowngradeError extends ObtainiumError {
+class DowngradeError extends UpdatiumError {
   DowngradeError(int currentVersionCode, int newVersionCode)
     : super(
         '${tr('cantInstallOlderVersion')} (versionCode $currentVersionCode ➔ $newVersionCode)',
       );
 }
 
-class InstallError extends ObtainiumError {
+class InstallError extends UpdatiumError {
   InstallError(int code)
     : super(PackageInstallerStatus.byCode(code).name.substring(7));
 }
 
-class IDChangedError extends ObtainiumError {
+class IDChangedError extends UpdatiumError {
   IDChangedError(String newId) : super('${tr('appIdMismatch')} - $newId');
 }
 
-class NotImplementedError extends ObtainiumError {
+class NotImplementedError extends UpdatiumError {
   NotImplementedError() : super(tr('functionNotImplemented'));
 }
 
-class MultiAppMultiError extends ObtainiumError {
+class MultiAppMultiError extends UpdatiumError {
   Map<String, dynamic> rawErrors = {};
   Map<String, List<String>> idsByErrorString = {};
   Map<String, String> appIdNames = {};
@@ -116,7 +116,7 @@ void showMessage(dynamic e, BuildContext context, {bool isError = false}) {
     context,
     listen: false,
   ).add(e.toString(), level: isError ? LogLevels.error : LogLevels.info);
-  if (e is String || (e is ObtainiumError && !e.unexpected)) {
+  if (e is String || (e is UpdatiumError && !e.unexpected)) {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(e.toString())));

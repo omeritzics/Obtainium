@@ -1,5 +1,5 @@
 // Exposes functions that can be used to send notifications to the user
-// Contains a set of pre-defined ObtainiumNotification objects that should be used throughout the app
+// Contains a set of pre-defined UpdatiumNotification objects that should be used throughout the app
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:obtainium/main.dart';
 import 'package:obtainium/providers/settings_provider.dart';
 import 'package:obtainium/providers/source_provider.dart';
 
-class ObtainiumNotification {
+class UpdatiumNotification {
   late int id;
   late String title;
   late String message;
@@ -20,7 +20,7 @@ class ObtainiumNotification {
   bool onlyAlertOnce;
   String? payload;
 
-  ObtainiumNotification(
+  UpdatiumNotification(
     this.id,
     this.title,
     this.message,
@@ -34,7 +34,7 @@ class ObtainiumNotification {
   });
 }
 
-class UpdateNotification extends ObtainiumNotification {
+class UpdateNotification extends UpdatiumNotification {
   UpdateNotification(List<App> updates, {int? id})
     : super(
         id ?? 2,
@@ -57,7 +57,7 @@ class UpdateNotification extends ObtainiumNotification {
   }
 }
 
-class SilentUpdateNotification extends ObtainiumNotification {
+class SilentUpdateNotification extends UpdatiumNotification {
   SilentUpdateNotification(List<App> updates, bool succeeded, {int? id})
     : super(
         id ?? 3,
@@ -81,7 +81,7 @@ class SilentUpdateNotification extends ObtainiumNotification {
   }
 }
 
-class SilentUpdateAttemptNotification extends ObtainiumNotification {
+class SilentUpdateAttemptNotification extends UpdatiumNotification {
   SilentUpdateAttemptNotification(List<App> updates, {int? id})
     : super(
         id ?? 3,
@@ -105,7 +105,7 @@ class SilentUpdateAttemptNotification extends ObtainiumNotification {
   }
 }
 
-class ErrorCheckingUpdatesNotification extends ObtainiumNotification {
+class ErrorCheckingUpdatesNotification extends UpdatiumNotification {
   ErrorCheckingUpdatesNotification(String error, {int? id})
     : super(
         id ?? 5,
@@ -119,7 +119,7 @@ class ErrorCheckingUpdatesNotification extends ObtainiumNotification {
       );
 }
 
-class AppsRemovedNotification extends ObtainiumNotification {
+class AppsRemovedNotification extends UpdatiumNotification {
   AppsRemovedNotification(List<List<String>> namedReasons)
     : super(
         6,
@@ -138,7 +138,7 @@ class AppsRemovedNotification extends ObtainiumNotification {
   }
 }
 
-class DownloadNotification extends ObtainiumNotification {
+class DownloadNotification extends UpdatiumNotification {
   DownloadNotification(String appName, int progPercent)
     : super(
         appName.hashCode,
@@ -153,7 +153,7 @@ class DownloadNotification extends ObtainiumNotification {
       );
 }
 
-class DownloadedNotification extends ObtainiumNotification {
+class DownloadedNotification extends UpdatiumNotification {
   DownloadedNotification(String fileName, String downloadUrl)
     : super(
         downloadUrl.hashCode,
@@ -166,7 +166,7 @@ class DownloadedNotification extends ObtainiumNotification {
       );
 }
 
-final completeInstallationNotification = ObtainiumNotification(
+final completeInstallationNotification = UpdatiumNotification(
   1,
   tr('completeAppInstallation'),
   tr('obtainiumMustBeOpenToInstallApps'),
@@ -176,7 +176,7 @@ final completeInstallationNotification = ObtainiumNotification(
   Importance.max,
 );
 
-class CheckingUpdatesNotification extends ObtainiumNotification {
+class CheckingUpdatesNotification extends UpdatiumNotification {
   CheckingUpdatesNotification(String appName)
     : super(
         4,
@@ -305,7 +305,7 @@ class NotificationsProvider {
   }
 
   Future<void> notify(
-    ObtainiumNotification notif, {
+    UpdatiumNotification notif, {
     bool cancelExisting = false,
   }) => notifyRaw(
     notif.id,

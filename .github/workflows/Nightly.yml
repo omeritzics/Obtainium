@@ -1,0 +1,64 @@
+name: Nightly Build
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+      - rebrand
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Build APK (Debug Mode)
+        run: |
+          sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
+          
+          flutter build apk --debug --flavor normal
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Updatium-Debug-APK
+          path: build/app/outputs/flutter-apk/**/app-normal-debug.apk
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: nightly-build
+          name: "Updatium Nightly"
+          files: build/app/outputs/flutter-apk/**/app-normal-debug.apk
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

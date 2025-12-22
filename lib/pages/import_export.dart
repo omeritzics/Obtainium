@@ -118,7 +118,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
       });
     }
 
-    runObtainiumExport({bool pickOnly = false}) async {
+    runUpdatiumExport({bool pickOnly = false}) async {
       HapticFeedback.selectionClick();
       appsProvider
           .export(
@@ -136,7 +136,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
           });
     }
 
-    runObtainiumImport() {
+    runUpdatiumImport() {
       HapticFeedback.selectionClick();
       FilePicker.platform
           .pickFiles()
@@ -149,7 +149,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
               try {
                 jsonDecode(data);
               } catch (e) {
-                throw ObtainiumError(tr('invalidInput'));
+                throw UpdatiumError(tr('invalidInput'));
               }
               appsProvider.import(data).then((value) {
                 var cats = settingsProvider.categories;
@@ -292,7 +292,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
                   }
                 }
               } else {
-                throw ObtainiumError(tr('noResults'));
+                throw UpdatiumError(tr('noResults'));
               }
             }
           }()
@@ -399,7 +399,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
                                   onPressed: importInProgress
                                       ? null
                                       : () {
-                                          runObtainiumExport(pickOnly: true);
+                                          runUpdatiumExport(pickOnly: true);
                                         },
                                   child: Text(
                                     tr('pickExportDir'),
@@ -414,7 +414,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
                                   onPressed:
                                       importInProgress || snapshot.data == null
                                       ? null
-                                      : runObtainiumExport,
+                                      : runUpdatiumExport,
                                   child: Text(
                                     tr('obtainiumExport'),
                                     textAlign: TextAlign.center,
@@ -431,7 +431,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
                                   style: outlineButtonStyle,
                                   onPressed: importInProgress
                                       ? null
-                                      : runObtainiumImport,
+                                      : runUpdatiumImport,
                                   child: Text(
                                     tr('obtainiumImport'),
                                     textAlign: TextAlign.center,

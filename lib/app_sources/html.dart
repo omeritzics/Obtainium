@@ -118,7 +118,7 @@ Future<List<MapEntry<String, String>>> grabLinksCommonFromRes(
   Map<String, dynamic> additionalSettings,
 ) async {
   if (res.statusCode != 200) {
-    throw getObtainiumHttpError(res);
+    throw getUpdatiumHttpError(res);
   }
   return grabLinksCommon(res.body, res.request!.url, additionalSettings);
 }

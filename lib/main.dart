@@ -162,21 +162,21 @@ void main() async {
         path: localeDir,
         fallbackLocale: fallbackLocale,
         useOnlyLangCode: false,
-        child: const Obtainium(),
+        child: const Updatium(),
       ),
     ),
   );
   BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
 }
 
-class Obtainium extends StatefulWidget {
-  const Obtainium({super.key});
+class Updatium extends StatefulWidget {
+  const Updatium({super.key});
 
   @override
-  State<Obtainium> createState() => _ObtainiumState();
+  State<Updatium> createState() => _UpdatiumState();
 }
 
-class _ObtainiumState extends State<Obtainium> {
+class _UpdatiumState extends State<Updatium> {
   var existingUpdateInterval = -1;
 
   @override
@@ -310,8 +310,8 @@ class _ObtainiumState extends State<Obtainium> {
     } else {
       bool isFirstRun = settingsProvider.checkAndFlipFirstRun();
       if (isFirstRun) {
-        logs.add('This is the first ever run of Obtainium.');
-        // If this is the first run, add Obtainium to the Apps list
+        logs.add('This is the first ever run of Updatium.');
+        // If this is the first run, add Updatium to the Apps list
         if (!fdroid) {
           getInstalledInfo(obtainiumId)
               .then((value) {
@@ -321,7 +321,7 @@ class _ObtainiumState extends State<Obtainium> {
                       obtainiumId,
                       obtainiumUrl,
                       'ImranR98',
-                      'Obtainium',
+                      'Updatium',
                       value!.versionName,
                       value.versionName!,
                       [],
@@ -384,7 +384,7 @@ class _ObtainiumState extends State<Obtainium> {
           if (settingsProvider.useSystemFont) NativeFeatures.loadSystemFont();
 
           return MaterialApp(
-            title: 'Obtainium',
+            title: 'Updatium',
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,

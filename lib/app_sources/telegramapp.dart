@@ -40,7 +40,7 @@ class TelegramApp extends AppSource {
         MapEntry<String, String>('telegram-$version.apk', apkUrl),
       ], AppNames('Telegram', 'Telegram'));
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 }

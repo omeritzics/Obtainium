@@ -74,7 +74,7 @@ List<MapEntry<String, String>> assumed2DlistToStringMapList(
   List<dynamic> arr,
 ) => arr.map((e) => MapEntry(e[0] as String, e[1] as String)).toList();
 
-// App JSON schema has changed multiple times over the many versions of Obtainium
+// App JSON schema has changed multiple times over the many versions of Updatium
 // This function takes an App JSON and modifies it if needed to conform to the latest (current) version
 Map<String, dynamic> appJSONCompatibilityModifiers(Map<String, dynamic> json) {
   var source = SourceProvider().getSource(
@@ -592,7 +592,7 @@ sourceRequestStreamResponse(
 
     return MapEntry(currentUrl, MapEntry(httpClient, response));
   }
-  throw ObtainiumError('Too many redirects ($maxRedirects)');
+  throw UpdatiumError('Too many redirects ($maxRedirects)');
 }
 
 Future<Response> httpClientResponseStreamToFinalResponse(
@@ -988,8 +988,8 @@ abstract class AppSource {
   }
 }
 
-ObtainiumError getObtainiumHttpError(Response res) {
-  return ObtainiumError(
+UpdatiumError getUpdatiumHttpError(Response res) {
+  return UpdatiumError(
     (res.reasonPhrase != null &&
             res.reasonPhrase != null &&
             res.reasonPhrase!.isNotEmpty)
@@ -1313,7 +1313,7 @@ class SourceProvider {
     for (var url in urls) {
       try {
         if (alreadyAddedUrls.contains(url)) {
-          throw ObtainiumError(tr('appAlreadyAdded'));
+          throw UpdatiumError(tr('appAlreadyAdded'));
         }
         var source = sourceOverride ?? getSource(url);
         apps.add(

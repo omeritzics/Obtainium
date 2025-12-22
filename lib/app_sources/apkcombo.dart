@@ -50,7 +50,7 @@ class APKCombo extends AppSource {
   ) async {
     var res = await sourceRequest('$standardUrl/download/apk', {});
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
     var html = parse(res.body);
     return html
@@ -106,7 +106,7 @@ class APKCombo extends AppSource {
     String appId = (await tryInferringAppId(standardUrl))!;
     var preres = await sourceRequest(standardUrl, additionalSettings);
     if (preres.statusCode != 200) {
-      throw getObtainiumHttpError(preres);
+      throw getUpdatiumHttpError(preres);
     }
     var res = parse(preres.body);
     String? version = res.querySelector('div.version')?.text.trim();

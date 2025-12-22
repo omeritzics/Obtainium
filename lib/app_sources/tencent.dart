@@ -82,7 +82,7 @@ class Tencent extends AppSource {
         MapEntry(apkName, apkUrl),
       ], AppNames(author, appName));
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 }

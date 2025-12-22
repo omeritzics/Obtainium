@@ -70,7 +70,7 @@ class Jenkins extends AppSource {
         AppNames(Uri.parse(standardUrl).host, standardUrl.split('/').last),
       );
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 }

@@ -43,7 +43,7 @@ class Aptoide extends AppSource {
   ) async {
     var res = await sourceRequest(standardUrl, additionalSettings);
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
     var idMatch = RegExp('"app":{"id":[0-9]+').firstMatch(res.body);
     String? id;
@@ -57,7 +57,7 @@ class Aptoide extends AppSource {
       additionalSettings,
     );
     if (res2.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
     return jsonDecode(res2.body)?['nodes']?['meta']?['data'];
   }

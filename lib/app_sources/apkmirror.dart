@@ -46,7 +46,7 @@ class APKMirror extends AppSource {
   }) async {
     return {
       "User-Agent":
-          "Obtainium/${(await getInstalledInfo(obtainiumId))?.versionName ?? '1.0.0'}",
+          "Updatium/${(await getInstalledInfo(obtainiumId))?.versionName ?? '1.0.0'}",
     };
   }
 
@@ -127,7 +127,7 @@ class APKMirror extends AppSource {
         releaseDate: releaseDate,
       );
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 

@@ -45,7 +45,7 @@ class _AppPageState extends State<AppPage> {
           onWebResourceError: (WebResourceError error) {
             if (error.isForMainFrame == true) {
               showError(
-                ObtainiumError(error.description, unexpected: true),
+                UpdatiumError(error.description, unexpected: true),
                 context,
               );
             }

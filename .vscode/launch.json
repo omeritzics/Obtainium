@@ -5,20 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Obtainium",
+            "name": "Updatium",
             "request": "launch",
             "type": "dart",
             "args":[ "--flavor", "normal" ]
         },
         {
-            "name": "Obtainium (profile mode)",
+            "name": "Updatium (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
             "args":[ "--flavor", "normal" ]
         },
         {
-            "name": "Obtainium (release mode)",
+            "name": "Updatium (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",

@@ -37,8 +37,8 @@ for file in ./build/app/outputs/flutter-apk/app-*normal*.apk*; do mv "$file" "${
 flutter build apk --flavor fdroid -t lib/main_fdroid.dart && # Do the same for the F-Droid flavour
     flutter build apk --split-per-abi --flavor fdroid -t lib/main_fdroid.dart
 for file in ./build/app/outputs/flutter-apk/*.sha1; do gpg --sign --detach-sig "$file"; done # Generate PGP signatures
-rsync -r ./build/app/outputs/flutter-apk/ ~/Downloads/Obtainium-build/                       # Dropoff in Downloads to allow for drag-drop into Flatpak Firefox
-cd ~/Downloads/Obtainium-build/                                                              # Make zips just in case (for in-comment uploads)
+rsync -r ./build/app/outputs/flutter-apk/ ~/Downloads/Updatium-build/                       # Dropoff in Downloads to allow for drag-drop into Flatpak Firefox
+cd ~/Downloads/Updatium-build/                                                              # Make zips just in case (for in-comment uploads)
 for apk in *.apk; do
     PREFIX="$(echo "$apk" | head -c -5)"
     zip "$PREFIX" "$PREFIX"*

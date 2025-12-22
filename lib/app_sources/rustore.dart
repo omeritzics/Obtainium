@@ -59,7 +59,7 @@ class RuStore extends AppSource {
       additionalSettings,
     );
     if (res0.statusCode != 200) {
-      throw getObtainiumHttpError(res0);
+      throw getUpdatiumHttpError(res0);
     }
     var appDetails = (await decodeJsonBody(res0.bodyBytes))['body'];
     if (appDetails['appId'] == null) {

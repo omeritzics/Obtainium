@@ -93,7 +93,7 @@ class FDroidRepo extends AppSource {
       });
       return results;
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 
@@ -208,7 +208,7 @@ class FDroidRepo extends AppSource {
         }).toList();
       }
       if (foundApps.isEmpty) {
-        throw ObtainiumError(tr('appWithIdOrNameNotFound'));
+        throw UpdatiumError(tr('appWithIdOrNameNotFound'));
       }
       var authorName = body.querySelector('repo')?.attributes['name'] ?? name;
       String appId = foundApps[0].attributes['id']!;
@@ -269,7 +269,7 @@ class FDroidRepo extends AppSource {
         changeLog: changeLog,
       );
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 }

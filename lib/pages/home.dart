@@ -79,12 +79,12 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       launchUrlString(
-                        'https://github.com/ImranR98/Obtainium/blob/main/README.md',
+                        'https://github.com/ImranR98/Updatium/blob/main/README.md',
                         mode: LaunchMode.externalApplication,
                       );
                     },
                     child: Text(
-                      'https://github.com/ImranR98/Obtainium/blob/main/README.md',
+                      'https://github.com/ImranR98/Updatium/blob/main/README.md',
                       style: const TextStyle(
                         decoration: TextDecoration.underline,
                         fontWeight: FontWeight.bold,
@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> {
             );
           }
         } else {
-          throw ObtainiumError(tr('unknown'));
+          throw UpdatiumError(tr('unknown'));
         }
       } catch (e) {
         showError(e, context);

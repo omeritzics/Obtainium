@@ -53,7 +53,7 @@ class CoolApk extends AppSource {
     var res = await sourceRequest(detailUrl, additionalSettings);
 
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
 
     var json = jsonDecode(res.body);

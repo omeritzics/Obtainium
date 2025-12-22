@@ -41,7 +41,7 @@ class HuaweiAppGallery extends AppSource {
         res.statusCode == 304) {
       return res;
     } else {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 

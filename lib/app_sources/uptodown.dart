@@ -57,7 +57,7 @@ class Uptodown extends AppSource {
   ) async {
     var res = await sourceRequest(standardUrl, additionalSettings);
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
     var html = parse(res.body);
     String? version = html.querySelector('div.version')?.innerHtml;
@@ -131,7 +131,7 @@ class Uptodown extends AppSource {
   ) async {
     var res = await sourceRequest(assetUrl, additionalSettings);
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
     var html = parse(res.body);
     var finalUrlKey = html

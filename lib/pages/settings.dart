@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
   bool showIntervalLabel = true;
   final Map<ColorSwatch<Object>, String> colorsNameMap =
       <ColorSwatch<Object>, String>{
-        ColorTools.createPrimarySwatch(obtainiumThemeColor): 'Obtainium',
+        ColorTools.createPrimarySwatch(obtainiumThemeColor): 'Updatium',
       };
 
   void initUpdateIntervalInterpolator() {
@@ -641,26 +641,26 @@ class _SettingsPageState extends State<SettingsPage> {
                                     switch (resCode) {
                                       case 'binder_not_found':
                                         showError(
-                                          ObtainiumError(
+                                          UpdatiumError(
                                             tr('shizukuBinderNotFound'),
                                           ),
                                           context,
                                         );
                                       case 'old_shizuku':
                                         showError(
-                                          ObtainiumError(tr('shizukuOld')),
+                                          UpdatiumError(tr('shizukuOld')),
                                           context,
                                         );
                                       case 'old_android_with_adb':
                                         showError(
-                                          ObtainiumError(
+                                          UpdatiumError(
                                             tr('shizukuOldAndroidWithADB'),
                                           ),
                                           context,
                                         );
                                       case 'denied':
                                         showError(
-                                          ObtainiumError(tr('cancelled')),
+                                          UpdatiumError(tr('cancelled')),
                                           context,
                                         );
                                     }
@@ -983,7 +983,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       onPressed: () {
                         context.read<LogsProvider>().get().then((logs) {
                           if (logs.isEmpty) {
-                            showMessage(ObtainiumError(tr('noLogs')), context);
+                            showMessage(UpdatiumError(tr('noLogs')), context);
                           } else {
                             showDialog(
                               context: context,
@@ -1070,7 +1070,7 @@ class _LogsDialogState extends State<LogsDialog> {
                       title: tr('appLogs'),
                       items: const [],
                       initValid: true,
-                      message: tr('removeFromObtainium'),
+                      message: tr('removeFromUpdatium'),
                     );
                   },
                 )) !=

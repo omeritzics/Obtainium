@@ -384,7 +384,7 @@ class GitHub extends AppSource {
         if (onHttpErrorCode != null) {
           onHttpErrorCode(res);
         }
-        throw getObtainiumHttpError(res);
+        throw getUpdatiumHttpError(res);
       }
       latestRelease = jsonDecode(res.body);
     }
@@ -637,7 +637,7 @@ class GitHub extends AppSource {
       if (onHttpErrorCode != null) {
         onHttpErrorCode(res);
       }
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 
@@ -722,7 +722,7 @@ class GitHub extends AppSource {
       if (onHttpErrorCode != null) {
         onHttpErrorCode(res);
       }
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
   }
 

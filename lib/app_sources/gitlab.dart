@@ -95,7 +95,7 @@ class GitLab extends AppSource {
         'https://${hosts[0]}/api/v4/projects?search=${Uri.encodeQueryComponent(query)}';
     var res = await sourceRequest(url, {});
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
     var json = jsonDecode(res.body) as List<dynamic>;
     Map<String, List<String>> results = {};
@@ -160,7 +160,7 @@ class GitLab extends AppSource {
       additionalSettings,
     );
     if (res0.statusCode != 200) {
-      throw getObtainiumHttpError(res0);
+      throw getUpdatiumHttpError(res0);
     }
     int? projectId = jsonDecode(res0.body)['id'];
     if (projectId == null) {
@@ -173,7 +173,7 @@ class GitLab extends AppSource {
       additionalSettings,
     );
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
 
     // Extract .apk details from received data

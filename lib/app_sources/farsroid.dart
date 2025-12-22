@@ -46,7 +46,7 @@ class Farsroid extends AppSource {
 
     var res = await sourceRequest(standardUrl, additionalSettings);
     if (res.statusCode != 200) {
-      throw getObtainiumHttpError(res);
+      throw getUpdatiumHttpError(res);
     }
     var html = parse(res.body);
     var dlinks = html.querySelectorAll('.download-links');
