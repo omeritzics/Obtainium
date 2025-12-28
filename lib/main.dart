@@ -237,7 +237,7 @@ class _UpdatiumState extends State<Updatium> {
         notificationTitle: tr('foregroundService'),
         notificationText: tr('fgServiceNotice'),
         notificationIcon: NotificationIcon(
-          metaDataName: 'dev.imranr.obtainium.service.NOTIFICATION_ICON',
+          metaDataName: 'com.omeritzics.updatium.service.NOTIFICATION_ICON',
         ),
         callback: startCallback,
       );

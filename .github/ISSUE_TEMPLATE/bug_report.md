@@ -23,7 +23,7 @@ assignees: ''
 4. See error -->
 
 **Screenshots and Logs**
-<!-- If applicable, add screenshots, logs, and any other artifacts (like some/all files under `/Android/data/dev.imranr.obtainium/`) that you think may help troubleshoot the issue. -->
+<!-- If applicable, add screenshots, logs, and any other artifacts (like some/all files under `/Android/data/com.omeritzics.updatium/`) that you think may help troubleshoot the issue. -->
 
 **Please complete the following information:**
  - Device: <!-- [e.g. Pixel 7] -->

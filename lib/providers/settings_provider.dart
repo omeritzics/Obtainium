@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_storage/shared_storage.dart' as saf;
 
 String obtainiumTempId = 'imranr98_obtainium_${GitHub().hosts[0]}';
-String obtainiumId = 'dev.imranr.obtainium';
+String obtainiumId = 'com.omeritzics.updatium';
 String obtainiumUrl = 'https://github.com/omeritzics/Updatium';
 Color obtainiumThemeColor = const Color(0xFF3a79b7);
 

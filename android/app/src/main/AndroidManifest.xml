@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="dev.imranr.obtainium">
+    package="com.omeritzics.updatium">
     <application
         android:label="@string/label"
         android:name="${applicationName}"
@@ -66,7 +66,7 @@
             android:foregroundServiceType="specialUse"
             android:exported="false" />
         <meta-data
-            android:name="dev.imranr.obtainium.service.NOTIFICATION_ICON"
+            android:name="com.omeritzics.updatium.service.NOTIFICATION_ICON"
             android:resource="@drawable/ic_notification" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
