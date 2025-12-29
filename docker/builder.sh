@@ -10,7 +10,7 @@ docker run \
     --net host \
     -v "${PWD}/../:${PWD}/../":z \
     -w "${PWD}" \
-    --name flutter-dev-obtainium \
+    --name flutter-dev-updatium \
     --user $(id -u) \
     -v ./data/home:/home/${USER}:z \
     -e USER=${USER} \
@@ -18,4 +18,4 @@ docker run \
     -e ANDROID_USER_HOME=${HOME}/.android \
     -e GRADLE_USER_HOME=${HOME}/.gradle \
     -e PS1="${debian_chroot:+($debian_chroot)}${USER}@\h:\w\$ " \
-    flutter-builder-obtainium
+    flutter-builder-updatium

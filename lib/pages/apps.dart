@@ -4,16 +4,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:obtainium/components/custom_app_bar.dart';
-import 'package:obtainium/components/generated_form.dart';
-import 'package:obtainium/components/generated_form_modal.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/main.dart';
-import 'package:obtainium/pages/app.dart';
-import 'package:obtainium/pages/settings.dart';
-import 'package:obtainium/providers/apps_provider.dart';
-import 'package:obtainium/providers/settings_provider.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/components/custom_app_bar.dart';
+import 'package:updatium/components/generated_form.dart';
+import 'package:updatium/components/generated_form_modal.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/main.dart';
+import 'package:updatium/pages/app.dart';
+import 'package:updatium/pages/settings.dart';
+import 'package:updatium/providers/apps_provider.dart';
+import 'package:updatium/providers/settings_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -1049,26 +1049,6 @@ class AppsPageState extends State<AppsPage> {
                     onPressed: selectedAppIds.isEmpty
                         ? null
                         : () {
-                            String urls = '';
-                            for (var a in selectedApps) {
-                              urls +=
-                                  'https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/${Uri.encodeComponent(jsonEncode({'id': a.id, 'url': a.url, 'author': a.author, 'name': a.name, 'preferredApkIndex': a.preferredApkIndex, 'additionalSettings': jsonEncode(a.additionalSettings), 'overrideSource': a.overrideSource}))}\n\n';
-                            }
-                            Share.share(
-                              urls,
-                              subject: 'Updatium - ${tr('appsString')}',
-                            );
-                          },
-                    child: Text(
-                      tr('shareAppConfigLinks'),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const Divider(),
-                  TextButton(
-                    onPressed: selectedAppIds.isEmpty
-                        ? null
-                        : () {
                             var encoder = const JsonEncoder.withIndent("    ");
                             var exportJSON = encoder.convert(
                               appsProvider.generateExportJSON(
@@ -1077,7 +1057,7 @@ class AppsPageState extends State<AppsPage> {
                               ),
                             );
                             String fn =
-                                '${tr('obtainiumExportHyphenatedLowercase')}-${DateTime.now().toIso8601String().replaceAll(':', '-')}-count-${selectedApps.length}';
+                                '${tr('updatiumExportHyphenatedLowercase')}-${DateTime.now().toIso8601String().replaceAll(':', '-')}-count-${selectedApps.length}';
                             XFile f = XFile.fromData(
                               Uint8List.fromList(utf8.encode(exportJSON)),
                               mimeType: 'application/json',
@@ -1089,7 +1069,7 @@ class AppsPageState extends State<AppsPage> {
                             );
                           },
                     child: Text(
-                      '${tr('share')} - ${tr('obtainiumExport')}',
+                      '${tr('share')} - ${tr('updatiumExport')}',
                       textAlign: TextAlign.center,
                     ),
                   ),

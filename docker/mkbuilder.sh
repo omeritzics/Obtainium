@@ -8,7 +8,7 @@ set -e
 cd "${SCRIPT_DIR}/.."
 # Create the builder image
 docker build \
-    -t flutter-builder-obtainium \
+    -t flutter-builder-updatium \
     -f ./docker/Dockerfile \
     --build-arg="DEV_UID=$(id -u)" \
     .

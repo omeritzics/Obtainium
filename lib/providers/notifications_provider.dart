@@ -4,9 +4,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:obtainium/main.dart';
-import 'package:obtainium/providers/settings_provider.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/main.dart';
+import 'package:updatium/providers/settings_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 
 class UpdatiumNotification {
   late int id;
@@ -169,7 +169,7 @@ class DownloadedNotification extends UpdatiumNotification {
 final completeInstallationNotification = UpdatiumNotification(
   1,
   tr('completeAppInstallation'),
-  tr('obtainiumMustBeOpenToInstallApps'),
+  tr('updatiumMustBeOpenToInstallApps'),
   'COMPLETE_INSTALL',
   tr('completeAppInstallationNotifChannel'),
   tr('completeAppInstallationNotifDescription'),
@@ -292,7 +292,7 @@ class NotificationsProvider {
           channelDescription: channelDescription,
           importance: importance,
           priority: importanceToPriority[importance]!,
-          groupKey: '$obtainiumId.$channelCode',
+          groupKey: '$updatiumId.$channelCode',
           progress: progPercent ?? 0,
           maxProgress: 100,
           showProgress: progPercent != null,

@@ -5,18 +5,18 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:obtainium/app_sources/github.dart';
-import 'package:obtainium/main.dart';
-import 'package:obtainium/providers/apps_provider.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/app_sources/github.dart';
+import 'package:updatium/main.dart';
+import 'package:updatium/providers/apps_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_storage/shared_storage.dart' as saf;
 
-String obtainiumTempId = 'omeritzics_updatium_${GitHub().hosts[0]}';
-String obtainiumId = 'com.omeritzics.updatium';
-String obtainiumUrl = 'https://github.com/omeritzics/Updatium';
-Color obtainiumThemeColor = const Color(0xFF3a79b7);
+String updatiumTempId = 'omeritzics_updatium_${GitHub().hosts[0]}';
+String updatiumId = 'com.omeritzics.updatium';
+String updatiumUrl = 'https://github.com/omeritzics/Updatium';
+Color updatiumThemeColor = const Color(0xFF3a79b7);
 
 enum ThemeSettings { system, light, dark }
 
@@ -68,7 +68,7 @@ class SettingsProvider with ChangeNotifier {
 
   Color get themeColor {
     int? colorCode = prefs?.getInt('themeColor');
-    return (colorCode != null) ? Color(colorCode) : obtainiumThemeColor;
+    return (colorCode != null) ? Color(colorCode) : updatiumThemeColor;
   }
 
   set themeColor(Color themeColor) {

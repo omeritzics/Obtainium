@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:bcrypt/bcrypt.dart';
 import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/providers/source_provider.dart';
 import 'dart:math';
 
 // kanged from https://github.com/DUpdateSystem/UpgradeAll/blob/b2f92c9/core-websdk/src/main/java/net/xzos/upgradeall/core/websdk/api/client_proxy/hubs/CoolApk.kt

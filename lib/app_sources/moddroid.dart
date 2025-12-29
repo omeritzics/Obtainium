@@ -1,6 +1,6 @@
 import 'package:html/parser.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/providers/source_provider.dart';
 
 class Moddroid extends AppSource {
   Moddroid() {

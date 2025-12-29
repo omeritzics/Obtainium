@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:html/parser.dart';
-import 'package:obtainium/app_sources/html.dart';
-import 'package:obtainium/components/generated_form.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/app_sources/html.dart';
+import 'package:updatium/components/generated_form.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/providers/source_provider.dart';
 
 class Farsroid extends AppSource {
   Farsroid() {

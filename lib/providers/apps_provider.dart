@@ -20,20 +20,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/io_client.dart';
-import 'package:obtainium/app_sources/directAPKLink.dart';
-import 'package:obtainium/app_sources/html.dart';
-import 'package:obtainium/components/generated_form.dart';
-import 'package:obtainium/components/generated_form_modal.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/main.dart';
-import 'package:obtainium/providers/logs_provider.dart';
-import 'package:obtainium/providers/notifications_provider.dart';
-import 'package:obtainium/providers/settings_provider.dart';
+import 'package:updatium/app_sources/directAPKLink.dart';
+import 'package:updatium/app_sources/html.dart';
+import 'package:updatium/components/generated_form.dart';
+import 'package:updatium/components/generated_form_modal.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/main.dart';
+import 'package:updatium/providers/logs_provider.dart';
+import 'package:updatium/providers/notifications_provider.dart';
+import 'package:updatium/providers/settings_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_fgbg/flutter_fgbg.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 import 'package:http/http.dart';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter_archive/flutter_archive.dart';
@@ -815,10 +815,10 @@ class AppsProvider with ChangeNotifier {
       return true;
     }
 
-    if (app.id == obtainiumId) {
+    if (app.id == updatiumId) {
       return false;
     }
-    if (installerPackageName != obtainiumId) {
+    if (installerPackageName != updatiumId) {
       // If we did not install the app, silent install is not possible
       return false;
     }
@@ -1167,10 +1167,10 @@ class AppsProvider with ChangeNotifier {
     // Move Updatium to the end of the line (let all other apps update first)
     appsToInstall = moveStrToEnd(
       appsToInstall,
-      obtainiumId,
-      strB: obtainiumTempId,
+      updatiumId,
+      strB: updatiumTempId,
     );
-    appsToInstall = moveStrToEnd(appsToInstall, '$obtainiumId.fdroid');
+    appsToInstall = moveStrToEnd(appsToInstall, '$updatiumId.fdroid');
 
     Future<void> installFn(
       String id,
@@ -2100,7 +2100,7 @@ class AppsProvider with ChangeNotifier {
       var result = await saf.createFile(
         exportDir,
         displayName:
-            '${tr('obtainiumExportHyphenatedLowercase')}-${DateTime.now().toIso8601String().replaceAll(':', '-')}${isAuto ? '-auto' : ''}.json',
+            '${tr('updatiumExportHyphenatedLowercase')}-${DateTime.now().toIso8601String().replaceAll(':', '-')}${isAuto ? '-auto' : ''}.json',
         mimeType: 'application/json',
         bytes: Uint8List.fromList(utf8.encode(encoder.convert(finalExport))),
       );
@@ -2582,10 +2582,10 @@ Future<void> bgUpdateCheck(String taskId, Map<String, dynamic>? params) async {
     if (toInstall.isNotEmpty) {
       var tempObtArr = toInstall.where(
         (element) =>
-            element.key == obtainiumId || element.key == '$obtainiumId.fdroid',
+            element.key == updatiumId || element.key == '$updatiumId.fdroid',
       );
       if (tempObtArr.isNotEmpty) {
-        // Move obtainium to the end of the list as it must always install last
+        // Move updatium to the end of the list as it must always install last
         var obt = tempObtArr.first;
         toInstall = moveStrToEndMapEntryWithCount(toInstall, obt);
       }

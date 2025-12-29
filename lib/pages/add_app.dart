@@ -1,18 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:obtainium/components/custom_app_bar.dart';
-import 'package:obtainium/components/generated_form.dart';
-import 'package:obtainium/components/generated_form_modal.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/main.dart';
-import 'package:obtainium/pages/app.dart';
-import 'package:obtainium/pages/import_export.dart';
-import 'package:obtainium/pages/settings.dart';
-import 'package:obtainium/providers/apps_provider.dart';
-import 'package:obtainium/providers/notifications_provider.dart';
-import 'package:obtainium/providers/settings_provider.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/components/custom_app_bar.dart';
+import 'package:updatium/components/generated_form.dart';
+import 'package:updatium/components/generated_form_modal.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/main.dart';
+import 'package:updatium/pages/app.dart';
+import 'package:updatium/pages/import_export.dart';
+import 'package:updatium/pages/settings.dart';
+import 'package:updatium/providers/apps_provider.dart';
+import 'package:updatium/providers/notifications_provider.dart';
+import 'package:updatium/providers/settings_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -708,14 +708,6 @@ class AddAppPageState extends State<AddAppPage> {
                 fontStyle: FontStyle.italic,
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              launchUrlString(
-                'https://apps.obtainium.imranr.dev/',
-                mode: LaunchMode.externalApplication,
-              );
-            },
             child: Text(
               tr('crowdsourcedConfigsShort'),
               style: const TextStyle(

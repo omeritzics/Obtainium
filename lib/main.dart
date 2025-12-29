@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:obtainium/pages/home.dart';
-import 'package:obtainium/providers/apps_provider.dart';
-import 'package:obtainium/providers/logs_provider.dart';
-import 'package:obtainium/providers/native_provider.dart';
-import 'package:obtainium/providers/notifications_provider.dart';
-import 'package:obtainium/providers/settings_provider.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/pages/home.dart';
+import 'package:updatium/providers/apps_provider.dart';
+import 'package:updatium/providers/logs_provider.dart';
+import 'package:updatium/providers/native_provider.dart';
+import 'package:updatium/providers/notifications_provider.dart';
+import 'package:updatium/providers/settings_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -313,7 +313,7 @@ class _UpdatiumState extends State<Updatium> {
         logs.add('This is the first ever run of Updatium.');
         // If this is the first run, add Updatium to the Apps list
         if (!fdroid) {
-          getInstalledInfo(obtainiumId)
+          getInstalledInfo(updatiumId)
               .then((value) {
                 if (value?.versionName != null) {
                   appsProvider.saveApps([

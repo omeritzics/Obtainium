@@ -4,14 +4,14 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:obtainium/app_sources/fdroidrepo.dart';
-import 'package:obtainium/components/custom_app_bar.dart';
-import 'package:obtainium/components/generated_form.dart';
-import 'package:obtainium/components/generated_form_modal.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/providers/apps_provider.dart';
-import 'package:obtainium/providers/settings_provider.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/app_sources/fdroidrepo.dart';
+import 'package:updatium/components/custom_app_bar.dart';
+import 'package:updatium/components/generated_form.dart';
+import 'package:updatium/components/generated_form_modal.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/providers/apps_provider.dart';
+import 'package:updatium/providers/settings_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -416,7 +416,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
                                       ? null
                                       : runUpdatiumExport,
                                   child: Text(
-                                    tr('obtainiumExport'),
+                                    tr('updatiumExport'),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -433,7 +433,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
                                       ? null
                                       : runUpdatiumImport,
                                   child: Text(
-                                    tr('obtainiumImport'),
+                                    tr('updatiumImport'),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),

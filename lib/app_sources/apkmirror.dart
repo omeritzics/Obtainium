@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart';
-import 'package:obtainium/components/generated_form.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/providers/apps_provider.dart';
-import 'package:obtainium/providers/settings_provider.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/components/generated_form.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/providers/apps_provider.dart';
+import 'package:updatium/providers/settings_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 
 class APKMirror extends AppSource {
   APKMirror() {
@@ -46,7 +46,7 @@ class APKMirror extends AppSource {
   }) async {
     return {
       "User-Agent":
-          "Updatium/${(await getInstalledInfo(obtainiumId))?.versionName ?? '1.0.0'}",
+          "Updatium/${(await getInstalledInfo(updatiumId))?.versionName ?? '1.0.0'}",
     };
   }
 

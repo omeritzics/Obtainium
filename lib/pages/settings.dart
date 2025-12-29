@@ -3,16 +3,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:equations/equations.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:obtainium/components/custom_app_bar.dart';
-import 'package:obtainium/components/generated_form.dart';
-import 'package:obtainium/components/generated_form_modal.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/main.dart';
-import 'package:obtainium/providers/apps_provider.dart';
-import 'package:obtainium/providers/logs_provider.dart';
-import 'package:obtainium/providers/native_provider.dart';
-import 'package:obtainium/providers/settings_provider.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/components/custom_app_bar.dart';
+import 'package:updatium/components/generated_form.dart';
+import 'package:updatium/components/generated_form_modal.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/main.dart';
+import 'package:updatium/providers/apps_provider.dart';
+import 'package:updatium/providers/logs_provider.dart';
+import 'package:updatium/providers/native_provider.dart';
+import 'package:updatium/providers/settings_provider.dart';
+import 'package:updatium/providers/source_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shizuku_apk_installer/shizuku_apk_installer.dart';
@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
   bool showIntervalLabel = true;
   final Map<ColorSwatch<Object>, String> colorsNameMap =
       <ColorSwatch<Object>, String>{
-        ColorTools.createPrimarySwatch(obtainiumThemeColor): 'Updatium',
+        ColorTools.createPrimarySwatch(updatiumThemeColor): 'Updatium',
       };
 
   void initUpdateIntervalInterpolator() {
@@ -958,16 +958,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       },
                       icon: const Icon(Icons.code),
                       tooltip: tr('appSource'),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        launchUrlString(
-                          'https://apps.obtainium.imranr.dev/',
-                          mode: LaunchMode.externalApplication,
-                        );
-                      },
-                      icon: const Icon(Icons.apps_rounded),
-                      tooltip: tr('crowdsourcedConfigsLabel'),
                     ),
                     IconButton(
                       onPressed: () {
