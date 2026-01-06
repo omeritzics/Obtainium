@@ -30,6 +30,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  gettext: ^0.2.0
+  easy_gettext: ^0.0.1
+
+flutter:
+  assets:
+    - lib/l10n/en.po
+    - lib/l10n/he.po
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

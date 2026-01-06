@@ -1,7 +1,7 @@
 [![Download Nightly](https://img.shields.io/badge/Download-Nightly-blue?style=for-the-badge&logo=android)](https://github.com/omeritzics/Updatium/releases/tag/nightly-build) (Note: Updatium is still not ready to function as an independant app, this is a work in progress)
 # ![Updatium Icon](./assets/graphics/icon_small.png) Updatium
 
-Update your Android apps directly from the APK source. Forked from [Obtainium](https://github.com/ImranR98/Obtainium) due to the developer's problematic political views and his terrible behavior towards Jewish people who wanted to contribute to his app.
+Update your Android apps directly from the APK source. Forked from [Obtainium](https://github.com/ImranR98/Obtainium) due to the developer's problematic political views and his terrible behaviour towards Jewish people who wanted to contribute to his app.
 
 Updatium allows you to install and update apps directly from their releases pages, and receive notifications when new releases are made available.
 

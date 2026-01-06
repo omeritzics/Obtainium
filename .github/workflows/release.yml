@@ -1,7 +1,4 @@
 name: Build and Release
-permissions:
-  contents: write
-  packages: write
 
 on:
   workflow_dispatch:
@@ -9,6 +6,9 @@ on:
       beta:
         type: boolean
         description: Is beta?
+      draft:
+        type: boolean
+        description: Is draft?
 
 jobs:
   build:
@@ -18,17 +18,22 @@ jobs:
       
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
-          java-version: '21'
+          java-version: '17'
 
       - name: Flutter Doctor
         id: flutter_doctor
         run: |
           flutter doctor -v
+          
+      - name: Import GPG key
+        id: import_pgp_key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.PGP_KEY_BASE64 }}
+          passphrase: ${{ secrets.PGP_PASSPHRASE }}
 
       - name: Check submodule
         id: check_submodule
@@ -47,18 +52,29 @@ jobs:
 
       - name: Build APKs
         run: |
-          sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle.kts
+          sed -i 's/signingConfig signingConfigs.release//g' android/app/build.gradle
           flutter build apk --flavor normal && flutter build apk --split-per-abi --flavor normal
           for file in build/app/outputs/flutter-apk/app-*normal*.apk*; do mv "$file" "${file//-normal/}"; done
           flutter build apk --flavor fdroid -t lib/main_fdroid.dart && flutter build apk --split-per-abi --flavor fdroid -t lib/main_fdroid.dart
           rm ./build/app/outputs/flutter-apk/*.sha1
-          cp ./sign.sh ./build/app/outputs/flutter-apk/
           ls -l ./build/app/outputs/flutter-apk/
-
-      - name: Save Unsigned APKs as Action Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          path: build/app/outputs/flutter-apk/*
+        
+      - name: Sign APKs
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+        run: |
+          echo "${KEYSTORE_BASE64}" | base64 -d > apksign.keystore
+          for apk in ./build/app/outputs/flutter-apk/*-release*.apk; do
+            unsignedFn=${apk/-release/-unsigned}
+            mv "$apk" "$unsignedFn"
+            ${ANDROID_HOME}/build-tools/$(ls ${ANDROID_HOME}/build-tools/ | tail -1)/apksigner sign --ks apksign.keystore --ks-pass pass:"${KEYSTORE_PASSWORD}" --out "${apk}" "${unsignedFn}"
+            sha256sum ${apk} | cut -d " " -f 1 > "$apk".sha256
+            gpg --batch  --pinentry-mode loopback --passphrase "${PGP_PASSPHRASE}" --sign --detach-sig "$apk".sha256
+          done
+          rm apksign.keystore
+          PGP_KEY_FINGERPRINT="${{ steps.import_pgp_key.outputs.fingerprint }}"
 
       - name: Create Tag
         uses: mathieudutour/github-tag-action@v6.1
@@ -67,11 +83,12 @@ jobs:
           custom_tag: "${{ steps.extract_version.outputs.tag }}"
           tag_prefix: ""
       
-      - name: Create Draft Release
+      - name: Create Release And Upload APKs
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           tag: "${{ steps.extract_version.outputs.tag }}"
           prerelease: "${{ steps.extract_version.outputs.beta }}"
-          draft: "true"
+          draft: "${{ inputs.draft }}"
+          artifacts: ./build/app/outputs/flutter-apk/*-release*.apk*
           generateReleaseNotes: true
