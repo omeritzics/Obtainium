@@ -8,34 +8,48 @@ on:
 
 jobs:
   update-translations:
+    runs-on: ubuntu-latest
+    # Grant permission to create a Pull Request
     permissions:
       contents: write
       pull-requests: write
-    runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
       - name: Install gettext
         run: sudo apt-get install -y gettext
 
-      - name: Extract Strings and Update PO Files
+      - name: Extract Strings and Update All PO Files
         run: |
           mkdir -p assets/translations
-          # Search for tr('...') or tr("...") in the code
+          
+          # 1. Extract strings from tr('...') calls.
+          # The extracted text becomes the 'msgid' (source text).
           find lib -name "*.dart" | xgettext -f - \
               --from-code=UTF-8 \
               --language=Python \
               --keyword=tr \
+              --no-wrap \
               --output=assets/translations/app.pot || touch assets/translations/app.pot
           
-          # Sync PO files with the new template
-          [ -f assets/translations/en.po ] && msgmerge -U assets/translations/en.po assets/translations/app.pot || cp assets/translations/app.pot assets/translations/en.po
-          [ -f assets/translations/he.po ] && msgmerge -U assets/translations/he.po assets/translations/app.pot || cp assets/translations/app.pot assets/translations/he.po
+          # 2. Update every language file (.po) found in the assets folder.
+          # This loop handles all current and future languages automatically.
+          for po_file in assets/translations/*.po; do
+            if [ -f "$po_file" ]; then
+              echo "Merging updates into $po_file..."
+              msgmerge -U --no-fuzzy-matching "$po_file" assets/translations/app.pot
+            fi
+          done
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          commit-message: "chore: update translation files"
-          title: "🌍 Translation Update"
-          body: "Found new strings via tr() function."
-          branch: translations-update
+          commit-message: "chore: auto-update translation files from source"
+          title: "🌍 Global Translation Update"
+          body: |
+            This is an automated PR. 
+            The translation bot scanned the Dart code and updated all `.po` files with new strings found in `tr()` calls.
+          branch: translations-update-all
+          base: main
+          delete-branch: true
