@@ -1,0 +1,1221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-06 13:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: lib/mass_app_sources/githubstars.dart:11
+msgid "githubStarredRepos"
+msgstr ""
+
+#: lib/mass_app_sources/githubstars.dart:14
+msgid "uname"
+msgstr ""
+
+#: lib/mass_app_sources/githubstars.dart:34 lib/app_sources/fdroid.dart:173
+#: lib/app_sources/github.dart:715 lib/app_sources/gitlab.dart:105
+msgid "noDescription"
+msgstr ""
+
+#: lib/mass_app_sources/githubstars.dart:51
+msgid "wrongArgNum"
+msgstr ""
+
+#: lib/pages/app.dart:139 lib/pages/apps.dart:522
+msgid "notInstalled"
+msgstr ""
+
+#: lib/pages/app.dart:148
+msgid "never"
+msgstr ""
+
+#: lib/pages/app.dart:145
+msgid "lastUpdateCheckX"
+msgstr ""
+
+#: lib/pages/app.dart:184 lib/pages/apps.dart:40 lib/pages/apps.dart:528
+msgid "changes"
+msgstr ""
+
+#: lib/pages/app.dart:247 lib/pages/apps.dart:1096
+#: lib/providers/apps_provider.dart:2224
+msgid "releaseAsset"
+msgstr ""
+
+#: lib/pages/app.dart:246 lib/pages/apps.dart:1095
+msgid "downloadX"
+msgstr ""
+
+#: lib/pages/app.dart:286 lib/pages/app.dart:378 lib/custom_errors.dart:139
+msgid "copiedToClipboard"
+msgstr ""
+
+#: lib/pages/app.dart:351 lib/pages/home.dart:187 lib/pages/add_app.dart:126
+#: lib/providers/notifications_provider.dart:148
+#: lib/providers/notifications_provider.dart:163
+#: lib/providers/notifications_provider.dart:164
+#: lib/app_sources/rustore.dart:69 lib/app_sources/aptoide.dart:71
+#: lib/app_sources/html.dart:470 lib/app_sources/uptodown.dart:111
+msgid "app"
+msgstr ""
+
+#: lib/pages/app.dart:358 lib/pages/home.dart:224
+#: lib/providers/source_provider.dart:411 lib/providers/apps_provider.dart:281
+msgid "unknown"
+msgstr ""
+
+#: lib/pages/app.dart:358 lib/pages/apps.dart:666
+msgid "byX"
+msgstr ""
+
+#: lib/pages/app.dart:412
+msgid "alreadyUpToDateQuestion"
+msgstr ""
+
+#: lib/pages/app.dart:418 lib/pages/apps.dart:968
+msgid "no"
+msgstr ""
+
+#: lib/pages/app.dart:430
+msgid "yesMarkUpdated"
+msgstr ""
+
+#: lib/pages/app.dart:455 lib/pages/app.dart:567
+msgid "additionalOptions"
+msgstr ""
+
+#: lib/pages/app.dart:469
+msgid "appsFromSourceAreTrackOnly"
+msgstr ""
+
+#: lib/pages/app.dart:512
+msgid "installed"
+msgstr ""
+
+#: lib/pages/app.dart:513 lib/pages/apps.dart:871
+#: lib/providers/notifications_provider.dart:64
+msgid "appsUpdated"
+msgstr ""
+
+#: lib/pages/app.dart:535
+msgid "install"
+msgstr ""
+
+#: lib/pages/app.dart:536
+msgid "markInstalled"
+msgstr ""
+
+#: lib/pages/app.dart:538 lib/pages/apps.dart:444
+msgid "update"
+msgstr ""
+
+#: lib/pages/app.dart:539 lib/pages/app.dart:611 lib/pages/apps.dart:443
+msgid "markUpdated"
+msgstr ""
+
+#: lib/pages/app.dart:576 lib/pages/settings.dart:359
+#: lib/pages/import_export.dart:165 lib/pages/home.dart:59
+msgid "settings"
+msgstr ""
+
+#: lib/pages/app.dart:593 lib/pages/apps.dart:920
+#: lib/components/generated_form_modal.dart:93
+#: lib/providers/apps_provider.dart:2272 lib/providers/apps_provider.dart:2320
+msgid "continue"
+msgstr ""
+
+#: lib/pages/app.dart:601 lib/pages/apps.dart:1151
+msgid "more"
+msgstr ""
+
+#: lib/pages/app.dart:625
+msgid "resetInstallStatus"
+msgstr ""
+
+#: lib/pages/app.dart:645 lib/pages/settings.dart:1063
+#: lib/components/generated_form.dart:663
+msgid "remove"
+msgstr ""
+
+#: lib/pages/settings.dart:45 lib/pages/settings.dart:65
+msgid "neverManualOnly"
+msgstr ""
+
+#: lib/pages/settings.dart:110
+msgid "followSystemThemeExplanation"
+msgstr ""
+
+#: lib/pages/settings.dart:137
+msgid "standard"
+msgstr ""
+
+#: lib/pages/settings.dart:138
+msgid "custom"
+msgstr ""
+
+#: lib/pages/settings.dart:141 lib/pages/settings.dart:183
+#: lib/components/generated_form.dart:612
+msgid "colour"
+msgstr ""
+
+#: lib/pages/settings.dart:141 lib/pages/settings.dart:183
+#: lib/pages/import_export.dart:518 lib/pages/import_export.dart:959
+#: lib/pages/add_app.dart:316 lib/providers/apps_provider.dart:2224
+msgid "selectX"
+msgstr ""
+
+#: lib/pages/settings.dart:211
+msgid "useMaterialYou"
+msgstr ""
+
+#: lib/pages/settings.dart:227
+msgid "appSortBy"
+msgstr ""
+
+#: lib/pages/settings.dart:232
+msgid "authorName"
+msgstr ""
+
+#: lib/pages/settings.dart:236
+msgid "nameAuthor"
+msgstr ""
+
+#: lib/pages/settings.dart:240
+msgid "asAdded"
+msgstr ""
+
+#: lib/pages/settings.dart:244 lib/app_sources/github.dart:135
+msgid "releaseDate"
+msgstr ""
+
+#: lib/pages/settings.dart:256
+msgid "appSortOrder"
+msgstr ""
+
+#: lib/pages/settings.dart:261
+msgid "ascending"
+msgstr ""
+
+#: lib/pages/settings.dart:265
+msgid "descending"
+msgstr ""
+
+#: lib/pages/settings.dart:276
+msgid "language"
+msgstr ""
+
+#: lib/pages/settings.dart:279 lib/pages/settings.dart:715
+msgid "followSystem"
+msgstr ""
+
+#: lib/pages/settings.dart:369
+msgid "updates"
+msgstr ""
+
+#: lib/pages/settings.dart:402
+msgid "foregroundServiceExplanation"
+msgstr ""
+
+#: lib/pages/settings.dart:422
+msgid "enableBackgroundUpdates"
+msgstr ""
+
+#: lib/pages/settings.dart:438
+msgid "backgroundUpdateReqsExplanation"
+msgstr ""
+
+#: lib/pages/settings.dart:444
+msgid "backgroundUpdateLimitsExplanation"
+msgstr ""
+
+#: lib/pages/settings.dart:462
+msgid "bgUpdatesOnWiFiOnly"
+msgstr ""
+
+#: lib/pages/settings.dart:485
+msgid "bgUpdatesWhileChargingOnly"
+msgstr ""
+
+#: lib/pages/settings.dart:512
+msgid "checkOnStart"
+msgstr ""
+
+#: lib/pages/settings.dart:526
+msgid "checkUpdateOnDetailPage"
+msgstr ""
+
+#: lib/pages/settings.dart:543
+msgid "onlyCheckInstalledOrTrackOnlyApps"
+msgstr ""
+
+#: lib/pages/settings.dart:562
+msgid "removeOnExternalUninstall"
+msgstr ""
+
+#: lib/pages/settings.dart:577
+msgid "parallelDownloads"
+msgstr ""
+
+#: lib/pages/settings.dart:596
+msgid "beforeNewInstallsShareToAppVerifier"
+msgstr ""
+
+#: lib/pages/settings.dart:606 lib/providers/source_provider.dart:832
+#: lib/app_sources/github.dart:39 lib/app_sources/github.dart:79
+#: lib/app_sources/gitlab.dart:37
+msgid "about"
+msgstr ""
+
+#: lib/pages/settings.dart:631
+msgid "useShizuku"
+msgstr ""
+
+#: lib/pages/settings.dart:645 lib/providers/apps_provider.dart:1284
+msgid "shizukuBinderNotFound"
+msgstr ""
+
+#: lib/pages/settings.dart:651 lib/providers/apps_provider.dart:1286
+msgid "shizukuOld"
+msgstr ""
+
+#: lib/pages/settings.dart:657 lib/providers/apps_provider.dart:1288
+msgid "shizukuOldAndroidWithADB"
+msgstr ""
+
+#: lib/pages/settings.dart:663 lib/pages/add_app.dart:193
+#: lib/providers/apps_provider.dart:1279 lib/providers/apps_provider.dart:1290
+msgid "cancelled"
+msgstr ""
+
+#: lib/pages/settings.dart:680 lib/providers/source_provider.dart:809
+msgid "shizukuPretendToBeGooglePlay"
+msgstr ""
+
+#: lib/pages/settings.dart:694
+msgid "sourceSpecific"
+msgstr ""
+
+#: lib/pages/settings.dart:703
+msgid "appearance"
+msgstr ""
+
+#: lib/pages/settings.dart:710
+msgid "theme"
+msgstr ""
+
+#: lib/pages/settings.dart:719
+msgid "light"
+msgstr ""
+
+#: lib/pages/settings.dart:723
+msgid "dark"
+msgstr ""
+
+#: lib/pages/settings.dart:740
+msgid "useBlackTheme"
+msgstr ""
+
+#: lib/pages/settings.dart:776
+msgid "useSystemFont"
+msgstr ""
+
+#: lib/pages/settings.dart:807
+msgid "showWebInAppView"
+msgstr ""
+
+#: lib/pages/settings.dart:820
+msgid "pinUpdates"
+msgstr ""
+
+#: lib/pages/settings.dart:834
+msgid "moveNonInstalledAppsToBottom"
+msgstr ""
+
+#: lib/pages/settings.dart:848
+msgid "groupByCategory"
+msgstr ""
+
+#: lib/pages/settings.dart:862
+msgid "dontShowTrackOnlyWarnings"
+msgstr ""
+
+#: lib/pages/settings.dart:877
+msgid "dontShowAPKOriginWarnings"
+msgstr ""
+
+#: lib/pages/settings.dart:891
+msgid "disablePageTransitions"
+msgstr ""
+
+#: lib/pages/settings.dart:904
+msgid "reversePageTransitions"
+msgstr ""
+
+#: lib/pages/settings.dart:920
+msgid "highlightTouchTargets"
+msgstr ""
+
+#: lib/pages/settings.dart:931 lib/pages/settings.dart:1123
+msgid "categories"
+msgstr ""
+
+#: lib/pages/settings.dart:960 lib/pages/apps.dart:1205
+msgid "appSource"
+msgstr ""
+
+#: lib/pages/settings.dart:966 lib/pages/settings.dart:1012
+msgid "noLogs"
+msgstr ""
+
+#: lib/pages/settings.dart:978 lib/pages/settings.dart:1023
+#: lib/pages/settings.dart:1050 lib/pages/settings.dart:1073
+msgid "appLogs"
+msgstr ""
+
+#: lib/pages/settings.dart:1053 lib/providers/apps_provider.dart:1852
+msgid "removeFromUpdatium"
+msgstr ""
+
+#: lib/pages/settings.dart:1069
+msgid "close"
+msgstr ""
+
+#: lib/pages/settings.dart:1076
+msgid "share"
+msgstr ""
+
+#: lib/pages/settings.dart:1124
+msgid "noCategories"
+msgstr ""
+
+#: lib/pages/settings.dart:1128
+msgid "deleteCategoriesQuestion"
+msgstr ""
+
+#: lib/pages/settings.dart:1129
+msgid "categoryDeleteWarning"
+msgstr ""
+
+#: lib/pages/import_export.dart:52 lib/pages/import_export.dart:558
+msgid "importFromURLList"
+msgstr ""
+
+#: lib/pages/import_export.dart:58
+msgid "appURLList"
+msgstr ""
+
+#: lib/pages/import_export.dart:92 lib/pages/import_export.dart:274
+#: lib/pages/import_export.dart:343 lib/pages/home.dart:217
+msgid "importedX"
+msgstr ""
+
+#: lib/pages/import_export.dart:131
+msgid "exportedTo"
+msgstr ""
+
+#: lib/pages/import_export.dart:152 lib/pages/add_app.dart:632
+#: lib/providers/source_provider.dart:1021
+#: lib/providers/source_provider.dart:1025
+#: lib/providers/source_provider.dart:1028 lib/app_sources/github.dart:64
+#: lib/app_sources/github.dart:175 lib/app_sources/html.dart:310
+msgid "invalidInput"
+msgstr ""
+
+#: lib/pages/import_export.dart:213 lib/pages/import_export.dart:547
+#: lib/pages/add_app.dart:344
+msgid "searchX"
+msgstr ""
+
+#: lib/pages/import_export.dart:218
+msgid "searchQuery"
+msgstr ""
+
+#: lib/pages/import_export.dart:227 lib/pages/add_app.dart:351
+#: lib/pages/add_app.dart:479 lib/pages/add_app.dart:697
+msgid "overrideSource"
+msgstr ""
+
+#: lib/pages/import_export.dart:295 lib/pages/add_app.dart:419
+msgid "noResults"
+msgstr ""
+
+#: lib/pages/import_export.dart:315 lib/pages/import_export.dart:578
+#: lib/pages/home.dart:185
+msgid "importX"
+msgstr ""
+
+#: lib/pages/import_export.dart:382 lib/pages/home.dart:55
+msgid "importExport"
+msgstr ""
+
+#: lib/pages/import_export.dart:405
+msgid "pickExportDir"
+msgstr ""
+
+#: lib/pages/import_export.dart:419
+msgid "updatiumExport"
+msgstr ""
+
+#: lib/pages/import_export.dart:436
+msgid "updatiumImport"
+msgstr ""
+
+#: lib/pages/import_export.dart:452
+msgid "autoExportOnChanges"
+msgstr ""
+
+#: lib/pages/import_export.dart:461 lib/pages/apps.dart:1208
+#: lib/pages/add_app.dart:466 lib/app_sources/github.dart:137
+msgid "none"
+msgstr ""
+
+#: lib/pages/import_export.dart:462
+msgid "excludeSecrets"
+msgstr ""
+
+#: lib/pages/import_export.dart:463
+msgid "all"
+msgstr ""
+
+#: lib/pages/import_export.dart:465
+msgid "includeSettings"
+msgstr ""
+
+#: lib/pages/import_export.dart:521 lib/pages/import_export.dart:548
+#: lib/pages/add_app.dart:126 lib/pages/add_app.dart:555
+msgid "source"
+msgstr ""
+
+#: lib/pages/import_export.dart:563
+msgid "importFromURLsInFile"
+msgstr ""
+
+#: lib/pages/import_export.dart:586
+msgid "importedAppsIdDisclaimer"
+msgstr ""
+
+#: lib/pages/import_export.dart:623
+msgid "importErrors"
+msgstr ""
+
+#: lib/pages/import_export.dart:629
+msgid "importedXOfYApps"
+msgstr ""
+
+#: lib/pages/import_export.dart:639
+msgid "followingURLsHadErrors"
+msgstr ""
+
+#: lib/pages/import_export.dart:659 lib/pages/home.dart:102
+#: lib/pages/home.dart:147 lib/pages/apps.dart:97 lib/pages/add_app.dart:664
+#: lib/providers/notifications_provider.dart:249 lib/custom_errors.dart:148
+msgid "ok"
+msgstr ""
+
+#: lib/pages/import_export.dart:755
+msgid "selectAll"
+msgstr ""
+
+#: lib/pages/import_export.dart:764
+msgid "deselectX"
+msgstr ""
+
+#: lib/pages/import_export.dart:770 lib/pages/import_export.dart:957
+msgid "pick"
+msgstr ""
+
+#: lib/pages/import_export.dart:778
+msgid "filter"
+msgstr ""
+
+#: lib/pages/import_export.dart:942 lib/components/generated_form_modal.dart:74
+#: lib/providers/apps_provider.dart:2265 lib/providers/apps_provider.dart:2313
+msgid "cancel"
+msgstr ""
+
+#: lib/pages/home.dart:45 lib/pages/home.dart:187 lib/pages/apps.dart:1303
+msgid "appsString"
+msgstr ""
+
+#: lib/pages/home.dart:50 lib/pages/add_app.dart:722
+msgid "addApp"
+msgstr ""
+
+#: lib/pages/home.dart:73
+msgid "welcome"
+msgstr ""
+
+#: lib/pages/home.dart:78
+msgid "documentationLinksNote"
+msgstr ""
+
+#: lib/pages/home.dart:116
+msgid "note"
+msgstr ""
+
+#: lib/pages/home.dart:122
+msgid "googleVerificationWarningP1"
+msgstr ""
+
+#: lib/pages/home.dart:131
+msgid "googleVerificationWarningP2"
+msgstr ""
+
+#: lib/pages/home.dart:138
+msgid "googleVerificationWarningP3"
+msgstr ""
+
+#: lib/pages/apps.dart:406
+msgid "pleaseWait"
+msgstr ""
+
+#: lib/pages/apps.dart:407
+msgid "noApps"
+msgstr ""
+
+#: lib/pages/apps.dart:408
+msgid "noAppsForFilter"
+msgstr ""
+
+#: lib/pages/apps.dart:680
+msgid "percentProgress"
+msgstr ""
+
+#: lib/pages/apps.dart:687
+msgid "installing"
+msgstr ""
+
+#: lib/pages/apps.dart:728
+msgid "noCategory"
+msgstr ""
+
+#: lib/pages/apps.dart:781
+msgid "updateX"
+msgstr ""
+
+#: lib/pages/apps.dart:798
+msgid "installX"
+msgstr ""
+
+#: lib/pages/apps.dart:815
+msgid "markXTrackOnlyAsUpdated"
+msgstr ""
+
+#: lib/pages/apps.dart:835
+msgid "changeX"
+msgstr ""
+
+#: lib/pages/apps.dart:902 lib/pages/apps.dart:917 lib/pages/apps.dart:1145
+msgid "categorize"
+msgstr ""
+
+#: lib/pages/apps.dart:905
+msgid "selectedCategorizeWarning"
+msgstr ""
+
+#: lib/pages/apps.dart:952
+msgid "markXSelectedAppsAsUpdated"
+msgstr ""
+
+#: lib/pages/apps.dart:957
+msgid "onlyWorksWithNonVersionDetectApps"
+msgstr ""
+
+#: lib/pages/apps.dart:987
+msgid "yes"
+msgstr ""
+
+#: lib/pages/apps.dart:1023
+msgid "pinToTop"
+msgstr ""
+
+#: lib/pages/apps.dart:1024
+msgid "unpinFromTop"
+msgstr ""
+
+#: lib/pages/apps.dart:1043
+msgid "shareSelectedAppURLs"
+msgstr ""
+
+#: lib/pages/apps.dart:1107
+msgid "markSelectedAppsUpdated"
+msgstr ""
+
+#: lib/pages/apps.dart:1125
+msgid "installUpdateApps"
+msgstr ""
+
+#: lib/pages/apps.dart:1126
+msgid "installUpdateSelectedApps"
+msgstr ""
+
+#: lib/pages/apps.dart:1139
+msgid "removeSelectedApps"
+msgstr ""
+
+#: lib/pages/apps.dart:1164 lib/pages/apps.dart:1244
+msgid "filterApps"
+msgstr ""
+
+#: lib/pages/apps.dart:1169 lib/providers/source_provider.dart:804
+msgid "appName"
+msgstr ""
+
+#: lib/pages/apps.dart:1175 lib/providers/source_provider.dart:805
+msgid "author"
+msgstr ""
+
+#: lib/pages/apps.dart:1183
+msgid "appId"
+msgstr ""
+
+#: lib/pages/apps.dart:1191
+msgid "upToDateApps"
+msgstr ""
+
+#: lib/pages/apps.dart:1198
+msgid "nonInstalledApps"
+msgstr ""
+
+#: lib/pages/add_app.dart:124
+msgid "xIsTrackOnly"
+msgstr ""
+
+#: lib/pages/add_app.dart:130
+msgid "dontShowAgain"
+msgstr ""
+
+#: lib/pages/add_app.dart:155
+msgid "releaseDateAsVersion"
+msgstr ""
+
+#: lib/pages/add_app.dart:157
+msgid "releaseDateAsVersionExplanation"
+msgstr ""
+
+#: lib/pages/add_app.dart:215 lib/providers/source_provider.dart:1316
+#: lib/providers/apps_provider.dart:2180
+msgid "appAlreadyAdded"
+msgstr ""
+
+#: lib/pages/add_app.dart:251
+msgid "appSourceURL"
+msgstr ""
+
+#: lib/pages/add_app.dart:267
+msgid "error"
+msgstr ""
+
+#: lib/pages/add_app.dart:296 lib/components/generated_form.dart:687
+msgid "add"
+msgstr ""
+
+#: lib/pages/add_app.dart:522
+msgid "searchSomeSourcesLabel"
+msgstr ""
+
+#: lib/pages/add_app.dart:545
+msgid "search"
+msgstr ""
+
+#: lib/pages/add_app.dart:555
+msgid "additionalOptsFor"
+msgstr ""
+
+#: lib/pages/add_app.dart:599
+msgid "tryInferAppIdFromCode"
+msgstr ""
+
+#: lib/pages/add_app.dart:665 lib/pages/add_app.dart:704
+msgid "supportedSources"
+msgstr ""
+
+#: lib/pages/add_app.dart:681
+msgid "trackOnlyInBrackets"
+msgstr ""
+
+#: lib/pages/add_app.dart:681
+msgid "searchableInBrackets"
+msgstr ""
+
+#: lib/pages/add_app.dart:697
+msgid "selfHostedNote"
+msgstr ""
+
+#: lib/components/generated_form.dart:371
+msgid "dropdownNoOptsError"
+msgstr ""
+
+#: lib/components/generated_form.dart:454
+msgid "label"
+msgstr ""
+
+#: lib/providers/settings_provider.dart:185
+msgid "pleaseAllowInstallPerm"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:41
+msgid "updatesAvailable"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:44
+msgid "updatesAvailableNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:45
+msgid "updatesAvailableNotifDescription"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:49
+msgid "noNewUpdates"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:51
+msgid "xHasAnUpdate"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:64
+msgid "appsNotUpdated"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:67
+msgid "appsUpdatedNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:68
+msgid "appsUpdatedNotifDescription"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:73
+msgid "xWasUpdatedToY"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:88
+msgid "appsPossiblyUpdated"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:91
+msgid "appsPossiblyUpdatedNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:92
+msgid "appsPossiblyUpdatedNotifDescription"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:97
+msgid "xWasPossiblyUpdatedToY"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:112
+msgid "errorCheckingUpdates"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:115
+msgid "errorCheckingUpdatesNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:116
+msgid "errorCheckingUpdatesNotifDescription"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:126
+msgid "appsRemoved"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:129
+msgid "appsRemovedNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:130
+msgid "appsRemovedNotifDescription"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:145
+msgid "downloadingX"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:148
+msgid "downloadingXNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:149
+msgid "downloadNotifDescription"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:160
+#: lib/providers/notifications_provider.dart:164
+msgid "downloadedX"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:163
+msgid "downloadedXNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:171
+msgid "completeAppInstallation"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:172
+msgid "updatiumMustBeOpenToInstallApps"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:174
+msgid "completeAppInstallationNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:175
+msgid "completeAppInstallationNotifDescription"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:183
+msgid "checkingForUpdates"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:186
+msgid "checkingForUpdatesNotifChannel"
+msgstr ""
+
+#: lib/providers/notifications_provider.dart:187
+msgid "checkingForUpdatesNotifDescription"
+msgstr ""
+
+#: lib/providers/source_provider.dart:487 lib/custom_errors.dart:45
+msgid "noAPKFound"
+msgstr ""
+
+#: lib/providers/source_provider.dart:747
+msgid "trackOnly"
+msgstr ""
+
+#: lib/providers/source_provider.dart:751
+#: lib/providers/source_provider.dart:759
+msgid "trimVersionString"
+msgstr ""
+
+#: lib/providers/source_provider.dart:759
+msgid "matchGroupToUseForX"
+msgstr ""
+
+#: lib/providers/source_provider.dart:767
+msgid "versionDetectionExplanation"
+msgstr ""
+
+#: lib/providers/source_provider.dart:774
+msgid "useVersionCodeAsOSVersion"
+msgstr ""
+
+#: lib/providers/source_provider.dart:781
+msgid "filterAPKsByRegEx"
+msgstr ""
+
+#: lib/providers/source_provider.dart:800
+msgid "autoApkFilterByArch"
+msgstr ""
+
+#: lib/providers/source_provider.dart:816
+msgid "allowInsecure"
+msgstr ""
+
+#: lib/providers/source_provider.dart:823
+msgid "exemptFromBackgroundUpdates"
+msgstr ""
+
+#: lib/providers/source_provider.dart:829
+msgid "skipUpdateNotifications"
+msgstr ""
+
+#: lib/providers/source_provider.dart:836
+msgid "refreshBeforeDownload"
+msgstr ""
+
+#: lib/providers/source_provider.dart:892
+msgid "includeZips"
+msgstr ""
+
+#: lib/providers/source_provider.dart:899
+msgid "zippedApkFilterRegEx"
+msgstr ""
+
+#: lib/providers/source_provider.dart:997
+msgid "errorWithHttpStatusCode"
+msgstr ""
+
+#: lib/providers/source_provider.dart:1014
+msgid "invalidRegEx"
+msgstr ""
+
+#: lib/providers/source_provider.dart:1107
+msgid "and"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:251 lib/providers/apps_provider.dart:2108
+#: lib/custom_errors.dart:132
+msgid "unexpectedError"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:281
+msgid "fileDeletionError"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:933
+msgid "appVerifierInstructionToast"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:950
+msgid "badDownload"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:1122 lib/providers/apps_provider.dart:1351
+msgid "appNotFound"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:1859
+msgid "uninstallFromDevice"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:2225
+msgid "pickAnAPK"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:2231
+msgid "appHasMoreThanOnePackage"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:2251
+msgid "deviceSupportsXArch"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:2252
+msgid "deviceSupportsFollowingArchs"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:2298
+msgid "warning"
+msgstr ""
+
+#: lib/providers/apps_provider.dart:2301
+msgid "sourceIsXButPackageFromYPrompt"
+msgstr ""
+
+#: lib/app_sources/fdroid.dart:15
+msgid "fdroid"
+msgstr ""
+
+#: lib/app_sources/fdroid.dart:22
+msgid "filterVersionsByRegEx"
+msgstr ""
+
+#: lib/app_sources/fdroid.dart:34 lib/app_sources/fdroidrepo.dart:35
+msgid "trySelectingSuggestedVersionCode"
+msgstr ""
+
+#: lib/app_sources/fdroid.dart:41
+msgid "autoSelectHighestVersionCode"
+msgstr ""
+
+#: lib/app_sources/apkpure.dart:28 lib/app_sources/sourcehut.dart:18
+#: lib/app_sources/github.dart:102 lib/app_sources/apkmirror.dart:22
+#: lib/app_sources/gitlab.dart:53
+msgid "fallbackToOlderReleases"
+msgstr ""
+
+#: lib/app_sources/apkpure.dart:35
+msgid "stayOneVersionBehind"
+msgstr ""
+
+#: lib/app_sources/apkpure.dart:42 lib/app_sources/farsroid.dart:20
+msgid "useFirstApkOfVersion"
+msgstr ""
+
+#: lib/app_sources/coolapk.dart:12
+msgid "coolApk"
+msgstr ""
+
+#: lib/app_sources/github.dart:26
+msgid "githubPATLabel"
+msgstr ""
+
+#: lib/app_sources/github.dart:51
+msgid "GHReqPrefix"
+msgstr ""
+
+#: lib/app_sources/github.dart:95
+msgid "includePrereleases"
+msgstr ""
+
+#: lib/app_sources/github.dart:109 lib/app_sources/apkmirror.dart:29
+msgid "filterReleaseTitlesByRegEx"
+msgstr ""
+
+#: lib/app_sources/github.dart:121
+msgid "filterReleaseNotesByRegEx"
+msgstr ""
+
+#: lib/app_sources/github.dart:130
+msgid "verifyLatestTag"
+msgstr ""
+
+#: lib/app_sources/github.dart:136
+msgid "smartname"
+msgstr ""
+
+#: lib/app_sources/github.dart:142
+msgid "name"
+msgstr ""
+
+#: lib/app_sources/github.dart:144
+msgid "sortMethod"
+msgstr ""
+
+#: lib/app_sources/github.dart:151
+msgid "useLatestAssetDateAsReleaseDate"
+msgstr ""
+
+#: lib/app_sources/github.dart:158
+msgid "releaseTitleAsVersion"
+msgstr ""
+
+#: lib/app_sources/github.dart:168
+msgid "minStarCount"
+msgstr ""
+
+#: lib/app_sources/html.dart:216
+msgid "versionExtractionRegEx"
+msgstr ""
+
+#: lib/app_sources/html.dart:219
+msgid "matchGroupToUse"
+msgstr ""
+
+#: lib/app_sources/html.dart:230
+msgid "customLinkFilterRegex"
+msgstr ""
+
+#: lib/app_sources/html.dart:243
+msgid "versionExtractWholePage"
+msgstr ""
+
+#: lib/app_sources/html.dart:248
+msgid "filterByLinkText"
+msgstr ""
+
+#: lib/app_sources/html.dart:252
+msgid "matchLinksOutsideATags"
+msgstr ""
+
+#: lib/app_sources/html.dart:255
+msgid "skipSort"
+msgstr ""
+
+#: lib/app_sources/html.dart:256
+msgid "takeFirstLink"
+msgstr ""
+
+#: lib/app_sources/html.dart:260
+msgid "sortByLastLinkSegment"
+msgstr ""
+
+#: lib/app_sources/html.dart:268
+msgid "intermediateLinkRegex"
+msgstr ""
+
+#: lib/app_sources/html.dart:277
+msgid "autoLinkFilterByArch"
+msgstr ""
+
+#: lib/app_sources/html.dart:288
+msgid "intermediateLink"
+msgstr ""
+
+#: lib/app_sources/html.dart:300 lib/app_sources/html.dart:318
+msgid "requestHeader"
+msgstr ""
+
+#: lib/app_sources/html.dart:331 lib/app_sources/directAPKLink.dart:22
+msgid "partialAPKHash"
+msgstr ""
+
+#: lib/app_sources/html.dart:332
+msgid "APKLinkHash"
+msgstr ""
+
+#: lib/app_sources/html.dart:335 lib/app_sources/directAPKLink.dart:25
+msgid "defaultPseudoVersioningMethod"
+msgstr ""
+
+#: lib/app_sources/tencent.dart:9
+msgid "tencentAppStore"
+msgstr ""
+
+#: lib/app_sources/directAPKLink.dart:11
+msgid "directAPKLink"
+msgstr ""
+
+#: lib/app_sources/vivoappstore.dart:12
+msgid "vivoAppStore"
+msgstr ""
+
+#: lib/app_sources/gitlab.dart:24
+msgid "gitlabPATLabel"
+msgstr ""
+
+#: lib/app_sources/fdroidrepo.dart:10
+msgid "fdroidThirdPartyRepo"
+msgstr ""
+
+#: lib/app_sources/fdroidrepo.dart:20
+msgid "appIdOrName"
+msgstr ""
+
+#: lib/app_sources/fdroidrepo.dart:21
+msgid "reposHaveMultipleApps"
+msgstr ""
+
+#: lib/app_sources/fdroidrepo.dart:28
+msgid "pickHighestVersionCode"
+msgstr ""
+
+#: lib/app_sources/fdroidrepo.dart:211
+msgid "appWithIdOrNameNotFound"
+msgstr ""
+
+#: lib/custom_errors.dart:29
+msgid "invalidURLForSource"
+msgstr ""
+
+#: lib/custom_errors.dart:34
+msgid "requiresCredentialsInSettings"
+msgstr ""
+
+#: lib/custom_errors.dart:49
+msgid "noVersionFound"
+msgstr ""
+
+#: lib/custom_errors.dart:53
+msgid "urlMatchesNoSource"
+msgstr ""
+
+#: lib/custom_errors.dart:73
+msgid "functionNotImplemented"
+msgstr ""
+
+#: lib/custom_errors.dart:81
+msgid "placeholder"
+msgstr ""
+
+#: lib/custom_errors.dart:131
+msgid "someErrors"
+msgstr ""
