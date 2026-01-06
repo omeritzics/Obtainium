@@ -86,14 +86,15 @@ class SourceHut extends AppSource {
         String? releaseDateString = entry.querySelector('pubDate')?.innerHtml;
         DateTime? releaseDate;
         try {
-          releaseDate = releaseDateString != null
-              ? DateFormat('E, dd MMM yyyy HH:mm:ss Z').parse(releaseDateString)
-              : null;
-          releaseDate = releaseDateString != null
-              ? DateFormat(
-                  'EEE, dd MMM yyyy HH:mm:ss Z',
-                ).parse(releaseDateString)
-              : null;
+          if (releaseDateString != null) {
+            try {
+              releaseDate = DateFormat('E, dd MMM yyyy HH:mm:ss Z')
+                  .parse(releaseDateString);
+            } catch (_) {
+              releaseDate = DateFormat('EEE, dd MMM yyyy HH:mm:ss Z')
+                  .parse(releaseDateString);
+            }
+          }
         } catch (e) {
           // ignore
         }
