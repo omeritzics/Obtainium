@@ -15,7 +15,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Install gettext
         run: sudo apt-get install -y gettext
