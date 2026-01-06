@@ -1725,6 +1725,8 @@ class AppsProvider with ChangeNotifier {
         if (settingsProvider.removeOnExternalUninstall) {
           await removeApps(removedAppIds);
         }
+      if (settingsProvider.removeOnExternalUninstall) {
+        await removeApps(removedAppIds);
       }
     }
     loadingApps = false;
@@ -2485,6 +2487,7 @@ Future<void> bgUpdateCheck(String taskId, Map<String, dynamic>? params) async {
             int minRetryIntervalForThisApp = err is RateLimitError
                 ? (err.remainingMinutes * 60)
                 : e is ClientException
+                : err is ClientException
                 ? (15 * 60)
                 : (toCheckApp.value + 1);
             if (minRetryIntervalForThisApp > maxRetryWaitSeconds) {
