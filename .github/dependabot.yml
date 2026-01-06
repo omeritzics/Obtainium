@@ -1,20 +1,22 @@
 # Dependabot configuration file for Updatium
 version: 2
 updates:
-  # 1. Fetch updates for Flutter/Dart packages (pub.dev)
+  # 1. Flutter/Dart packages (pub.dev)
   - package-ecosystem: "pub"
-    directory: "/" # Location of your pubspec.yaml
+    directory: "/"
     schedule:
       interval: "weekly"
       day: "sunday"
       time: "09:00"
-    timezone: "Israel" # Optional: set to your local time
-    open-pull-requests-limit: 5 # Avoid getting overwhelmed by too many PRs
+    open-pull-requests-limit: 5
     labels:
       - "dependencies"
       - "flutter"
+    # This allows Dependabot to look into git dependencies
+    allow:
+      - dependency-type: "direct"
 
-  # 2. Fetch updates for GitHub Actions
+  # 2. GitHub Actions updates
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -25,7 +27,7 @@ updates:
       - "dependencies"
       - "github_actions"
 
-  # 3. (Optional) Fetch updates for Gradle (Android specific)
+  # 3. Android/Gradle updates
   - package-ecosystem: "gradle"
     directory: "/android"
     schedule:
