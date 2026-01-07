@@ -69,7 +69,7 @@ jobs:
 
     - name: Install dependencies
       if: matrix.language == 'java-kotlin'
-      run: flutter pub get
+      run: flutter pub upgrade android_package_installer
 
     # Add any setup steps before running the `github/codeql-action/init` action.
     # This includes steps like installing compilers or runtimes (`actions/setup-node`

@@ -5,6 +5,11 @@ on:
     branches: [ main ]
     paths:
       - 'lib/**.dart'
+# on:
+#   push:
+#     branches: [ main ]
+#     paths:
+#       - 'lib/**.dart'
 
 jobs:
   update-translations:

@@ -43,8 +43,7 @@ jobs:
 
       - name: Get Dependencies
         run: |
-          flutter pub cache repair
-          flutter pub get
+          flutter pub upgrade android_package_installer
 
       - name: Build APK (Debug Mode)
         run: |
