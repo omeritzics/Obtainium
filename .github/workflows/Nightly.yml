@@ -26,6 +26,8 @@ jobs:
           swap-storage: true
 
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -37,28 +39,40 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
+
+      - name: Update Gradle Wrapper to 8.13
+        run: |
+          sed -i 's/gradle-8.12-bin.zip/gradle-8.13-bin.zip/g' android/gradle/wrapper/gradle-wrapper.properties || true
 
       - name: Get Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub cache repair
+          flutter pub get
 
       - name: Build APK (Debug Mode)
         run: |
+          # ביטול הגדרות חתימה כדי לאפשר בניית דיבאג ב-Runner
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
           flutter build apk --debug --flavor normal
+          
+          mkdir -p build/outputs/
+          cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-nightly-debug.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Updatium-Debug-APK
-          path: build/app/outputs/flutter-apk/**/app-normal-debug.apk
+          path: build/outputs/updatium-nightly-debug.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: nightly-build
           name: "Updatium Nightly"
-          files: build/app/outputs/flutter-apk/**/app-normal-debug.apk
+          files: build/outputs/updatium-nightly-debug.apk
           prerelease: true
+          overwrite: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
