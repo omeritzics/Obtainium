@@ -8,13 +8,16 @@ on:
     branches:
       - main
       - rebrand
+  schedule:
+    # Optional: Keep the nightly running even if no code changes
+    - cron: '0 2 * * *'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-      # Standard cleanup to ensure enough disk space
+      # 1. Clean up disk space to ensure a smooth build
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
@@ -26,11 +29,13 @@ jobs:
           docker-images: true
           swap-storage: true
 
+      # 2. Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # 3. Setup necessary environments
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -43,19 +48,17 @@ jobs:
           channel: stable
           cache: true
 
-      # This step is still needed to ensure the environment matches the latest AGP requirements
-      - name: Update Gradle Wrapper
+      # 4. RUN THE SYNC SCRIPT (The Fixer)
+      # This replaces manual sed commands and ensures everything is synchronized
+      - name: Run Environment Sync
         run: |
-          mkdir -p android/gradle/wrapper
-          printf "distributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\ndistributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip" > android/gradle/wrapper/gradle-wrapper.properties
+          chmod +x scripts/fix_environment.sh
+          bash scripts/fix_environment.sh
 
-      - name: Get Dependencies
-        run: |
-          flutter pub get
-
+      # 5. Build the APK
       - name: Build APK (Debug Mode)
         run: |
-          # Strip signing config for CI build
+          # Extra safety: strip signing config just for this build
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
           flutter build apk --debug --flavor normal
@@ -63,6 +66,7 @@ jobs:
           mkdir -p build/outputs/
           cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-nightly-debug.apk
 
+      # 6. Artifact Management & Release
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -72,10 +76,3 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: nightly-build
-          name: "Updatium Nightly"
-          files: build/outputs/updatium-nightly-debug.apk
-          prerelease: true
-          overwrite: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
