@@ -8,16 +8,14 @@ on:
     branches:
       - main
       - rebrand
-  schedule:
-    # Optional: Keep the nightly running even if no code changes
-    - cron: '0 2 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-      # 1. Clean up disk space to ensure a smooth build
+      # Step 1: Maximize disk space
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
@@ -29,13 +27,13 @@ jobs:
           docker-images: true
           swap-storage: true
 
-      # 2. Checkout the repository
+      # Step 2: Checkout the repo
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 3. Setup necessary environments
+      # Step 3: Setup environments
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -48,17 +46,20 @@ jobs:
           channel: stable
           cache: true
 
-      # 4. RUN THE SYNC SCRIPT (The Fixer)
-      # This replaces manual sed commands and ensures everything is synchronized
+      # Step 4: Run the fixer script
       - name: Run Environment Sync
         run: |
           chmod +x scripts/fix_environment.sh
-          bash scripts/fix_environment.sh
+          ./scripts/fix_environment.sh
 
-      # 5. Build the APK
+      # Step 5: Get dependencies
+      - name: Get Dependencies
+        run: flutter pub get
+
+      # Step 6: Build the APK
       - name: Build APK (Debug Mode)
         run: |
-          # Extra safety: strip signing config just for this build
+          # Remove signingConfig for CI to prevent crashes
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
           flutter build apk --debug --flavor normal
@@ -66,7 +67,7 @@ jobs:
           mkdir -p build/outputs/
           cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-nightly-debug.apk
 
-      # 6. Artifact Management & Release
+      # Step 7: Upload and Release
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -76,3 +77,10 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: nightly-build
+          name: "Updatium Nightly"
+          files: build/outputs/updatium-nightly-debug.apk
+          prerelease: true
+          overwrite: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
