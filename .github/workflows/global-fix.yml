@@ -1,7 +1,7 @@
 name: Global Repository Fix (One-Time)
 
 on:
-  workflow_dispatch: # This allows you to trigger it manually from the Actions tab
+  workflow_dispatch: # הפעלה ידנית בלשונית Actions
 
 jobs:
   fix-all-branches:
@@ -10,59 +10,60 @@ jobs:
       contents: write
     
     steps:
-      # 1. Checkout the repository with all branches
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetches all history and branches
+          fetch-depth: 0 # מושך את כל הענפים
 
-      # 2. Setup Flutter (needed for 'pub get' verification)
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
 
-      # 3. Global Fix Script
       - name: Fix and Push All Branches
         run: |
-          # Set git identity
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
 
-          # Get all remote branches (excluding HEAD and tags)
+          # קבלת רשימת כל הענפים המרוחקים
           BRANCHES=$(git branch -r | grep -v '\->' | sed 's/origin\///')
 
           for branch in $BRANCHES; do
             echo "------------------------------------------------"
-            echo "Processing branch: $branch"
+            echo "Cleaning and fixing branch: $branch"
             echo "------------------------------------------------"
             
-            git checkout $branch
-            
-            # Execute the fix logic
-            # 1. SDK constraint
+            git checkout $branch || continue
+
+            # --- שלב 1: ניקוי שאריות פלאגינים מהנייטיב (כמו background_fetch) ---
+            find android -name "settings.gradle*" -exec sed -i '/background_fetch/d' {} + || true
+            find android -name "build.gradle*" -exec sed -i '/background_fetch/d' {} + || true
+            # ניקוי הפניות ל-background_fetch ב-MainApplication או קבצי קוטלין/ג'אווה
+            find android/app/src -name "*.kt" -exec sed -i '/background_fetch/d' {} + || true
+            find android/app/src -name "*.java" -exec sed -i '/background_fetch/d' {} + || true
+
+            # --- שלב 2: תיקון SDK ב-pubspec.yaml ---
             sed -i 's/sdk: ">=2.7.0 <3.0.0"/sdk: ">=3.0.0 <4.0.0"/g' pubspec.yaml || true
             
-            # 2. Inject Overrides if missing
+            # --- שלב 3: הזרקת Dependency Overrides (רשת הביטחון) ---
             if ! grep -q "dependency_overrides:" pubspec.yaml; then
                 printf "\ndependency_overrides:\n  web: ^1.0.0\n  connectivity_plus: ^6.0.3\n  battery_plus: ^6.2.2\n" >> pubspec.yaml
             fi
 
-            # 3. Infrastructure fix
+            # --- שלב 4: עדכון תשתיות אנדרואיד (Gradle 8.13) ---
             mkdir -p android/gradle/wrapper
             printf "distributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\ndistributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip" > android/gradle/wrapper/gradle-wrapper.properties
             
-            if [ -f "android/app/build.gradle.kts" ]; then
-                sed -i 's/jvmTarget = JavaVersion.VERSION_11.toString()/kotlinOptions.jvmTarget = "11"/g' android/app/build.gradle.kts || true
-            fi
+            # תיקון תחביר jvmTarget בקבצי .kts
+            find android -name "build.gradle.kts" -exec sed -i 's/jvmTarget = JavaVersion.VERSION_11.toString()/kotlinOptions.jvmTarget = "11"/g' {} + || true
 
-            # Check if there are changes
+            # --- שלב 5: אימות וביצוע Commit ---
             if [ -n "$(git status --porcelain)" ]; then
-              echo "Changes detected on $branch. Committing..."
+              echo "Changes detected on $branch. Updating..."
               git add .
-              git commit -m "chore: global automated dependency and infrastructure fix"
+              git commit -m "chore: global automated fix for dependencies, gradle, and legacy plugin references"
               git push origin $branch
             else
-              echo "No changes needed for $branch."
+              echo "Branch $branch is already clean."
             fi
           done
