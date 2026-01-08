@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - main 
-      - rebrand
+      - stable
   workflow_dispatch:
 
 jobs:
