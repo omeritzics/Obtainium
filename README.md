@@ -1,5 +1,7 @@
 # ![Updatium Icon](./assets/graphics/icon_small.png) Updatium
 
+[![Nightly Build](https://github.com/omeritzics/Updatium/actions/workflows/nightly.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/nightly.yml)
+
 Update your Android apps directly from the APK source. Forked from [Obtainium](https://github.com/ImranR98/Obtainium) due to the developer's problematic political views and his terrible behaviour toward Jews who wanted to contribute to his app.
 
 Updatium allows you to install and update apps directly from their releases pages, and receive notifications when new releases are made available.
@@ -30,6 +32,8 @@ Currently supported App sources:
   - [Neutron Code](https://neutroncode.com/)
 - Direct APK Link
 - "HTML" (Fallback): Any other URL that returns an HTML page with links to APK files
+## Download
+[![Download Nightly APK](https://img.shields.io/badge/Download-Nightly_APK-green?style=for-the-badge&logo=android)](https://github.com/USERNAME/REPOSITORY/releases/tag/nightly-build)
 
 ## Limitations
 - For some sources, data is gathered using Web scraping and can easily break due to changes in website design. In such cases, more reliable methods may be unavailable.
