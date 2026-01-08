@@ -1,38 +1,24 @@
-# Dependabot configuration file for Updatium
 version: 2
 updates:
-  # 1. Flutter/Dart packages (pub.dev)
   - package-ecosystem: "pub"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "09:00"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-      - "flutter"
-    # This allows Dependabot to look into git dependencies
-    allow:
-      - dependency-type: "direct"
-
-  # 2. GitHub Actions updates
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "sunday"
+      interval: "monthly"
     open-pull-requests-limit: 3
-    labels:
-      - "dependencies"
-      - "github_actions"
+    # Ignore major version updates for problematic packages
+    # This prevents Dependabot from breaking your project with "Plus" plugins
+    ignore:
+      - property: "version"
+        update-types: ["version-update:semver-major"]
+      - package-name: "connectivity_plus"
+      - package-name: "battery_plus"
+      - package-name: "flutter_foreground_task"
 
-  # 3. Android/Gradle updates
   - package-ecosystem: "gradle"
     directory: "/android"
     schedule:
-      interval: "monthly"
-    open-pull-requests-limit: 2
-    labels:
-      - "dependencies"
-      - "android"
+      interval: "weekly"
+    # Keep Gradle updates conservative
+    ignore:
+      - package-name: "com.android.tools.build:gradle"
+        update-types: ["version-update:semver-major"]
