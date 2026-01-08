@@ -1,51 +1,77 @@
-name: Auto-Fix Dependencies
+name: Daily Maintenance & Dependency Fix
 
 on:
-  pull_request:
-    paths:
-      - 'pubspec.yaml'
-  workflow_dispatch: # Allows you to run this manually from the Actions tab
+  schedule:
+    # Runs at 00:00 UTC every day
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual trigger from the Actions tab
 
 jobs:
-  downgrade_and_fix:
+  maintenance_fix:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
-          ref: ${{ github.head_ref }} # Checkout the PR branch
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
-      # This script tries to run 'pub get'. If it fails, it injects known stable overrides.
-      - name: Attempt Dependency Resolution
+      - name: Run Auto-Fix Logic
+        id: fix_step
         run: |
+          MODIFIED=false
+
+          # 1. Fix Gradle Wrapper (Ensure 8.13)
+          mkdir -p android/gradle/wrapper
+          CURRENT_GRADLE=$(cat android/gradle/wrapper/gradle-wrapper.properties 2>/dev/null | grep "gradle-8.13" || true)
+          if [ -z "$CURRENT_GRADLE" ]; then
+            printf "distributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\ndistributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip" > android/gradle/wrapper/gradle-wrapper.properties
+            MODIFIED=true
+            echo "Fixed Gradle Wrapper to 8.13"
+          fi
+
+          # 2. Fix Kotlin Syntax in build.gradle.kts
+          if grep -q "JavaVersion.VERSION_11.toString()" android/app/build.gradle.kts; then
+            sed -i 's/jvmTarget = JavaVersion.VERSION_11.toString()/kotlinOptions.jvmTarget = "11"/g' android/app/build.gradle.kts || true
+            MODIFIED=true
+            echo "Fixed Kotlin jvmTarget syntax"
+          fi
+
+          # 3. Resolve Flutter Dependencies
+          # First, ensure SDK constraint is modern
+          if grep -q 'sdk: ">=2.7.0 <3.0.0"' pubspec.yaml; then
+            sed -i 's/sdk: ">=2.7.0 <3.0.0"/sdk: ">=3.0.0 <4.0.0"/g' pubspec.yaml
+            MODIFIED=true
+          fi
+
           if ! flutter pub get; then
-            echo "Conflict detected! Injecting stable dependency overrides..."
-            
-            # Check if dependency_overrides already exists, if not, add the header
+            echo "Pub get failed. Applying dependency overrides..."
             if ! grep -q "dependency_overrides:" pubspec.yaml; then
               printf "\ndependency_overrides:\n" >> pubspec.yaml
             fi
             
-            # Force-inject known stable versions that often cause "Dependency Hell"
-            # You can add/remove packages here based on your common issues
-            printf "  connectivity_plus: 6.0.3\n" >> pubspec.yaml
-            printf "  battery_plus: 6.2.2\n" >> pubspec.yaml
-            printf "  web: ^1.0.0\n" >> pubspec.yaml
+            # Add overrides if they aren't already there
+            grep -q "connectivity_plus:" pubspec.yaml || printf "  connectivity_plus: 6.0.3\n" >> pubspec.yaml
+            grep -q "battery_plus:" pubspec.yaml || printf "  battery_plus: 6.2.2\n" >> pubspec.yaml
+            grep -q "web:" pubspec.yaml || printf "  web: ^1.0.0\n" >> pubspec.yaml
             
-            echo "Overrides injected. Retrying pub get..."
             flutter pub get
-            
-            # Commit the fixes back to the PR branch
-            git config --global user.name "github-actions[bot]"
-            git config --global user.email "github-actions@github.com"
-            git add pubspec.yaml
-            git commit -m "Auto-fix: Downgraded conflicting dependencies via overrides"
-            git push
-          else
-            echo "Dependencies are healthy. No action needed."
+            MODIFIED=true
           fi
+
+          echo "modified=$MODIFIED" >> $GITHUB_OUTPUT
+
+      # Create a Pull Request if any fixes
