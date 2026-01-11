@@ -1285,7 +1285,8 @@ getDisplayedList() {
               ) {
                 return getSingleAppHorizTile(index);
               }, childCount: listedApps.length),
-    }
+            );
+}
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: RefreshIndicator(
