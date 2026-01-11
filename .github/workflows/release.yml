@@ -42,15 +42,16 @@ jobs:
 
       - name: Create key.properties
         run: |
-          # Using an absolute path to ensure Gradle finds the keystore file regardless of the working directory
+          # Using absolute path for storeFile
+          # We explicitly set the alias to 'upload' which matches the key you generated
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
-          echo "alias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+          echo "alias=upload" >> android/key.properties
           echo "storeFile=/home/runner/work/Updatium/Updatium/android/upload-keystore.jks" >> android/key.properties
 
       - name: Build APKs
         run: |
-          # Building the app flavors. Gradle will now use the absolute path for signing.
+          # Building the app flavors with the permanent signature
           flutter build apk --flavor normal --release
           flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release
 
