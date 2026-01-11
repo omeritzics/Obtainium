@@ -98,7 +98,7 @@ dependencies:
 
 flutter_launcher_icons:
   android: "ic_launcher"
-  image_path: "assets/graphics/small_icon.png"
+  image_path: "assets/graphics/icon_small.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
