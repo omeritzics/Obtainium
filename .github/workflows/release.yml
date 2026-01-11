@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17' # Recommended for most Flutter/Android builds
+          java-version: '17'
 
       - name: Extract Version
         id: extract_version      
@@ -37,12 +37,13 @@ jobs:
 
       - name: Decode Keystore
         run: |
-          # Recover the permanent signing key from GitHub Secrets
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+          # The keystore is decoded into the 'android' directory as expected by your Gradle logs
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/upload-keystore.jks
 
       - name: Create key.properties
         run: |
-          # Create the configuration file for the Gradle signing process using secrets
+          # Creating the properties file in the 'android' folder
+          # The storeFile points directly to the file in the same directory
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "alias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
@@ -50,7 +51,7 @@ jobs:
 
       - name: Build APKs
         run: |
-          # Build signed APKs for both standard and F-Droid flavors
+          # Building both flavors with the permanent signature
           flutter build apk --flavor normal --release
           flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release
 
@@ -61,7 +62,7 @@ jobs:
           path: build/app/outputs/flutter-apk/*.apk
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2 # Updated to v2
+        uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ steps.extract_version.outputs.tag }}
