@@ -37,22 +37,30 @@ jobs:
 
       - name: Decode Keystore
         run: |
-          # Decoding the keystore to the exact location requested by Gradle
+          # Recover the permanent keystore file
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/upload-keystore.jks
 
       - name: Create key.properties
         run: |
-          # We explicitly set the values to ensure no 'null' values are passed to Gradle
+          # Creating the file just in case the build.gradle expects it
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "alias=upload" >> android/key.properties
-          echo "storeFile=/home/runner/work/Updatium/Updatium/android/upload-keystore.jks" >> android/key.properties
+          echo "storeFile=upload-keystore.jks" >> android/key.properties
 
       - name: Build APKs
         run: |
-          # Building the app flavors. The alias is now explicitly set to 'upload'
-          flutter build apk --flavor normal --release
-          flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release
+          # Injecting signing arguments directly into the build command as a fallback
+          # This ensures Gradle gets the alias even if key.properties fails to load
+          flutter build apk --flavor normal --release \
+            --dart-define=RELEASE_STORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }} \
+            --dart-define=RELEASE_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }} \
+            --dart-define=RELEASE_KEY_ALIAS=upload
+
+          flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release \
+            --dart-define=RELEASE_STORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }} \
+            --dart-define=RELEASE_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }} \
+            --dart-define=RELEASE_KEY_ALIAS=upload
 
       - name: Save APKs as Artifacts
         uses: actions/upload-artifact@v4
