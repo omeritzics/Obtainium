@@ -42,8 +42,7 @@ jobs:
 
       - name: Create key.properties
         run: |
-          # Using absolute path for storeFile
-          # We explicitly set the alias to 'upload' which matches the key you generated
+          # We explicitly set the values to ensure no 'null' values are passed to Gradle
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "alias=upload" >> android/key.properties
@@ -51,7 +50,7 @@ jobs:
 
       - name: Build APKs
         run: |
-          # Building the app flavors with the permanent signature
+          # Building the app flavors. The alias is now explicitly set to 'upload'
           flutter build apk --flavor normal --release
           flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release
 
