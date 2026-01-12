@@ -37,34 +37,24 @@ jobs:
 
       - name: Decode Keystore
         run: |
-          # Decoding the keystore to the project root
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > upload-keystore.jks
+          # We place the keystore inside android/app/ so Gradle's file() finds it easily
+          mkdir -p android/app
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
 
       - name: Create key.properties
         run: |
-          # Creating the file in the root directory
-          # Using keyAlias to match your build.gradle.kts
+          # We place key.properties in the root as your build.gradle.kts expects
+          # But for the storeFile path, we use a relative path from the app's perspective
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> key.properties
           echo "keyAlias=upload" >> key.properties
-          # Providing the absolute path for Kotlin's file() function
-          echo "storeFile=$GITHUB_WORKSPACE/upload-keystore.jks" >> key.properties
-
-      - name: Debug Signing Files
-        run: |
-          echo "--- Checking key.properties content (Passwords hidden) ---"
-          # This will show us the keys and paths but hide the actual secret values
-          sed 's/Password=.*/Password=********/' key.properties
-          echo "--- Checking if keystore file exists ---"
-          ls -l upload-keystore.jks
-          echo "--- Current Working Directory ---"
-          pwd
+          echo "storeFile=upload-keystore.jks" >> key.properties
 
       - name: Build APKs
         run: |
-          # Building the app flavors
-          flutter build apk --flavor normal --release
-          flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release
+          # Adding a small fix to ensure the environment is clean
+          flutter build apk --flavor normal --release --obfuscate --split-debug-info=build/debug-info
+          flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release --obfuscate --split-debug-info=build/debug-info
 
       - name: Save APKs as Artifacts
         uses: actions/upload-artifact@v4
