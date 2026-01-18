@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:html/parser.dart';
-import 'package:obtainium/custom_errors.dart';
-import 'package:obtainium/providers/source_provider.dart';
+import 'package:updatium/custom_errors.dart';
+import 'package:updatium/providers/source_provider.dart';
 
 class RockMods extends AppSource {
   RockMods() {
@@ -30,7 +30,7 @@ class RockMods extends AppSource {
     try {
       var res = await sourceRequest(standardUrl, additionalSettings);
       if (res.statusCode != 200) {
-        throw getObtainiumHttpError(res);
+        throw getUpdatiumHttpError(res);
       }
       var html = parse(res.body);
 
@@ -82,7 +82,7 @@ class RockMods extends AppSource {
               additionalSettings,
             );
             if (resIntermediate.statusCode != 200) {
-              throw getObtainiumHttpError(resIntermediate);
+              throw getUpdatiumHttpError(resIntermediate);
             }
             return parse(resIntermediate.body);
           }).toList();
@@ -105,7 +105,7 @@ class RockMods extends AppSource {
       var slugFutures = slugs.map((slugUrl) async {
         var resSlug = await sourceRequest(slugUrl, additionalSettings);
         if (resSlug.statusCode != 200) {
-          throw getObtainiumHttpError(resSlug);
+          throw getUpdatiumHttpError(resSlug);
         }
         return MapEntry(slugUrl, parse(resSlug.body));
       }).toList();
@@ -152,8 +152,8 @@ class RockMods extends AppSource {
             : null,
       );
     } catch (e) {
-      if (e is ObtainiumError) rethrow;
-      throw ObtainiumError('RockMods Error: $e');
+      if (e is UpdatiumError) rethrow;
+      throw UpdatiumError('RockMods Error: $e');
     }
   }
 }
