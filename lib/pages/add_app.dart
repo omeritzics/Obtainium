@@ -379,7 +379,7 @@ class AddAppPageState extends State<AddAppPage> {
                           );
                         },
                       );
-                      if (querySettings == null) return null;
+                      if (querySettings == null) { return null; }
                     } else {
                       querySettings = {};
                     }
