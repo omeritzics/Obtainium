@@ -77,5 +77,6 @@ jobs:
           files: build/outputs/updatium-nightly-debug.apk
           prerelease: true
           overwrite: true
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

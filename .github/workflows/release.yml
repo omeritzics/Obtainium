@@ -69,7 +69,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ steps.extract_version.outputs.tag }}
           name: "Release ${{ steps.extract_version.outputs.version }}${{ github.event.inputs.beta == 'true' && ' (Beta)' || '' }}"
-          prerelease: ${{ github.event.inputs.beta == true }}
+          prerelease: ${{ fromJSON(github.event.inputs.beta) }}
           draft: true
+          allow_updates: true
           files: build/app/outputs/flutter-apk/*.apk
           generate_release_notes: true
