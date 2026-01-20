@@ -31,6 +31,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -55,8 +61,8 @@ jobs:
 
       - name: Build APK (Debug Mode)
         run: |
-          # הסרת הגדרות חתימה כדי למנוע שגיאות ב-CI (Kotlin DSL syntax)
-          sed -i 's/signingConfig = .*release.*/signingConfig = null/g' android/app/build.gradle.kts || true
+          # הסרת הגדרות חתימה כדי למנוע שגיאות ב-CI
+          sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
           flutter build apk --debug --flavor normal
           
@@ -79,5 +85,6 @@ jobs:
           files: build/outputs/updatium-nightly-debug.apk
           prerelease: true
           overwrite: true
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

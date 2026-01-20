@@ -335,7 +335,7 @@ class AddAppPageState extends State<AddAppPage> {
                 .where((e) => searchSources.contains(e.name))
                 .map((e) async {
                   try {
-                    Map<String, dynamic>? querySettings = {};
+                    Map<String, dynamic>? querySettings;
                     if (e.includeAdditionalOptsInMainSearch) {
                       querySettings = await showDialog<Map<String, dynamic>?>(
                         context: context,
@@ -379,9 +379,9 @@ class AddAppPageState extends State<AddAppPage> {
                           );
                         },
                       );
-                      if (querySettings == null) {
-                        return null;
-                      }
+                      if (querySettings == null) { return null; }
+                    } else {
+                      querySettings = {};
                     }
                     return MapEntry(
                       e.runtimeType.toString(),
@@ -709,7 +709,6 @@ class AddAppPageState extends State<AddAppPage> {
               ),
             ),
           ),
-
         ],
       ),
     );
