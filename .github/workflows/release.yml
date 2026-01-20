@@ -71,5 +71,6 @@ jobs:
           name: "Release ${{ steps.extract_version.outputs.version }}${{ github.event.inputs.beta == 'true' && ' (Beta)' || '' }}"
           prerelease: ${{ github.event.inputs.beta == true }}
           draft: true
+          allowUpdates: true
           files: build/app/outputs/flutter-apk/*.apk
           generate_release_notes: true
