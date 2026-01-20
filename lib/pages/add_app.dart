@@ -379,8 +379,10 @@ class AddAppPageState extends State<AddAppPage> {
                           );
                         },
                       );
+                      if (querySettings == null) { return null; }
+                    } else {
+                      querySettings = {};
                     }
-                    if (querySettings == null) return null;
                     return MapEntry(
                       e.runtimeType.toString(),
                       await e.search(searchQuery, querySettings: querySettings),
