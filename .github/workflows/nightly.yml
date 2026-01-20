@@ -64,7 +64,7 @@ jobs:
           cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-nightly-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Updatium-Debug-APK
           path: build/outputs/updatium-nightly-debug.apk
