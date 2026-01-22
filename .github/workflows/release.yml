@@ -31,7 +31,7 @@ jobs:
       - name: Extract Version
         id: extract_version      
         run: |
-          # שליפת גרסה מקובץ pubspec.yaml
+          # Extracting version from pubspec.yaml
           VERSION=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | cut -d '+' -f 1)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "tag=v$VERSION" >> $GITHUB_OUTPUT
@@ -52,7 +52,7 @@ jobs:
         run: |
           flutter pub get
           
-          # בניית גרסת Normal
+          # Building Normal release
           flutter build apk --flavor normal --release --obfuscate --split-debug-info=build/debug-info
           
           flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release --obfuscate --split-debug-info=build/debug-info
