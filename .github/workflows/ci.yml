@@ -15,8 +15,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
       - name: Checkout Code
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Java
         uses: actions/setup-java@v5
@@ -29,6 +42,15 @@ jobs:
         with:
           channel: stable
           cache: true
+
+      - name: Run Environment Sync
+        run: |
+          if [ -f "scripts/fix_environment.sh" ]; then
+            chmod +x scripts/fix_environment.sh
+            ./scripts/fix_environment.sh
+          else
+            echo "Sync script not found, skipping..."
+          fi
 
       - name: Get Dependencies
         run: flutter pub get
