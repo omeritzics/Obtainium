@@ -43,7 +43,6 @@ jobs:
           channel: stable
           cache: true
 
-      # הרצת סקריפט הסנכרון כדי לוודא שאין תלויות שבורות לפני הבנייה
       - name: Run Environment Sync
         run: |
           if [ -f "scripts/fix_environment.sh" ]; then
@@ -55,7 +54,6 @@ jobs:
 
       - name: Build APK (Debug Mode)
         run: |
-          # הסרת הגדרות חתימה כדי למנוע שגיאות ב-CI
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
           flutter build apk --debug --flavor normal

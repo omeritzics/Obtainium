@@ -30,7 +30,7 @@ if (keystorePropertiesExists) {
 
 android {
     namespace = "com.omeritzics.updatium"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = "28.2.13676358"
 
     compileOptions {
@@ -48,7 +48,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 34
         versionCode = flutterVersionCode.toInt()
         versionName = flutterVersionName
     }

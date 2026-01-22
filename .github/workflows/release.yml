@@ -31,7 +31,6 @@ jobs:
       - name: Extract Version
         id: extract_version      
         run: |
-          # שליפת גרסה מקובץ pubspec.yaml
           VERSION=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | cut -d '+' -f 1)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "tag=v$VERSION" >> $GITHUB_OUTPUT
