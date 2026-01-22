@@ -358,7 +358,7 @@ class _UpdatiumState extends State<Updatium> {
     return WithForegroundTask(
       child: DynamicColorBuilder(
         builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-          // Decide on a colour/brightness scheme based on OS and user settings
+          // Decide on a color/brightness scheme based on OS and user settings
           ColorScheme lightColorScheme;
           ColorScheme darkColorScheme;
           if (lightDynamic != null &&

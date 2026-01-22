@@ -12,7 +12,7 @@ class GeneratedFormModal extends StatefulWidget {
     this.message = '',
     this.additionalWidgets = const [],
     this.singleNullReturnButton,
-    this.primaryActionColour,
+    this.primaryActionColor,
   });
 
   final String title;
@@ -21,7 +21,7 @@ class GeneratedFormModal extends StatefulWidget {
   final bool initValid;
   final List<Widget> additionalWidgets;
   final String? singleNullReturnButton;
-  final Color? primaryActionColour;
+  final Color? primaryActionColor;
 
   @override
   State<GeneratedFormModal> createState() => _GeneratedFormModalState();
@@ -77,10 +77,10 @@ class _GeneratedFormModalState extends State<GeneratedFormModal> {
         ),
         widget.singleNullReturnButton == null
             ? TextButton(
-                style: widget.primaryActionColour == null
+                style: widget.primaryActionColor == null
                     ? null
                     : TextButton.styleFrom(
-                        foregroundColor: widget.primaryActionColour,
+                        foregroundColor: widget.primaryActionColor,
                       ),
                 onPressed: !valid
                     ? null
