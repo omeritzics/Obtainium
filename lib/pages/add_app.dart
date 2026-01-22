@@ -379,9 +379,6 @@ class AddAppPageState extends State<AddAppPage> {
                           );
                         },
                       );
-                      if (querySettings == null) {
-                        return null;
-                      }
                     }
                     return MapEntry(
                       e.runtimeType.toString(),
@@ -709,7 +706,6 @@ class AddAppPageState extends State<AddAppPage> {
               ),
             ),
           ),
-
         ],
       ),
     );

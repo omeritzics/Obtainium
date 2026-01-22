@@ -1,14 +1,14 @@
-name: Nightly Build
-
+name: CI
 permissions:
-  contents: write
+  contents: read
 
 on:
   push:
     branches:
-      - main 
-      - stable
-  workflow_dispatch:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
     
     steps:
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
+        uses: jlumbroso/free-disk-space@v2.0.0
         with:
           tool-cache: true
           android: false
@@ -52,28 +52,12 @@ jobs:
             echo "Sync script not found, skipping..."
           fi
 
-      - name: Build APK (Debug Mode)
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Build Check (Debug Mode)
         run: |
+          # Remove signing configuration for CI check if present
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
           flutter build apk --debug --flavor normal
-          
-          mkdir -p build/outputs/
-          cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-nightly-debug.apk
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v6
-        with:
-          name: Updatium-Debug-APK
-          path: build/outputs/updatium-nightly-debug.apk
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: nightly-build
-          name: "Updatium Nightly"
-          files: build/outputs/updatium-nightly-debug.apk
-          prerelease: true
-          overwrite: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
