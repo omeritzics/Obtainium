@@ -57,7 +57,7 @@ jobs:
           cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/artifacts/updatium-${{ steps.vars.outputs.sha_short }}.apk
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Updatium-Commit-${{ steps.vars.outputs.sha_short }}
           path: build/outputs/artifacts/updatium-${{ steps.vars.outputs.sha_short }}.apk
