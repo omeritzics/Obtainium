@@ -17,8 +17,7 @@ subprojects {
     project.evaluationDependsOn(":app")
     
     val applySdkOverride = {
-        if (project.hasProperty("android")) {
-            val android = project.extensions.getByName("android")
+        project.extensions.findByName("android")?.let { android ->
             if (android is com.android.build.gradle.BaseExtension) {
                 val minCompileSdk = (rootProject.findProperty("updatium.minCompileSdk") as? String)?.toIntOrNull() ?: 34
                 val currentSdk = android.compileSdkVersion?.substringAfter("-")?.toIntOrNull() ?: 0
