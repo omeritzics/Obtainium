@@ -382,7 +382,10 @@ class AddAppPageState extends State<AddAppPage> {
                     }
                     return MapEntry(
                       e.runtimeType.toString(),
-                      await e.search(searchQuery, querySettings: querySettings),
+                      await e.search(
+                        searchQuery,
+                        querySettings: querySettings ?? {},
+                      ),
                     );
                   } catch (err) {
                     if (err is! CredsNeededError) {
