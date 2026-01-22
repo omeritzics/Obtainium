@@ -1,13 +1,7 @@
 name: CI Commit Build
 
 on:
-  push:
-    branches:
-      - main
-      - stable
   pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
