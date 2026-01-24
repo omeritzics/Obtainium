@@ -772,14 +772,17 @@ class AppsPageState extends State<AppsPage> {
             toggleAppSelected(listedApps[index].app);
           },
           child: Stack(
+            alignment: Alignment.center,
             children: [
               if (selectedAppIds.contains(listedApps[index].app.id))
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.primary.withOpacity(0.2),
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withOpacity(0.2),
+                    ),
                   ),
                 ),
               if (listedApps[index].app.pinned)
