@@ -813,7 +813,14 @@ class AppsPageState extends State<AppsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 12),
-                  SizedBox(height: 64, width: 64, child: getAppIcon(index)),
+                  SizedBox(
+                    height: 64,
+                    width: 64,
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: getAppIcon(index),
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
