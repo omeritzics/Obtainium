@@ -1862,7 +1862,7 @@ class AppsProvider with ChangeNotifier {
       context: context,
       builder: (BuildContext ctx) {
         return GeneratedFormModal(
-          primaryActionColour: Theme.of(context).colorScheme.error,
+          primaryActionColor: Theme.of(context).colorScheme.error,
           title: plural('removeAppQuestion', apps.length),
           items: !showUninstallOption
               ? []

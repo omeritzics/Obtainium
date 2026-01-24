@@ -21,7 +21,7 @@
     "continue": "Continue",
     "requiredInBrackets": "(required)",
     "dropdownNoOptsError": "ERROR: DROPDOWN MUST HAVE AT LEAST ONE OPT",
-    "colour": "Colour",
+    "color": "Color",
     "standard": "Standard",
     "custom": "Custom",
     "useMaterialYou": "Use Material You",
@@ -402,7 +402,7 @@
         "other": "{} APKs"
     },
     "certificateHash": {
-      "one": "Certificate Hash",
-      "other": "Certificate Hashes"
+        "one": "Certificate Hash",
+        "other": "Certificate Hashes"
     }
 }

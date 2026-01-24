@@ -26,7 +26,7 @@ List<MapEntry<Locale, String>> supportedLocales = const [
   MapEntry(Locale('zh', 'Hant_TW'), '臺灣話'),
   MapEntry(Locale('it'), 'Italiano'),
   MapEntry(Locale('ja'), '日本語'),
-  MapEntry(Locale('hu'), 'עברית'),
+  MapEntry(Locale('he'), 'עברית'),
   MapEntry(Locale('hu'), 'Magyar'),
   MapEntry(Locale('de'), 'Deutsch'),
   MapEntry(Locale('fa'), 'فارسی'),
@@ -358,7 +358,7 @@ class _UpdatiumState extends State<Updatium> {
     return WithForegroundTask(
       child: DynamicColorBuilder(
         builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-          // Decide on a colour/brightness scheme based on OS and user settings
+          // Decide on a color/brightness scheme based on OS and user settings
           ColorScheme lightColorScheme;
           ColorScheme darkColorScheme;
           if (lightDynamic != null &&

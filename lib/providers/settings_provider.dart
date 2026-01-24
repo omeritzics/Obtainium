@@ -490,7 +490,7 @@ class SettingsProvider with ChangeNotifier {
   }
 
   bool get parallelDownloads {
-    return prefs?.getBool('parallelDownloads') ?? false;
+    return prefs?.getBool('parallelDownloads') ?? true;
   }
 
   set parallelDownloads(bool val) {

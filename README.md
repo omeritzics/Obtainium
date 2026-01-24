@@ -1,6 +1,8 @@
 # ![Updatium Icon](./assets/graphics/icon_small.png) Updatium
 
 [![Nightly Build](https://github.com/omeritzics/Updatium/actions/workflows/nightly.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/nightly.yml)
+[![Dependency review](https://github.com/omeritzics/Updatium/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/dependency-review.yml)
+[![OSV-Scanner](https://github.com/omeritzics/Updatium/actions/workflows/osv-scanner.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/osv-scanner.yml)
 
 Update your Android apps directly from the APK source. Forked from [Obtainium](https://github.com/ImranR98/Obtainium) due to the developer's problematic political views and his terrible behaviour towards Jewish people who wanted to contribute to his app.
 
@@ -40,9 +42,3 @@ Currently supported App sources:
 
 ## Limitations
 - For some sources, data is gathered using Web scraping and can easily break due to changes in website design. In such cases, more reliable methods may be unavailable.
-
-## Screenshots
-
-| <img src="./assets/screenshots/1.apps.png" alt="Apps Page" /> | <img src="./assets/screenshots/2.dark_theme.png" alt="Dark Theme" />           | <img src="./assets/screenshots/3.material_you.png" alt="Material You" />    |
-| ------------------------------------------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| <img src="./assets/screenshots/4.app.png" alt="App Page" />   | <img src="./assets/screenshots/5.app_opts.png" alt="App Options" /> | <img src="./assets/screenshots/6.app_webview.png" alt="App Web View" /> |

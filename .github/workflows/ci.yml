@@ -1,0 +1,64 @@
+name: CI Commit Build
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build_artifact:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: false
+
+      - name: Checkout Code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Get Commit SHA
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Prepare Build
+        run: |
+          flutter pub get
+          # Strip signing config to build debug APK safely without keystores
+          sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
+
+      - name: Build APK (Unique ID)
+        run: |
+          # Inject the short SHA into the Application ID to allow side-by-side testing
+          # This replaces the existing applicationId with a unique one for this commit
+          sed -i 's/applicationId ".*"/applicationId "com.updatium.ci.${{ steps.vars.outputs.sha_short }}"/g' android/app/build.gradle || true
+          
+          # Build the debug APK for the normal flavor
+          flutter build apk --debug --flavor normal
+          
+          mkdir -p build/outputs/artifacts/
+          cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/artifacts/updatium-${{ steps.vars.outputs.sha_short }}.apk
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: Updatium-Commit-${{ steps.vars.outputs.sha_short }}
+          path: build/outputs/artifacts/updatium-${{ steps.vars.outputs.sha_short }}.apk
+          retention-days: 14 # Keep artifacts for 14 days to save space
