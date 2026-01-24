@@ -731,7 +731,8 @@ class AppsPageState extends State<AppsPage> {
         ];
       } else if (numCategories == 1) {
         stops = [0.9999, 1.0];
-      } else { // numCategories is 0
+      } else {
+        // numCategories is 0
         stops = [1.0];
       }
 
@@ -809,7 +810,7 @@ class AppsPageState extends State<AppsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 12),
-                  getAppIcon(index),
+                  SizedBox(height: 64, width: 64, child: getAppIcon(index)),
                   const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
