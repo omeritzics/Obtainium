@@ -710,6 +710,158 @@ class AppsPageState extends State<AppsPage> {
       );
     }
 
+    getSingleAppGridTile(int index) {
+      var hasUpdate =
+          listedApps[index].app.installedVersion != null &&
+          listedApps[index].app.installedVersion !=
+              listedApps[index].app.latestVersion;
+      var transparent = Theme.of(
+        context,
+      ).colorScheme.surface.withAlpha(0).value;
+      final categories = listedApps[index].app.categories;
+      final numCategories = categories.length;
+      List<double> stops;
+
+      if (numCategories > 1) {
+        stops = [
+          ...categories.asMap().entries.map(
+            (e) => ((e.key / (numCategories - 1)) - 0.0001).clamp(0.0, 1.0),
+          ),
+          1.0,
+        ];
+      } else if (numCategories == 1) {
+        stops = [0.9999, 1.0];
+      } else { // numCategories is 0
+        stops = [1.0];
+      }
+
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: LinearGradient(
+            stops: stops,
+            begin: const Alignment(-1, -1),
+            end: const Alignment(1, 1),
+            colors: [
+              ...listedApps[index].app.categories.map(
+                (e) => Color(
+                  settingsProvider.categories[e] ?? transparent,
+                ).withAlpha(40),
+              ),
+              Color(transparent),
+            ],
+          ),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            if (selectedAppIds.isNotEmpty) {
+              toggleAppSelected(listedApps[index].app);
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      AppPage(appId: listedApps[index].app.id),
+                ),
+              );
+            }
+          },
+          onLongPress: () {
+            toggleAppSelected(listedApps[index].app);
+          },
+          child: Stack(
+            children: [
+              if (selectedAppIds.contains(listedApps[index].app.id))
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withOpacity(0.2),
+                  ),
+                ),
+              if (listedApps[index].app.pinned)
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.push_pin,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+              if (hasUpdate)
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.circle,
+                      size: 10,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 12),
+                  getAppIcon(index),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      listedApps[index].name,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: listedApps[index].app.pinned
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      listedApps[index].author,
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                ],
+              ),
+              if (listedApps[index].downloadProgress != null)
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.black45,
+                    ),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        value: listedApps[index].downloadProgress! >= 0
+                            ? listedApps[index].downloadProgress! / 100
+                            : null,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      );
+    }
+
     getCategoryCollapsibleTile(int index) {
       var tiles = listedApps
           .asMap()
@@ -1242,6 +1394,21 @@ class AppsPageState extends State<AppsPage> {
           IconButton(
             color: Theme.of(context).colorScheme.primary,
             style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            tooltip: settingsProvider.useGridView
+                ? tr('listView')
+                : tr('gridView'),
+            onPressed: () {
+              settingsProvider.useGridView = !settingsProvider.useGridView;
+            },
+            icon: Icon(
+              settingsProvider.useGridView
+                  ? Icons.view_list_rounded
+                  : Icons.grid_view_rounded,
+            ),
+          ),
+          IconButton(
+            color: Theme.of(context).colorScheme.primary,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
             tooltip: isFilterOff
                 ? tr('filterApps')
                 : '${tr('filter')} - ${tr('remove')}',
@@ -1268,27 +1435,50 @@ class AppsPageState extends State<AppsPage> {
       );
     }
 
-getDisplayedList() {
-      return settingsProvider.groupByCategory &&
-              !(listedCategories.isEmpty ||
-                  (listedCategories.length == 1 && listedCategories[0] == null))
-          ? SliverList(
-              delegate: SliverChildBuilderDelegate((
-                BuildContext context,
-                int index,
-              ) {
-                return getCategoryCollapsibleTile(index);
-              }, childCount: listedCategories.length),
-            )
-          : SliverList(
-              delegate: SliverChildBuilderDelegate((
-                BuildContext context,
-                int index,
-              ) {
-                return getSingleAppHorizTile(index);
-              }, childCount: listedApps.length),
-            );
-}
+    getDisplayedList() {
+      if (settingsProvider.groupByCategory &&
+          !(listedCategories.isEmpty ||
+              (listedCategories.length == 1 && listedCategories[0] == null))) {
+        // Category View
+        return SliverList(
+          delegate: SliverChildBuilderDelegate((
+            BuildContext context,
+            int index,
+          ) {
+            // For now, Category view remains as list of ExpansionTiles
+            return getCategoryCollapsibleTile(index);
+          }, childCount: listedCategories.length),
+        );
+      } else {
+        // Flat View
+        if (settingsProvider.useGridView) {
+          return SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 150,
+              childAspectRatio: 0.8,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+            ),
+            delegate: SliverChildBuilderDelegate((
+              BuildContext context,
+              int index,
+            ) {
+              return getSingleAppGridTile(index);
+            }, childCount: listedApps.length),
+          );
+        } else {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate((
+              BuildContext context,
+              int index,
+            ) {
+              return getSingleAppHorizTile(index);
+            }, childCount: listedApps.length),
+          );
+        }
+      }
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: RefreshIndicator(

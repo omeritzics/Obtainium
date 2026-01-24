@@ -534,4 +534,13 @@ class SettingsProvider with ChangeNotifier {
     prefs?.setBool('useFGService', val);
     notifyListeners();
   }
+
+  bool get useGridView {
+    return prefs?.getBool('useGridView') ?? false;
+  }
+
+  set useGridView(bool val) {
+    prefs?.setBool('useGridView', val);
+    notifyListeners();
+  }
 }
