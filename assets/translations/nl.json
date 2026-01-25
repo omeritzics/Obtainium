@@ -221,6 +221,8 @@
     "versionDetection": "Versieherkenning",
     "standardVersionDetection": "Standaard versieherkenning",
     "groupByCategory": "Groeperen op categorie",
+    "listView": "Lijstweergave",
+    "gridView": "Rasterweergave",
     "autoApkFilterByArch": "Probeer APK's te filteren op CPU-architectuur, indien mogelijk",
     "autoLinkFilterByArch": "Probeer links zo mogelijk te filteren op CPU-architectuur",
     "overrideSource": "Bron overschrijven",

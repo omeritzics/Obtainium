@@ -221,6 +221,8 @@
     "versionDetection": "Versiodetekto",
     "standardVersionDetection": "Norma versiodetekto",
     "groupByCategory": "Grupigi per kategorio",
+    "listView": "Lista vido",
+    "gridView": "Krada vido",
     "autoApkFilterByArch": "Provi filtri APKj per CPU-arkitekturo se ebla",
     "autoLinkFilterByArch": "Attempt to filter links by CPU architecture if possible",
     "overrideSource": "Substitui la fonton",

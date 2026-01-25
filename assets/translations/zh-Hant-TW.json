@@ -221,6 +221,8 @@
     "versionDetection": "版本偵測",
     "standardVersionDetection": "標準版本偵測",
     "groupByCategory": "按類別分組",
+    "listView": "列表檢視",
+    "gridView": "網格檢視",
     "autoApkFilterByArch": "如果可能，嘗試按 CPU 架構過濾 APK",
     "autoLinkFilterByArch": "若可能，自動根據 CPU 架構篩選連結",
     "overrideSource": "覆蓋來源",

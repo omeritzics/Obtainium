@@ -221,6 +221,8 @@
     "versionDetection": "Phát hiện phiên bản",
     "standardVersionDetection": "Phát hiện phiên bản tiêu chuẩn",
     "groupByCategory": "Nhóm theo danh mục",
+    "listView": "Chế độ xem danh sách",
+    "gridView": "Chế độ xem lưới",
     "autoApkFilterByArch": "Cố gắng lọc APK theo kiến trúc CPU nếu có thể",
     "autoLinkFilterByArch": "Cố gắng lọc các liên kết theo kiến trúc CPU nếu có thể.",
     "overrideSource": "Ghi đè nguồn",

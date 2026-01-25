@@ -221,6 +221,8 @@
     "versionDetection": "Versionsdetektering",
     "standardVersionDetection": "Standardversionsdetektering",
     "groupByCategory": "Gruppera via Kategori",
+    "listView": "Listvy",
+    "gridView": "Rutnätsvy",
     "autoApkFilterByArch": "Försök att filtrera APK-filer efter CPU-arkitektur om möjligt",
     "autoLinkFilterByArch": "Försök att filtrera länkar efter CPU-arkitektur om möjligt",
     "overrideSource": "Överskrid Källa",

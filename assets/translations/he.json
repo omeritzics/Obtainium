@@ -221,6 +221,8 @@
     "versionDetection": "זיהוי גרסה",
     "standardVersionDetection": "Standard version detection",
     "groupByCategory": "Group by category",
+    "listView": "תצוגת רשימה",
+    "gridView": "תצוגת רשת",
     "autoApkFilterByArch": "Attempt to filter APKs by CPU architecture if possible",
     "autoLinkFilterByArch": "Attempt to filter links by CPU architecture if possible",
     "overrideSource": "Override source",

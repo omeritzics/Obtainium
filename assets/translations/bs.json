@@ -221,6 +221,8 @@
     "versionDetection": "Otkrivanje verzije",
     "standardVersionDetection": "Detekcija standardne verzije",
     "groupByCategory": "Grupiši po kategoriji",
+    "listView": "Prikaz liste",
+    "gridView": "Prikaz mreže",
     "autoApkFilterByArch": "Pokušajte filtrirati APK-ove po arhitekturi procesora ako je moguće",
     "autoLinkFilterByArch": "Attempt to filter links by CPU architecture if possible",
     "overrideSource": "Premosti izvor",

@@ -221,6 +221,8 @@
     "versionDetection": "اكتشاف الإصدار",
     "standardVersionDetection": "اكتشاف الإصدار القياسي",
     "groupByCategory": "التجميع حسب التصنيف",
+    "listView": "عرض القائمة",
+    "gridView": "عرض الشبكة",
     "autoApkFilterByArch": "محاولة تصفية ملفات APK حسب بنية المعالج إذا أمكن",
     "autoLinkFilterByArch": "محاولة تصفية الروابط حسب بنية المعالج إذا أمكن",
     "overrideSource": "تجاوز المصدر",
