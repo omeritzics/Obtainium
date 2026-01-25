@@ -62,17 +62,17 @@ class AppInMemory {
 
   List<String> get certificateHashes {
     // https://developer.android.com/reference/android/content/pm/SigningInfo#getApkContentsSigners()
-    final signatures = this.hasMultipleSigners
+    final signatures = hasMultipleSigners
         ? installedInfo?.signingInfo?.apkContentSigners
         : installedInfo?.signingInfo?.signingCertificateHistory;
 
     return signatures?.map((signature) {
-      final digest = sha256.convert(signature);
-      return digest.bytes
-        .map((b) => b.toRadixString(16).padLeft(2, '0').toUpperCase())
-        .join(':');
-      }).toList() ??
-      [];
+          final digest = sha256.convert(signature);
+          return digest.bytes
+              .map((b) => b.toRadixString(16).padLeft(2, '0').toUpperCase())
+              .join(':');
+        }).toList() ??
+        [];
   }
 }
 
@@ -500,8 +500,9 @@ Future<File> downloadFile(
 
 Future<List<PackageInfo>> getAllInstalledInfo() async {
   return await pm.getInstalledPackages(
-      flags: PackageInfoFlags({PMFlag.getSigningCertificates})
-  ) ?? [];
+        flags: PackageInfoFlags({PMFlag.getSigningCertificates}),
+      ) ??
+      [];
 }
 
 Future<PackageInfo?> getInstalledInfo(
@@ -827,7 +828,7 @@ class AppsProvider with ChangeNotifier {
     // https://developer.android.com/reference/android/content/pm/PackageInstaller.SessionParams#setRequireUserAction(int)
     if (!(targetSDK != null && targetSDK >= requiredSDK)) {
       logs.add(
-        'App currently targets API ${targetSDK} which is too low for background updates (requires API ${requiredSDK}): ${app.id}',
+        'App currently targets API $targetSDK which is too low for background updates (requires API $requiredSDK): ${app.id}',
       );
       return false;
     }
