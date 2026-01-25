@@ -42,7 +42,7 @@ dependencies:
   http: ^1.6.0
   webview_flutter: ^4.13.1
   dynamic_color: ^1.8.1
-  material_color_utilities: ^0.13.0
+  material_color_utilities: ^0.11.1
   html: ^0.15.6
   shared_preferences: ^2.5.4
   url_launcher: ^6.3.2
