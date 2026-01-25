@@ -221,6 +221,8 @@
     "versionDetection": "Detekce verze",
     "standardVersionDetection": "Standardní detekce verze",
     "groupByCategory": "Seskupit podle kategorie",
+    "listView": "Zobrazení seznamu",
+    "gridView": "Zobrazení mřížky",
     "autoApkFilterByArch": "Pokud je to možné, pokuste se filtrovat soubory APK podle architektury procesoru",
     "autoLinkFilterByArch": "Pokusit se filtrovat odkazy podle architektury procesoru, pokud je to možné",
     "overrideSource": "Přepsat zdroj",

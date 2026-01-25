@@ -1,2 +1,63 @@
+# Qodo configuration: codebase context checks for Updatium
+# This file scopes which files Qodo can read for RAG/context,
+# enforces size limits, ignores binaries, and respects .gitignore.
+
 [rag_arguments]
 enable_rag = true
+
+# Restrict context to project source and documentation
+include_globs = [
+  "lib/**/*.dart",
+  "pubspec.yaml",
+  "analysis_options.yaml",
+  "README.md",
+  "LICENSE.md",
+  "assets/translations/*.json",
+  "fastlane/metadata/android/**/full_description.txt",
+  "fastlane/metadata/android/**/short_description.txt",
+  "fastlane/metadata/android/**/title.txt",
+]
+
+# Exclude heavy/binary/non-source paths and artifacts
+exclude_globs = [
+  "**/.git/**",
+  ".dart_tool/**",
+  "build/**",
+  "android/**/build/**",
+  "ios/**/build/**",
+  "web/**/build/**",
+  "docker/**",
+  "assets/graphics/**",
+  "assets/screenshots/**",
+  "fastlane/**/images/**",
+  "assets/fonts/**",
+  "assets/ca/**",
+  "**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.webp", "**/*.svg", "**/*.ico",
+  "**/*.mp4", "**/*.mov", "**/*.pdf", "**/*.zip", "**/*.apk",
+  "test/**",
+  "pubspec.lock",
+  "**/*.lock",
+]
+
+# Enforce limits to keep context small and fast
+max_file_size_kb = 256      # Skip files larger than 256KB
+max_files = 300             # Stop indexing after this many files
+ignore_binary_files = true  # Auto-skip non-text/binary files
+follow_gitignore = true     # Also ignore anything .gitignore ignores
+
+# Security/safety guardrails for context
+denylist_globs = [
+  "**/*.pem", "**/*.crt", "**/*.key", "**/*.jks", "**/*.keystore", "**/*.p12",
+  "**/.env", "**/secrets/**", "**/keys/**",
+  "**/google-services.json", "**/*-key.properties", "**/local.properties"
+]
+allow_outside_repo = false  # Disallow accessing files outside the repo root
+follow_symlinks = false     # Prevent following symbolic links to external files
+
+# Language hints to optimize indexing/parsing
+languages = ["dart", "yaml", "json", "toml", "shell"]
+
+# Optional tuning knobs (uncomment to use):
+# max_total_index_kb = 20480  # Cap the total size Qodo will index
+# index_comments = true       # Include comments in the index
+# index_tests = false         # Exclude tests even if included by include_globs

@@ -140,6 +140,9 @@ class AppsPageState extends State<AppsPage> {
   late TextEditingController _searchController;
   String _searchQuery = '';
 
+  // Cache gradient stops by category count to avoid recomputation
+  final Map<int, List<double>> _stopsCache = {};
+
   bool clearSelected() {
     if (selectedAppIds.isNotEmpty) {
       setState(() {
@@ -794,7 +797,27 @@ class AppsPageState extends State<AppsPage> {
       );
     }
 
-    getSingleAppGridTile(int index) {
+    List<double> _categoryStops(List<String> categories) {
+      final n = categories.length;
+      final cached = _stopsCache[n];
+      if (cached != null) return cached;
+      List<double> result;
+      if (n > 1) {
+        result = [
+          ...List<double>.generate(
+              n, (i) => ((i / (n - 1)) - 0.0001).clamp(0.0, 1.0)),
+          1.0,
+        ];
+      } else if (n == 1) {
+        result = const [0.9999, 1.0];
+      } else {
+        result = const [1.0];
+      }
+      _stopsCache[n] = result;
+      return result;
+    }
+
+    Widget getSingleAppGridTile(int index) {
       var hasUpdate =
           listedApps[index].app.installedVersion != null &&
           listedApps[index].app.installedVersion !=
@@ -803,22 +826,7 @@ class AppsPageState extends State<AppsPage> {
         context,
       ).colorScheme.surface.withAlpha(0).value;
       final categories = listedApps[index].app.categories;
-      final numCategories = categories.length;
-      List<double> stops;
-
-      if (numCategories > 1) {
-        stops = [
-          ...categories.asMap().entries.map(
-            (e) => ((e.key / (numCategories - 1)) - 0.0001).clamp(0.0, 1.0),
-          ),
-          1.0,
-        ];
-      } else if (numCategories == 1) {
-        stops = [0.9999, 1.0];
-      } else {
-        // numCategories is 0
-        stops = [1.0];
-      }
+      final stops = _categoryStops(categories);
 
       return Container(
         decoration: BoxDecoration(
@@ -895,6 +903,7 @@ class AppsPageState extends State<AppsPage> {
                 ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 12),
                   SizedBox(
@@ -911,17 +920,15 @@ class AppsPageState extends State<AppsPage> {
                     child: Text(
                       listedApps[index].name,
                       textAlign: TextAlign.center,
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: listedApps[index].app.pinned
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                        fontSize: 13,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
@@ -929,7 +936,7 @@ class AppsPageState extends State<AppsPage> {
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 11),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -1530,7 +1537,7 @@ class AppsPageState extends State<AppsPage> {
       );
     }
 
-    getDisplayedList() {
+    Widget getDisplayedList() {
       if (settingsProvider.groupByCategory &&
           !(listedCategories.isEmpty ||
               (listedCategories.length == 1 && listedCategories[0] == null))) {
@@ -1550,7 +1557,7 @@ class AppsPageState extends State<AppsPage> {
           return SliverGrid(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 150,
-              childAspectRatio: 0.8,
+              childAspectRatio: 0.7,
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,
             ),

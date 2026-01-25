@@ -73,3 +73,14 @@ jobs:
           draft: true
           files: build/app/outputs/flutter-apk/*.apk
           generate_release_notes: true
+
+      - name: Cleanup signing files
+        if: always()
+        run: |
+          if [ -n "$GITHUB_WORKSPACE" ]; then
+            rm -f "$GITHUB_WORKSPACE/upload-keystore.jks" || true
+            rm -f "$GITHUB_WORKSPACE/android/key.properties" || true
+            unset KEYSTORE_PASSWORD || true
+            unset KEY_PASSWORD || true
+            unset KEY_ALIAS || true
+          fi

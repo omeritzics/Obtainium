@@ -221,6 +221,8 @@
     "versionDetection": "Визначення версії",
     "standardVersionDetection": "Стандартне визначення версії",
     "groupByCategory": "Групувати за категоріями",
+    "listView": "Вигляд списку",
+    "gridView": "Вигляд сітки",
     "autoApkFilterByArch": "Спробувати фільтрувати APK за архітектурою ЦП, якщо можливо",
     "autoLinkFilterByArch": "Спробуйте відфільтрувати посилання за архітектурою процесора, якщо це можливо",
     "overrideSource": "Перевизначити джерело",

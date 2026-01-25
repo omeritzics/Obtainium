@@ -221,6 +221,8 @@
     "versionDetection": "Detecció de la versió",
     "standardVersionDetection": "Detecció de la versió estàndard",
     "groupByCategory": "Agrupa per categories",
+    "listView": "Vista de llista",
+    "gridView": "Vista de graella",
     "autoApkFilterByArch": "Intenta filtrar les APKs per l'aquitectura de la CPU, si és possible",
     "autoLinkFilterByArch": "Intenta filtrar els enllaços per l'aquitectura de la CPU, si és possible",
     "overrideSource": "Força la font",
