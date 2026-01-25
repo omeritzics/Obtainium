@@ -48,7 +48,8 @@ follow_gitignore = true     # Also ignore anything .gitignore ignores
 # Security/safety guardrails for context
 denylist_globs = [
   "**/*.pem", "**/*.crt", "**/*.key", "**/*.jks", "**/*.keystore", "**/*.p12",
-  "**/.env", "**/secrets/**", "**/keys/**"
+  "**/.env", "**/secrets/**", "**/keys/**",
+  "**/google-services.json", "**/*-key.properties", "**/local.properties"
 ]
 allow_outside_repo = false  # Disallow accessing files outside the repo root
 
