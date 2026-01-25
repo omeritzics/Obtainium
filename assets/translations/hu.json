@@ -221,6 +221,8 @@
     "versionDetection": "Verziófelismerés",
     "standardVersionDetection": "Alapértelmezett verziófelismerés",
     "groupByCategory": "Csoportosítás kategória alapján",
+    "listView": "Lista nézet",
+    "gridView": "Rács nézet",
     "autoApkFilterByArch": "APK-k CPU-architektúra szerinti szűrése, ha lehetséges",
     "autoLinkFilterByArch": "Hivatkozások CPU-architektúra szerinti szűrése, ha lehetséges",
     "overrideSource": "Forrás felülírása",

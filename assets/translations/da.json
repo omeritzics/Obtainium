@@ -221,6 +221,8 @@
     "versionDetection": "Versionsregistrering",
     "standardVersionDetection": "Standard versionsregistrering",
     "groupByCategory": "Gruppér efter kategori",
+    "listView": "Listevisning",
+    "gridView": "Gittervisning",
     "autoApkFilterByArch": "Forsøg at filtrere APK'er efter CPU-arkitektur, hvis muligt",
     "autoLinkFilterByArch": "Forsøg at filtrere links efter CPU-arkitektur, hvis det er muligt",
     "overrideSource": "Tilsidesæt kilde",

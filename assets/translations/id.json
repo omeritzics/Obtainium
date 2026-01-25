@@ -221,6 +221,8 @@
     "versionDetection": "Pendeteksi versi",
     "standardVersionDetection": "Pendeteksi versi standar",
     "groupByCategory": "Kelompokkan berdasarkan kategori",
+    "listView": "Tampilan daftar",
+    "gridView": "Tampilan kisi",
     "autoApkFilterByArch": "Coba filter APK berdasarkan arsitektur CPU jika memungkinkan",
     "autoLinkFilterByArch": "Mencoba memfilter tautan berdasarkan arsitektur CPU jika memungkinkan",
     "overrideSource": "Ganti sumber",

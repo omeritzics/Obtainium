@@ -14,10 +14,10 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: c9e144fae63231b5d1d7b88af779c314afcb6e83
-      url: "https://github.com/ImranR98/android_package_installer"
+      resolved-ref: df709614422dfb2a458f0289839827c722847a9d
+      url: "https://github.com/playbott/android_package_installer"
     source: git
-    version: "0.0.1"
+    version: "0.0.3"
   android_package_manager:
     dependency: "direct main"
     description:
@@ -657,7 +657,7 @@ packages:
     source: hosted
     version: "0.12.17"
   material_color_utilities:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: material_color_utilities
       sha256: f7142bb1154231d7ea5f96bc7bde4bda2a0945d2806bb11670e30b850d56bdec
