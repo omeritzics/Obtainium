@@ -247,7 +247,7 @@ class _UpdatiumState extends State<Updatium> {
     return null;
   }
 
-  Future<Future<ServiceRequestResult>> stopForegroundService() async {
+  Future<ServiceRequestResult?> stopForegroundService() async {
     if (await FlutterForegroundTask.isRunningService) {
       return await FlutterForegroundTask.stopService();
     }
