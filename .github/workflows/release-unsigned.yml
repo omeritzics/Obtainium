@@ -1,0 +1,76 @@
+name: Release Qama (without signing)
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Run Environment Sync
+        run: |
+          if [ -f "scripts/fix_environment.sh" ]; then
+            chmod +x scripts/fix_environment.sh
+            ./scripts/fix_environment.sh
+          else
+            echo "Sync script not found, skipping..."
+          fi
+
+      - name: Build APK (Debug Mode)
+        run: |
+          sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
+          
+          flutter build apk --debug --flavor normal
+          
+          mkdir -p build/outputs/
+          cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-qama-v26.${{ github.run_number }}.apk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Updatium-Qama-v26.${{ github.run_number }}
+          path: build/outputs/updatium-qama-v26.${{ github.run_number }}.apk
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: qama-v26.${{ github.run_number }}
+          name: "Updatium Qama v26.${{ github.run_number }}"
+          files: build/outputs/updatium-qama-v26.${{ github.run_number }}.apk
+          prerelease: true
+          draft: true
+          overwrite: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
