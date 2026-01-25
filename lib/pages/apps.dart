@@ -302,6 +302,17 @@ class AppsPageState extends State<AppsPage> {
       if (app.app.installedVersion == null && !(filter.includeNonInstalled)) {
         return false;
       }
+      // Search query filter
+      if (_searchQuery.isNotEmpty) {
+        final query = _searchQuery.toLowerCase();
+        final matchesName = app.name.toLowerCase().contains(query);
+        final matchesAuthor = app.author.toLowerCase().contains(query);
+        final matchesId = app.app.id.toLowerCase().contains(query);
+        
+        if (!matchesName && !matchesAuthor && !matchesId) {
+          return false;
+        }
+      }
       if (filter.nameFilter.isNotEmpty || filter.authorFilter.isNotEmpty) {
         List<String> nameTokens = filter.nameFilter
             .split(' ')
