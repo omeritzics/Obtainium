@@ -41,16 +41,18 @@ exclude_globs = [
 
 # Enforce limits to keep context small and fast
 max_file_size_kb = 256      # Skip files larger than 256KB
-max_files = 1500            # Stop indexing after this many files
+max_files = 800             # Stop indexing after this many files
 ignore_binary_files = true  # Auto-skip non-text/binary files
 follow_gitignore = true     # Also ignore anything .gitignore ignores
 
 # Security/safety guardrails for context
 denylist_globs = [
   "**/*.pem", "**/*.crt", "**/*.key", "**/*.jks", "**/*.keystore", "**/*.p12",
-  "**/.env", "**/secrets/**", "**/keys/**"
+  "**/.env", "**/secrets/**", "**/keys/**",
+  "**/google-services.json", "**/*-key.properties", "**/local.properties"
 ]
 allow_outside_repo = false  # Disallow accessing files outside the repo root
+follow_symlinks = false     # Prevent following symbolic links to external files
 
 # Language hints to optimize indexing/parsing
 languages = ["dart", "yaml", "json", "toml", "shell"]
