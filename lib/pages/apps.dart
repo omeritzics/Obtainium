@@ -234,10 +234,9 @@ class AppsPageState extends State<AppsPage> {
                     ),
                     onPressed: () {
                       _searchController.clear();
-                      setState(() {
-                        _searchQuery = '';
-                      });
                     },
+                  ),
+                ),
               ]
             : [],
         // Remove the onChanged callback entirely
