@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -1193,11 +1194,12 @@ class AppsPageState extends State<AppsPage> {
                           appsProvider.saveApps(
                             selectedApps.map((e) {
                               e.categories = categories;
-                            return e;
-                          }).toList(),
-                        );
-                      },
-                    ),
+                              return e;
+                            }).toList(),
+                          );
+                        },
+                      ),
+                    ],
                   ],
                 );
               },

@@ -294,7 +294,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
                         context: context,
                         builder: (BuildContext ctx) {
                           return ImportErrorDialog(
-                            urlsLength: selectedUrls.length,
+                            urlsLength: selectedUrls?.length ?? 0,
                             errors: errors,
                           );
                         },
@@ -365,7 +365,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
                       context: context,
                       builder: (BuildContext ctx) {
                         return ImportErrorDialog(
-                          urlsLength: selectedUrls.length,
+                          urlsLength: selectedUrls?.length ?? 0,
                           errors: errors,
                         );
                       },
