@@ -193,11 +193,6 @@ class AppsPageState extends State<AppsPage> {
     _debounce?.cancel();
     _searchController.dispose();
     super.dispose();
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
     super.dispose();
   }
 
