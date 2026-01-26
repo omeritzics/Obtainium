@@ -543,7 +543,7 @@ class AppsPageState extends State<AppsPage> {
                       listedApps[appIndex].app.id,
                     ], globalNavigatorKey.currentContext)
                     .catchError((e) {
-                      showError(e, context);
+                      if (mounted) showError(e, context);
                       return <String>[];
                     });
               },
@@ -1123,11 +1123,11 @@ class AppsPageState extends State<AppsPage> {
                         globalNavigatorKey.currentContext,
                       )
                       .catchError((e) {
-                        showError(e, context);
+                        if (mounted) showError(e, context);
                         return <String>[];
                       })
                       .then((value) {
-                        if (value.isNotEmpty && shouldInstallUpdates) {
+                        if (value.isNotEmpty && shouldInstallUpdates && mounted) {
                           showMessage(tr('appsUpdated'), context);
                         }
                       });
@@ -1169,23 +1169,24 @@ class AppsPageState extends State<AppsPage> {
                 null;
           }
           if (cont) {
-            // ignore: use_build_context_synchronously
-            await showDialog<Map<String, dynamic>?>(
-              context: context,
-              builder: (BuildContext ctx) {
-                return GeneratedFormModal(
-                  title: tr('categorize'),
-                  items: const [],
-                  initValid: true,
-                  singleNullReturnButton: tr('continue'),
-                  additionalWidgets: [
-                    CategoryEditorSelector(
-                      preselected: !showPrompt ? preselected ?? {} : {},
-                      showLabelWhenNotEmpty: false,
-                      onSelected: (categories) {
-                        appsProvider.saveApps(
-                          selectedApps.map((e) {
-                            e.categories = categories;
+            final ctx = context;
+            if (ctx.mounted) {
+              await showDialog<Map<String, dynamic>?>(
+                context: ctx,
+                builder: (BuildContext ctx2) {
+                  return GeneratedFormModal(
+                    title: tr('categorize'),
+                    items: const [],
+                    initValid: true,
+                    singleNullReturnButton: tr('continue'),
+                    additionalWidgets: [
+                      CategoryEditorSelector(
+                        preselected: !showPrompt ? preselected ?? {} : {},
+                        showLabelWhenNotEmpty: false,
+                        onSelected: (categories) {
+                          appsProvider.saveApps(
+                            selectedApps.map((e) {
+                              e.categories = categories;
                             return e;
                           }).toList(),
                         );

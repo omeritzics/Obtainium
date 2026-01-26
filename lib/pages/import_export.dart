@@ -87,27 +87,32 @@ class _ImportExportPageState extends State<ImportExportPage> {
               .addAppsByURL(urls)
               .then((errors) {
                 if (errors.isEmpty) {
-                  showMessage(
-                    tr(
-                      'importedX',
-                      args: [plural('apps', urls.length).toLowerCase()],
-                    ),
-                    context,
-                  );
+                  if (mounted) {
+                    showMessage(
+                      tr(
+                        'importedX',
+                        args: [plural('apps', urls.length).toLowerCase()],
+                      ),
+                      context,
+                    );
+                  }
                 } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext ctx) {
-                      return ImportErrorDialog(
-                        urlsLength: urls.length,
-                        errors: errors,
-                      );
-                    },
-                  );
+                  final ctx2 = context;
+                  if (ctx2.mounted) {
+                    showDialog(
+                      context: ctx2,
+                      builder: (BuildContext ctx) {
+                        return ImportErrorDialog(
+                          urlsLength: urls.length,
+                          errors: errors,
+                        );
+                      },
+                    );
+                  }
                 }
               })
               .catchError((e) {
-                showError(e, context);
+                if (mounted) showError(e, context);
               })
               .whenComplete(() {
                 setState(() {
@@ -127,12 +132,12 @@ class _ImportExportPageState extends State<ImportExportPage> {
             sp: settingsProvider,
           )
           .then((String? result) {
-            if (result != null) {
+            if (result != null && mounted) {
               showMessage(tr('exportedTo', args: [result]), context);
             }
           })
           .catchError((e) {
-            showError(e, context);
+            if (mounted) showError(e, context);
           });
     }
 
@@ -161,17 +166,19 @@ class _ImportExportPageState extends State<ImportExportPage> {
                   }
                 });
                 appsProvider.addMissingCategories(settingsProvider);
-                showMessage(
-                  '${tr('importedX', args: [plural('apps', value.key.length).toLowerCase()])}${value.value ? ' + ${tr('settings').toLowerCase()}' : ''}',
-                  context,
-                );
+                if (mounted) {
+                  showMessage(
+                    '${tr('importedX', args: [plural('apps', value.key.length).toLowerCase()])}${value.value ? ' + ${tr('settings').toLowerCase()}' : ''}',
+                    context,
+                  );
+                }
               });
             } else {
               // User canceled the picker
             }
           })
           .catchError((e) {
-            showError(e, context);
+            if (mounted) showError(e, context);
           })
           .whenComplete(() {
             setState(() {
@@ -251,44 +258,48 @@ class _ImportExportPageState extends State<ImportExportPage> {
                 querySettings: values,
               );
               if (urlsWithDescriptions.isNotEmpty) {
-                var selectedUrls =
-                    // ignore: use_build_context_synchronously
-                    await showDialog<List<String>?>(
-                      context: context,
-                      builder: (BuildContext ctx) {
-                        return SelectionModal(
-                          entries: urlsWithDescriptions,
-                          selectedByDefault: false,
-                        );
-                      },
-                    );
+                List<String>? selectedUrls;
+                final ctx2 = context;
+                if (ctx2.mounted) {
+                  selectedUrls = await showDialog<List<String>?>(
+                    context: ctx2,
+                    builder: (BuildContext ctx) {
+                      return SelectionModal(
+                        entries: urlsWithDescriptions,
+                        selectedByDefault: false,
+                      );
+                    },
+                  );
+                }
                 if (selectedUrls != null && selectedUrls.isNotEmpty) {
                   var errors = await appsProvider.addAppsByURL(
                     selectedUrls,
                     sourceOverride: source,
                   );
                   if (errors.isEmpty) {
-                    // ignore: use_build_context_synchronously
-                    showMessage(
-                      tr(
-                        'importedX',
-                        args: [
-                          plural('apps', selectedUrls.length).toLowerCase(),
-                        ],
-                      ),
-                      context,
-                    );
+                    if (mounted) {
+                      showMessage(
+                        tr(
+                          'importedX',
+                          args: [
+                            plural('apps', selectedUrls.length).toLowerCase(),
+                          ],
+                        ),
+                        context,
+                      );
+                    }
                   } else {
-                    // ignore: use_build_context_synchronously
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext ctx) {
-                        return ImportErrorDialog(
-                          urlsLength: selectedUrls.length,
-                          errors: errors,
-                        );
-                      },
-                    );
+                    if (mounted) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext ctx) {
+                          return ImportErrorDialog(
+                            urlsLength: selectedUrls.length,
+                            errors: errors,
+                          );
+                        },
+                      );
+                    }
                   }
                 }
               } else {
@@ -297,7 +308,7 @@ class _ImportExportPageState extends State<ImportExportPage> {
             }
           }()
           .catchError((e) {
-            showError(e, context);
+            if (mounted) showError(e, context);
           })
           .whenComplete(() {
             setState(() {
@@ -326,42 +337,46 @@ class _ImportExportPageState extends State<ImportExportPage> {
               var urlsWithDescriptions = await source.getUrlsWithDescriptions(
                 values.values.map((e) => e.toString()).toList(),
               );
-              var selectedUrls =
-                  // ignore: use_build_context_synchronously
-                  await showDialog<List<String>?>(
-                    context: context,
-                    builder: (BuildContext ctx) {
-                      return SelectionModal(entries: urlsWithDescriptions);
-                    },
-                  );
+              List<String>? selectedUrls;
+              final ctx3 = context;
+              if (ctx3.mounted) {
+                selectedUrls = await showDialog<List<String>?>(
+                  context: ctx3,
+                  builder: (BuildContext ctx) {
+                    return SelectionModal(entries: urlsWithDescriptions);
+                  },
+                );
+              }
               if (selectedUrls != null) {
                 var errors = await appsProvider.addAppsByURL(selectedUrls);
                 if (errors.isEmpty) {
-                  // ignore: use_build_context_synchronously
-                  showMessage(
-                    tr(
-                      'importedX',
-                      args: [plural('apps', selectedUrls.length).toLowerCase()],
-                    ),
-                    context,
-                  );
+                  if (mounted) {
+                    showMessage(
+                      tr(
+                        'importedX',
+                        args: [plural('apps', selectedUrls.length).toLowerCase()],
+                      ),
+                      context,
+                    );
+                  }
                 } else {
-                  // ignore: use_build_context_synchronously
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext ctx) {
-                      return ImportErrorDialog(
-                        urlsLength: selectedUrls.length,
-                        errors: errors,
-                      );
-                    },
-                  );
+                  if (mounted) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext ctx) {
+                        return ImportErrorDialog(
+                          urlsLength: selectedUrls.length,
+                          errors: errors,
+                        );
+                      },
+                    );
+                  }
                 }
               }
             }
           }()
           .catchError((e) {
-            showError(e, context);
+            if (mounted) showError(e, context);
           })
           .whenComplete(() {
             setState(() {

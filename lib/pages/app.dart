@@ -86,8 +86,7 @@ class _AppPageState extends State<AppPage> {
           appsProvider.saveApps([appsProvider.apps[id]!.app]);
         }
       } catch (err) {
-        // ignore: use_build_context_synchronously
-        showError(err, context);
+        if (mounted) showError(err, context);
       } finally {
         setState(() {
           updating = false;
@@ -529,8 +528,7 @@ class _AppPageState extends State<AppPage> {
         app.app.additionalSettings = values;
         if (source?.enforceTrackOnly == true) {
           app.app.additionalSettings['trackOnly'] = true;
-          // ignore: use_build_context_synchronously
-          showMessage(tr('appsFromSourceAreTrackOnly'), context);
+          if (mounted) showMessage(tr('appsFromSourceAreTrackOnly'), context);
         }
         var versionDetectionEnabled =
             app.app.additionalSettings['versionDetection'] == true &&
@@ -580,16 +578,16 @@ class _AppPageState extends State<AppPage> {
                   app?.app.id != null ? [app!.app.id] : [],
                   globalNavigatorKey.currentContext,
                 );
-                if (res.isNotEmpty && !trackOnly) {
-                  // ignore: use_build_context_synchronously
+                if (res.isNotEmpty && !trackOnly && mounted) {
                   showMessage(successMessage, context);
                 }
                 if (res.isNotEmpty && mounted) {
                   Navigator.of(context).pop();
                 }
               } catch (e) {
-                // ignore: use_build_context_synchronously
-                showError(e, context);
+                if (mounted) {
+                  showError(e, context);
+                }
               }
             }
           : null,

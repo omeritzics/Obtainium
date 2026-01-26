@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:updatium/pages/home.dart';
 import 'package:updatium/providers/apps_provider.dart';
@@ -93,7 +94,9 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
   String taskId = task.taskId;
   bool isTimeout = task.timeout;
   if (isTimeout) {
-    print('BG update task timed out.');
+    if (kDebugMode) {
+      print('BG update task timed out.');
+    }
     BackgroundFetch.finish(taskId);
     return;
   }
@@ -111,7 +114,9 @@ class MyTaskHandler extends TaskHandler {
 
   @override
   Future<void> onStart(DateTime timestamp, TaskStarter starter) async {
-    print('onStart(starter: ${starter.name})');
+    if (kDebugMode) {
+      print('onStart(starter: ${starter.name})');
+    }
     bgUpdateCheck('bg_check', null);
   }
 
@@ -122,7 +127,9 @@ class MyTaskHandler extends TaskHandler {
 
   @override
   Future<void> onDestroy(DateTime timestamp, bool isTimeout) async {
-    print('Foreground service onDestroy(isTimeout: $isTimeout)');
+    if (kDebugMode) {
+      print('Foreground service onDestroy(isTimeout: $isTimeout)');
+    }
   }
 
   @override
@@ -341,7 +348,9 @@ class _UpdatiumState extends State<Updatium> {
                 }
               })
               .catchError((err) {
-                print(err);
+                if (kDebugMode) {
+                  print(err);
+                }
               });
         }
       }

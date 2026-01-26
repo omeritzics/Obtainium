@@ -18,6 +18,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/io_client.dart';
 import 'package:updatium/app_sources/directAPKLink.dart';
@@ -514,7 +515,9 @@ Future<PackageInfo?> getInstalledInfo(
       return await pm.getPackageInfo(packageName: packageName);
     } catch (e) {
       if (printErr) {
-        print(e); // OK
+        if (kDebugMode) {
+          print(e); // OK
+        }
       }
     }
   }
@@ -1074,18 +1077,20 @@ class AppsProvider with ChangeNotifier {
 
     if ((urlsToSelectFrom.length > 1 || evenIfSingleChoice) &&
         context != null) {
-      appFileUrl = await showDialog(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (BuildContext ctx) {
-          return AppFilePicker(
-            app: app,
-            initVal: appFileUrl,
-            archs: archs,
-            pickAnyAsset: pickAnyAsset,
-          );
-        },
-      );
+      final ctx = context;
+      if (ctx.mounted) {
+        appFileUrl = await showDialog(
+          context: ctx,
+          builder: (BuildContext ctx2) {
+            return AppFilePicker(
+              app: app,
+              initVal: appFileUrl,
+              archs: archs,
+              pickAnyAsset: pickAnyAsset,
+            );
+          },
+        );
+      }
     }
     getHost(String url) {
       if (url == 'placeholder') {
@@ -1102,19 +1107,21 @@ class AppsProvider with ChangeNotifier {
           'placeholder',
         ].contains(getHost(appFileUrl.value)) &&
         context != null) {
-      if (!(settingsProvider.hideAPKOriginWarning) &&
-          await showDialog(
-                // ignore: use_build_context_synchronously
-                context: context,
-                builder: (BuildContext ctx) {
-                  return APKOriginWarningDialog(
-                    sourceUrl: app.url,
-                    apkUrl: appFileUrl!.value,
-                  );
-                },
-              ) !=
-              true) {
-        appFileUrl = null;
+      final ctx = context;
+      if (ctx.mounted) {
+        if (!(settingsProvider.hideAPKOriginWarning) &&
+            await showDialog(
+                  context: ctx,
+                  builder: (BuildContext ctx2) {
+                    return APKOriginWarningDialog(
+                      sourceUrl: app.url,
+                      apkUrl: appFileUrl!.value,
+                    );
+                  },
+                ) !=
+                true) {
+          appFileUrl = null;
+        }
       }
     }
     return appFileUrl;
@@ -1153,8 +1160,8 @@ class AppsProvider with ChangeNotifier {
         await checkUpdate(apps[id]!.app.id);
       }
       if (!trackOnly) {
-        // ignore: use_build_context_synchronously
-        apkUrl = await confirmAppFileUrl(apps[id]!.app, context, false);
+        final safeCtx = (context != null && context.mounted) ? context : null;
+        apkUrl = await confirmAppFileUrl(apps[id]!.app, safeCtx, false);
       }
       if (apkUrl != null) {
         int urlInd = apps[id]!.app.apkUrls
@@ -1213,36 +1220,35 @@ class AppsProvider with ChangeNotifier {
             settingsProvider.shizukuPretendToBeGooglePlay ||
             apps[id]!.app.additionalSettings['shizukuPretendToBeGooglePlay'] ==
                 true;
+        final ctxForInstall = (contextIfNewInstall != null && contextIfNewInstall.mounted)
+            ? contextIfNewInstall
+            : null;
         if (downloadedFile != null) {
           if (needBGWorkaround) {
-            // ignore: use_build_context_synchronously
             installApk(
               downloadedFile,
-              contextIfNewInstall,
+              ctxForInstall,
               needsBGWorkaround: true,
               shizukuPretendToBeGooglePlay: shizukuPretendToBeGooglePlay,
             );
           } else {
-            // ignore: use_build_context_synchronously
             sayInstalled = await installApk(
               downloadedFile,
-              contextIfNewInstall,
+              ctxForInstall,
               shizukuPretendToBeGooglePlay: shizukuPretendToBeGooglePlay,
             );
           }
         } else {
           if (needBGWorkaround) {
-            // ignore: use_build_context_synchronously
             installApkDir(
               downloadedDir!,
-              contextIfNewInstall,
+              ctxForInstall,
               needsBGWorkaround: true,
             );
           } else {
-            // ignore: use_build_context_synchronously
             sayInstalled = await installApkDir(
               downloadedDir!,
-              contextIfNewInstall,
+              ctxForInstall,
               shizukuPretendToBeGooglePlay: shizukuPretendToBeGooglePlay,
             );
           }
@@ -1281,14 +1287,13 @@ class AppsProvider with ChangeNotifier {
       DownloadedApk? downloadedFile;
       DownloadedDir? downloadedDir;
       try {
-        var downloadedArtifact =
-            // ignore: use_build_context_synchronously
-            await downloadApp(
-              apps[id]!.app,
-              context,
-              notificationsProvider: notificationsProvider,
-              useExisting: useExisting,
-            );
+        final safeCtx = (context != null && context.mounted) ? context : null;
+        var downloadedArtifact = await downloadApp(
+          apps[id]!.app,
+          safeCtx,
+          notificationsProvider: notificationsProvider,
+          useExisting: useExisting,
+        );
         if (downloadedArtifact is DownloadedApk) {
           downloadedFile = downloadedArtifact;
         } else {
@@ -1312,9 +1317,8 @@ class AppsProvider with ChangeNotifier {
               throw UpdatiumError(tr('cancelled'));
           }
         }
-        if (!willBeSilent && context != null && !settingsProvider.useShizuku) {
-          // ignore: use_build_context_synchronously
-          await waitForUserToReturnToForeground(context);
+        if (!willBeSilent && safeCtx != null && !settingsProvider.useShizuku) {
+          await waitForUserToReturnToForeground(safeCtx);
         }
       } catch (e) {
         errors.add(id, e, appName: apps[id]?.name);
@@ -1382,10 +1386,10 @@ class AppsProvider with ChangeNotifier {
       }
       if (apps[id]!.app.apkUrls.isNotEmpty ||
           apps[id]!.app.otherAssetUrls.isNotEmpty) {
-        // ignore: use_build_context_synchronously
+        final safeCtx2 = (context != null && context.mounted) ? context : null;
         MapEntry<String, String>? tempFileUrl = await confirmAppFileUrl(
           apps[id]!.app,
-          context,
+          safeCtx2,
           true,
           evenIfSingleChoice: true,
         );
@@ -1859,33 +1863,37 @@ class AppsProvider with ChangeNotifier {
               a.additionalSettings['trackOnly'] != true,
         )
         .isNotEmpty;
-    var values = await showDialog(
-      context: context,
-      builder: (BuildContext ctx) {
-        return GeneratedFormModal(
-          primaryActionColor: Theme.of(context).colorScheme.error,
-          title: plural('removeAppQuestion', apps.length),
-          items: !showUninstallOption
-              ? []
-              : [
-                  [
-                    GeneratedFormSwitch(
-                      'rmAppEntry',
-                      label: tr('removeFromUpdatium'),
-                      defaultValue: true,
-                    ),
+    var values;
+    final ctx = context;
+    if (ctx.mounted) {
+      values = await showDialog(
+        context: ctx,
+        builder: (BuildContext ctx2) {
+          return GeneratedFormModal(
+            primaryActionColor: Theme.of(ctx).colorScheme.error,
+            title: plural('removeAppQuestion', apps.length),
+            items: !showUninstallOption
+                ? []
+                : [
+                    [
+                      GeneratedFormSwitch(
+                        'rmAppEntry',
+                        label: tr('removeFromUpdatium'),
+                        defaultValue: true,
+                      ),
+                    ],
+                    [
+                      GeneratedFormSwitch(
+                        'uninstallApp',
+                        label: tr('uninstallFromDevice'),
+                      ),
+                    ],
                   ],
-                  [
-                    GeneratedFormSwitch(
-                      'uninstallApp',
-                      label: tr('uninstallFromDevice'),
-                    ),
-                  ],
-                ],
-          initValid: true,
-        );
-      },
-    );
+            initValid: true,
+          );
+        },
+      );
+    }
     if (values != null) {
       bool uninstall = values['uninstallApp'] == true && showUninstallOption;
       bool remove = values['rmAppEntry'] == true || !showUninstallOption;
@@ -2363,7 +2371,9 @@ class _APKOriginWarningDialogState extends State<APKOriginWarningDialog> {
 ///
 Future<void> bgUpdateCheck(String taskId, Map<String, dynamic>? params) async {
   // ignore: avoid_print
-  print('BG task started $taskId: ${params.toString()}');
+  if (kDebugMode) {
+    print('BG task started $taskId: ${params.toString()}');
+  }
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await loadTranslations();
@@ -2461,9 +2471,11 @@ Future<void> bgUpdateCheck(String taskId, Map<String, dynamic>? params) async {
             .isBefore(DateTime.now());
     if (!enoughTimePassed) {
       // ignore: avoid_print
-      print(
-        'BG update task: Too early for another check (last check was ${appsProvider.settingsProvider.lastCompletedBGCheckTime.toIso8601String()}, interval is ${appsProvider.settingsProvider.updateInterval}).',
-      );
+      if (kDebugMode) {
+        print(
+          'BG update task: Too early for another check (last check was ${appsProvider.settingsProvider.lastCompletedBGCheckTime.toIso8601String()}, interval is ${appsProvider.settingsProvider.updateInterval}).',
+        );
+      }
       return;
     }
 

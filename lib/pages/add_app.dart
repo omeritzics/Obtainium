@@ -47,7 +47,7 @@ class AddAppPageState extends State<AddAppPage> {
       sourceProvider.getSource(input);
       changeUserInput(input, true, false, updateUrlInput: true);
     } catch (e) {
-      showError(e, context);
+      if (mounted) showError(e, context);
     }
   }
 
@@ -114,7 +114,7 @@ class AddAppPageState extends State<AddAppPage> {
       var useTrackOnly = userPickedTrackOnly || pickedSource!.enforceTrackOnly;
       if (useTrackOnly &&
           (!settingsProvider.hideTrackOnlyWarning || ignoreHideSetting)) {
-        // ignore: use_build_context_synchronously
+        if (!mounted) return false;
         var values = await showDialog(
           context: context,
           builder: (BuildContext ctx) {
@@ -146,19 +146,21 @@ class AddAppPageState extends State<AddAppPage> {
     getReleaseDateAsVersionConfirmationIfNeeded(
       bool userPickedTrackOnly,
     ) async {
-      return (!(additionalSettings['releaseDateAsVersion'] == true &&
-          // ignore: use_build_context_synchronously
-          await showDialog(
-                context: context,
-                builder: (BuildContext ctx) {
-                  return GeneratedFormModal(
-                    title: tr('releaseDateAsVersion'),
-                    items: const [],
-                    message: tr('releaseDateAsVersionExplanation'),
-                  );
-                },
-              ) ==
-              null));
+      if (additionalSettings['releaseDateAsVersion'] == true) {
+        if (!mounted) return false;
+        final res = await showDialog(
+          context: context,
+          builder: (BuildContext ctx) {
+            return GeneratedFormModal(
+              title: tr('releaseDateAsVersion'),
+              items: const [],
+              message: tr('releaseDateAsVersionExplanation'),
+            );
+          },
+        );
+        return res != null;
+      }
+      return true;
     }
 
     addApp({bool resetUserInputAfter = false}) async {
@@ -178,15 +180,14 @@ class AddAppPageState extends State<AddAppPage> {
             userInput.trim(),
             additionalSettings,
             trackOnlyOverride: trackOnly,
-            sourceIsOverriden: pickedSourceOverride != null,
             inferAppIdIfOptional: inferAppIdIfOptional,
           );
           // Only download the APK here if you need to for the package ID
           if (isTempId(app) && app.additionalSettings['trackOnly'] != true) {
-            // ignore: use_build_context_synchronously
+            final safeCtx = mounted ? context : null;
             var apkUrl = await appsProvider.confirmAppFileUrl(
               app,
-              context,
+              safeCtx,
               false,
             );
             if (apkUrl == null) {
@@ -196,7 +197,6 @@ class AddAppPageState extends State<AddAppPage> {
                 .map((e) => e.value)
                 .toList()
                 .indexOf(apkUrl.value);
-            // ignore: use_build_context_synchronously
             var downloadedArtifact = await appsProvider.downloadApp(
               app,
               globalNavigatorKey.currentContext,
@@ -228,7 +228,7 @@ class AddAppPageState extends State<AddAppPage> {
           );
         }
       } catch (e) {
-        showError(e, context);
+        if (mounted) showError(e, context);
       } finally {
         setState(() {
           gettingAppInfo = false;
@@ -418,19 +418,20 @@ class AddAppPageState extends State<AddAppPage> {
           if (res.isEmpty) {
             throw UpdatiumError(tr('noResults'));
           }
-          List<String>? selectedUrls = res.isEmpty
-              ? []
-              // ignore: use_build_context_synchronously
-              : await showDialog<List<String>?>(
-                  context: context,
-                  builder: (BuildContext ctx) {
-                    return SelectionModal(
-                      entries: res.map((k, v) => MapEntry(k, v.value)),
-                      selectedByDefault: false,
-                      onlyOneSelectionAllowed: true,
-                    );
-                  },
+          List<String>? selectedUrls;
+          final ctx4 = context;
+          if (ctx4.mounted) {
+            selectedUrls = await showDialog<List<String>?>(
+              context: ctx4,
+              builder: (BuildContext ctx) {
+                return SelectionModal(
+                  entries: res.map((k, v) => MapEntry(k, v.value)),
+                  selectedByDefault: false,
+                  onlyOneSelectionAllowed: true,
                 );
+              },
+            );
+          }
           if (selectedUrls != null && selectedUrls.isNotEmpty) {
             var sourceName = res[selectedUrls[0]]?.key;
             changeUserInput(
@@ -443,7 +444,7 @@ class AddAppPageState extends State<AddAppPage> {
           }
         }
       } catch (e) {
-        showError(e, context);
+        if (mounted) showError(e, context);
       } finally {
         setState(() {
           searching = false;
