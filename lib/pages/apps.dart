@@ -49,36 +49,36 @@ void showChangeLogDialog(
                     style: const TextStyle(
                       decoration: TextDecoration.underline,
                       fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                  onTap: () {
-                    launchUrlString(
-                      changesUrl,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
-                )
-              : const SizedBox.shrink(),
-          changesUrl != null
-              ? const SizedBox(height: 16)
-              : const SizedBox.shrink(),
-          appSource.changeLogIfAnyIsMarkDown
-              ? SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 350,
-                  child: Markdown(
-                    styleSheet: MarkdownStyleSheet(
-                      blockquoteDecoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                      ),
-                    ),
-                    data: changeLog,
-                    onTapLink: (text, href, title) {
-                      if (href != null) {
-                        launchUrlString(
-                          href.startsWith('http://') ||
-                                  href.startsWith('https://')
-                              ? href
+                    if (cont) {
+                      final ctx = context;
+                      if (ctx.mounted) {
+                        await showDialog<Map<String, dynamic>?>(
+                          context: ctx,
+                          builder: (BuildContext ctx2) {
+                            return GeneratedFormModal(
+                              title: tr('categorize'),
+                              items: const [],
+                              initValid: true,
+                              singleNullReturnButton: tr('continue'),
+                              additionalWidgets: [
+                                CategoryEditorSelector(
+                                  preselected: !showPrompt ? preselected ?? {} : {},
+                                  showLabelWhenNotEmpty: false,
+                                  onSelected: (categories) {
+                                    appsProvider.saveApps(
+                                      selectedApps.map((e) {
+                                        e.categories = categories;
+                                        return e;
+                                      }).toList(),
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    }
                               : '${Uri.parse(app.url).origin}/$href',
                           mode: LaunchMode.externalApplication,
                         );
