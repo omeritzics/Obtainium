@@ -179,6 +179,17 @@ class AppsPageState extends State<AppsPage> {
     _searchController = TextEditingController();
     _searchController.addListener(() {
       if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+      // If the search text is cleared, update the UI immediately.
+      if (_searchController.text.isEmpty) {
+        if (mounted) {
+          setState(() {
+            _searchQuery = '';
+          });
+        }
+        return;
+      }
+
       _debounce = Timer(const Duration(milliseconds: 500), () {
         if (mounted) {
           setState(() {
