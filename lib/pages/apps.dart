@@ -170,20 +170,29 @@ class AppsPageState extends State<AppsPage> {
 
   var sourceProvider = SourceProvider();
 
+  Timer? _debounce;
+
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
     _searchController.addListener(() {
-      setState(() {
-        _searchQuery = _searchController.text;
+      if (_debounce?.isActive ?? false) _debounce!.cancel();
+      _debounce = Timer(const Duration(milliseconds: 500), () {
+        if (mounted) {
+          setState(() {
+            _searchQuery = _searchController.text;
+          });
+        }
       });
     });
   }
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _searchController.dispose();
+    super.dispose();
     super.dispose();
   }
 
@@ -234,10 +243,9 @@ class AppsPageState extends State<AppsPage> {
                     ),
                     onPressed: () {
                       _searchController.clear();
-                      setState(() {
-                        _searchQuery = '';
-                      _searchController.clear();
                     },
+                  ),
+                ),
               ]
             : [],
         // Remove the onChanged callback entirely
@@ -298,10 +306,9 @@ class AppsPageState extends State<AppsPage> {
       if (app.app.installedVersion == null && !(filter.includeNonInstalled)) {
         return false;
       }
-        final matchesAuthor = app.author?.toLowerCase().contains(query) ?? false;
       if (_searchQuery.isNotEmpty) {
         final query = _searchQuery.toLowerCase();
-        final name = app.name.toLowerCase();
+        final name = (app.name ?? '').toLowerCase();
         final author = (app.author ?? '').toLowerCase();
         final id = app.app.id.toLowerCase();
   
