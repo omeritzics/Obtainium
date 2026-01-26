@@ -183,6 +183,7 @@
     "install": "Instal·la",
     "markInstalled": "Marca com a instal·lada",
     "update": "Actualitza",
+    "updated": "Actualitzat",
     "markUpdated": "Marca com a actualitzada",
     "additionalOptions": "Opcions addicionals",
     "disableVersionDetection": "Desactiva la detecció de versions",

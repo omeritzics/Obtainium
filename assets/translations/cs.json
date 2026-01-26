@@ -183,6 +183,7 @@
     "install": "Instalovat",
     "markInstalled": "Označit jako nainstalovaný",
     "update": "Aktualizovat",
+    "updated": "Aktualizováno",
     "markUpdated": "Označit jako aktuální",
     "additionalOptions": "Další možnosti",
     "disableVersionDetection": "Deaktivovat detekci verze",

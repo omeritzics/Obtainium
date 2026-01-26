@@ -183,6 +183,7 @@
     "install": "Встановити",
     "markInstalled": "Позначити як встановлене",
     "update": "Оновити",
+    "updated": "Оновлено",
     "markUpdated": "Позначити як оновлене",
     "additionalOptions": "Додаткові опції",
     "disableVersionDetection": "Вимкнути визначення версії",

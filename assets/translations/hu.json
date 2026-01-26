@@ -183,6 +183,7 @@
     "install": "Telepítés",
     "markInstalled": "Telepítettnek jelölés",
     "update": "Frissítés",
+    "updated": "Frissített",
     "markUpdated": "Frissítettnek jelölés",
     "additionalOptions": "További beállítások",
     "disableVersionDetection": "Verziófelismerés letiltása",

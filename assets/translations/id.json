@@ -183,6 +183,7 @@
     "install": "Pasang",
     "markInstalled": "Tandai terpasang",
     "update": "perbarui",
+    "updated": "Telah diperbarui",
     "markUpdated": "Tandai diperbarui",
     "additionalOptions": "Opsi tambahan",
     "disableVersionDetection": "Nonaktifkan pendeteksi versi",

@@ -183,6 +183,7 @@
     "install": "インストール",
     "markInstalled": "インストール済みとしてマークする",
     "update": "アップデート",
+    "updated": "更新済み",
     "markUpdated": "アップデート済みとしてマークする",
     "additionalOptions": "追加のオプション",
     "disableVersionDetection": "バージョン検出を無効にする",

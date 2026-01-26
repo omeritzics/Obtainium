@@ -183,6 +183,7 @@
     "install": "Cài đặt",
     "markInstalled": "Đánh dấu là đã cài đặt",
     "update": "Cập nhật",
+    "updated": "Đã cập nhật",
     "markUpdated": "Đánh dấu đã cập nhật",
     "additionalOptions": "Tùy chọn bổ sung",
     "disableVersionDetection": "Tắt tính năng phát hiện phiên bản",

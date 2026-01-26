@@ -183,6 +183,7 @@
     "install": "Установить",
     "markInstalled": "Отметить установленным",
     "update": "Обновить",
+    "updated": "Обновлено",
     "markUpdated": "Отметить обновлённым",
     "additionalOptions": "Дополнительные настройки",
     "disableVersionDetection": "Отключить определение версии",

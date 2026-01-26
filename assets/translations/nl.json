@@ -183,6 +183,7 @@
     "install": "Installeren",
     "markInstalled": "Als geïnstalleerd markeren",
     "update": "Bijwerken",
+    "updated": "Bijgewerkt",
     "markUpdated": "Als bijgewerkt markeren",
     "additionalOptions": "Aanvullende opties",
     "disableVersionDetection": "Versieherkenning uitschakelen",

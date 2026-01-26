@@ -183,6 +183,7 @@
     "install": "نصب",
     "markInstalled": "علامت گذاری به عنوان نصب شده",
     "update": "به روز رسانی",
+    "updated": "به‌روز شده",
     "markUpdated": "علامت گذاری به روز شد",
     "additionalOptions": "گزینه های اضافی",
     "disableVersionDetection": "غیرفعال کردن تشخیص نسخه",

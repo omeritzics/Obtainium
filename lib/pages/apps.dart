@@ -440,11 +440,13 @@ class AppsPageState extends State<AppsPage> {
     }
 
     getUpdateButton(int appIndex) {
+      // Legacy single-icon updater - kept for backward compatibility but not used
+      // by the new FilledButton approach.
       return IconButton(
         visualDensity: VisualDensity.compact,
         color: Theme.of(context).colorScheme.primary,
-        tooltip:
-            listedApps[appIndex].app.additionalSettings['trackOnly'] == true
+        tooltip: listedApps[appIndex].app.additionalSettings['trackOnly'] ==
+                true
             ? tr('markUpdated')
             : tr('update'),
         onPressed: appsProvider.areDownloadsRunning()
@@ -543,75 +545,84 @@ class AppsPageState extends State<AppsPage> {
           listedApps[index].app.installedVersion != null &&
           listedApps[index].app.installedVersion !=
               listedApps[index].app.latestVersion;
-      Widget trailingRow = Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          hasUpdate ? getUpdateButton(index) : const SizedBox.shrink(),
-          hasUpdate ? const SizedBox(width: 5) : const SizedBox.shrink(),
-          GestureDetector(
-            onTap: showChangesFn,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color:
-                    settingsProvider.highlightTouchTargets &&
-                        showChangesFn != null
-                    ? (Theme.of(context).brightness == Brightness.light
-                              ? Theme.of(context).primaryColor
-                              : Theme.of(context).primaryColorLight)
-                          .withAlpha(
-                            Theme.of(context).brightness == Brightness.light
-                                ? 20
-                                : 40,
-                          )
-                    : null,
-              ),
-              padding: settingsProvider.highlightTouchTargets
-                  ? const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0)
-                  : const EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width / 4,
-                        ),
-                        child: Text(
-                          getVersionText(index),
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.end,
-                          style: isVersionPseudo(listedApps[index].app)
-                              ? TextStyle(fontStyle: FontStyle.italic)
-                              : null,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        getChangesButtonString(index, showChangesFn != null),
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          decoration: showChangesFn != null
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+      // New trailing: show Install / Update button or Updated indicator
+      Widget trailingRow = Builder(builder: (ctx) {
+        final ai = listedApps[index];
+        final app = ai.app;
+        final isInstalled = app.installedVersion != null;
+        final hasUpdateLocal = isInstalled &&
+            app.installedVersion != app.latestVersion;
+        final isTrackOnly = app.additionalSettings['trackOnly'] == true;
+
+        Widget action;
+        if (isTrackOnly) {
+          action = const Icon(Icons.check_circle_outline);
+        } else if (!isInstalled) {
+          action = FilledButton.tonal(
+            onPressed: appsProvider.areDownloadsRunning()
+                ? null
+                : () {
+                    appsProvider
+                        .downloadAndInstallLatestApps([
+                          app.id,
+                        ],
+                            globalNavigatorKey
+                                .currentContext)
+                        .catchError((e) {
+                      showError(e, context);
+                      return <String>[];
+                    });
+                  },
+            style: const ButtonStyle(
+              visualDensity: VisualDensity.compact,
             ),
-          ),
-        ],
-      );
+            child: Text(tr('install')),
+          );
+        } else if (hasUpdateLocal) {
+          action = FilledButton.tonal(
+            onPressed: appsProvider.areDownloadsRunning()
+                ? null
+                : () {
+                    appsProvider
+                        .downloadAndInstallLatestApps([
+                          app.id,
+                        ],
+                            globalNavigatorKey
+                                .currentContext)
+                        .catchError((e) {
+                      showError(e, context);
+                      return <String>[];
+                    });
+                  },
+            style: const ButtonStyle(
+              visualDensity: VisualDensity.compact,
+            ),
+            child: Text(tr('update')),
+          );
+        } else {
+          action = Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: Colors.green[600],
+                size: 20,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                tr('updated'),
+                style: TextStyle(color: Colors.green[600]),
+              ),
+            ],
+          );
+        }
+
+        return SizedBox(
+          width: 120,
+          height: double.infinity,
+          child: Center(child: action),
+        );
+      });
 
       var transparent = Theme.of(
         context,
@@ -833,29 +844,109 @@ class AppsPageState extends State<AppsPage> {
                   const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      listedApps[index].name,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                    child: Flexible(
+                      child: Text(
+                        listedApps[index].name,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 2),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      listedApps[index].author,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 11),
+                    child: Flexible(
+                      child: Text(
+                        listedApps[index].author,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 11),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Builder(builder: (ctx) {
+                      final ai = listedApps[index];
+                      final app = ai.app;
+                      final isInstalled = app.installedVersion != null;
+                      final hasUpdateLocal = isInstalled &&
+                          app.installedVersion != app.latestVersion;
+                      final isTrackOnly = app.additionalSettings['trackOnly'] == true;
+
+                      if (isTrackOnly) {
+                        return const SizedBox.shrink();
+                      }
+
+                      if (!isInstalled) {
+                        return FilledButton.tonal(
+                          onPressed: appsProvider.areDownloadsRunning()
+                              ? null
+                              : () {
+                                  appsProvider
+                                      .downloadAndInstallLatestApps([
+                                        app.id,
+                                      ],
+                                          globalNavigatorKey.currentContext)
+                                      .catchError((e) {
+                                    showError(e, context);
+                                    return <String>[];
+                                  });
+                                },
+                          style: const ButtonStyle(
+                            visualDensity: VisualDensity.compact,
+                          ),
+                          child: Text(tr('install')),
+                        );
+                      }
+
+                      if (hasUpdateLocal) {
+                        return FilledButton.tonal(
+                          onPressed: appsProvider.areDownloadsRunning()
+                              ? null
+                              : () {
+                                  appsProvider
+                                      .downloadAndInstallLatestApps([
+                                        app.id,
+                                      ],
+                                          globalNavigatorKey.currentContext)
+                                      .catchError((e) {
+                                    showError(e, context);
+                                    return <String>[];
+                                  });
+                                },
+                          style: const ButtonStyle(
+                            visualDensity: VisualDensity.compact,
+                          ),
+                          child: Text(tr('update')),
+                        );
+                      }
+
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            color: Colors.green[600],
+                            size: 18,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            tr('updated'),
+                            style: TextStyle(color: Colors.green[600]),
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
                 ],
               ),
               if (listedApps[index].downloadProgress != null)
@@ -1473,7 +1564,7 @@ class AppsPageState extends State<AppsPage> {
           return SliverGrid(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 150,
-              childAspectRatio: 0.7,
+              childAspectRatio: 0.8,
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,
             ),

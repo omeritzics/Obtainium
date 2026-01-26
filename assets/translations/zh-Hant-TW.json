@@ -183,6 +183,7 @@
     "install": "安裝",
     "markInstalled": "標記為已安裝",
     "update": "更新",
+    "updated": "已更新",
     "markUpdated": "標記為已更新",
     "additionalOptions": "額外選項",
     "disableVersionDetection": "停用版本偵測",

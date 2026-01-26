@@ -183,6 +183,7 @@
     "install": "Yükle",
     "markInstalled": "Yüklü olarak işaretle",
     "update": "Güncelle",
+    "updated": "Güncellendi",
     "markUpdated": "Güncel olarak işaretle",
     "additionalOptions": "Ek seçenekler",
     "disableVersionDetection": "Sürüm algılamasını devre dışı bırak",

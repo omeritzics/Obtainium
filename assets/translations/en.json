@@ -183,6 +183,7 @@
     "install": "Install",
     "markInstalled": "Mark installed",
     "update": "Update",
+    "updated": "Updated",
     "markUpdated": "Mark updated",
     "additionalOptions": "Additional options",
     "disableVersionDetection": "Disable version detection",

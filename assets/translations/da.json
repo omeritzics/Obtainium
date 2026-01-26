@@ -183,6 +183,7 @@
     "install": "Installer",
     "markInstalled": "Markér som installeret",
     "update": "Opdater",
+    "updated": "Opdateret",
     "markUpdated": "Markér som opdateret",
     "additionalOptions": "Flere indstillinger",
     "disableVersionDetection": "Deaktivér versionsregistrering",

@@ -183,6 +183,7 @@
     "install": "ثبِّت",
     "markInstalled": "علِّم كمثبت",
     "update": "حدِّث",
+    "updated": "مُحدَّث",
     "markUpdated": "علِّم كمحدث",
     "additionalOptions": "خيارات إضافية",
     "disableVersionDetection": "عطّل اكتشاف الإصدار",

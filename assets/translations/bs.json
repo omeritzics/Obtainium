@@ -183,6 +183,7 @@
     "install": "Instaliraj",
     "markInstalled": "Označi kao instalirano",
     "update": "Nadogradi",
+    "updated": "Ažurirano",
     "markUpdated": "Označi kao ažurirano",
     "additionalOptions": "Dodatne opcije",
     "disableVersionDetection": "Onemogući detekciju verzije",

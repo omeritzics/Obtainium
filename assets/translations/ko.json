@@ -183,6 +183,7 @@
     "install": "설치",
     "markInstalled": "설치됨으로 표시",
     "update": "업데이트",
+    "updated": "업데이트됨",
     "markUpdated": "업데이트됨으로 표시",
     "additionalOptions": "추가 옵션",
     "disableVersionDetection": "버전 감지 비활성화",

@@ -183,6 +183,7 @@
     "install": "Installera",
     "markInstalled": "Märk Installerad",
     "update": "Uppdatera",
+    "updated": "Uppdaterad",
     "markUpdated": "Märk Uppdaterad",
     "additionalOptions": "Ytterligare Alternativ",
     "disableVersionDetection": "Inaktivera versionsdetektering",

@@ -183,6 +183,7 @@
     "install": "Installieren",
     "markInstalled": "Als installiert markieren",
     "update": "Aktualisieren",
+    "updated": "Aktuell",
     "markUpdated": "Als aktuell markieren",
     "additionalOptions": "Zusätzliche Optionen",
     "disableVersionDetection": "Versionserkennung deaktivieren",
