@@ -215,7 +215,7 @@ class SettingsProvider with ChangeNotifier {
   }
 
   bool get buryNonInstalled {
-    return prefs?.getBool('buryNonInstalled') ?? false;
+    return prefs?.getBool('buryNonInstalled') ?? true;
   }
 
   set buryNonInstalled(bool show) {
