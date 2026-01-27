@@ -973,7 +973,8 @@ class AppsPageState extends State<AppsPage> {
     }
 
     getCategoryCollapsibleTile(int index) {
-      var tiles = listedApps
+      // Collect indices of listedApps that belong to this category
+      var indices = listedApps
           .asMap()
           .entries
           .where(
@@ -982,10 +983,45 @@ class AppsPageState extends State<AppsPage> {
                 e.value.app.categories.isEmpty &&
                     listedCategories[index] == null,
           )
-          .map((e) => getSingleAppHorizTile(e.key))
+          .map((e) => e.key)
           .toList();
 
       capFirstChar(String str) => str[0].toUpperCase() + str.substring(1);
+
+      // If user prefers grid view, render a GridView inside the ExpansionTile.
+      if (settingsProvider.useGridView) {
+        return ExpansionTile(
+          initiallyExpanded: true,
+          title: Text(
+            capFirstChar(listedCategories[index] ?? tr('noCategory')),
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          controlAffinity: ListTileControlAffinity.leading,
+          trailing: Text(indices.length.toString()),
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 150,
+                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                ),
+                itemCount: indices.length,
+                itemBuilder: (ctx, i) {
+                  return getSingleAppGridTile(indices[i]);
+                },
+              ),
+            ),
+          ],
+        );
+      }
+
+      // Fallback: original list behaviour
+      var tiles = indices.map((i) => getSingleAppHorizTile(i)).toList();
       return ExpansionTile(
         initiallyExpanded: true,
         title: Text(
