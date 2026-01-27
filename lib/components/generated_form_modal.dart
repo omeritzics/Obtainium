@@ -41,6 +41,8 @@ class _GeneratedFormModalState extends State<GeneratedFormModal> {
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       title: Text(widget.title),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,7 +67,7 @@ class _GeneratedFormModalState extends State<GeneratedFormModal> {
         ],
       ),
       actions: [
-        TextButton(
+        FilledButton.tonal(
           onPressed: () {
             Navigator.of(context).pop(null);
           },
@@ -76,11 +78,12 @@ class _GeneratedFormModalState extends State<GeneratedFormModal> {
           ),
         ),
         widget.singleNullReturnButton == null
-            ? TextButton(
+            ? FilledButton.tonal(
                 style: widget.primaryActionColor == null
                     ? null
-                    : TextButton.styleFrom(
-                        foregroundColor: widget.primaryActionColor,
+                    : ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(
+                            widget.primaryActionColor),
                       ),
                 onPressed: !valid
                     ? null

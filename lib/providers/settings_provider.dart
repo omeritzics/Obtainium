@@ -113,7 +113,7 @@ class SettingsProvider with ChangeNotifier {
   }
 
   bool get checkOnStart {
-    return prefs?.getBool('checkOnStart') ?? false;
+    return prefs?.getBool('checkOnStart') ?? true;
   }
 
   set checkOnStart(bool checkOnStart) {
