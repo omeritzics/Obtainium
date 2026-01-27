@@ -1020,7 +1020,7 @@ class AppsPageState extends State<AppsPage> {
         );
       }
 
-      // Fallback: original list behaviour
+      // Fallback: original list behavior
       var tiles = indices.map((i) => getSingleAppHorizTile(i)).toList();
       return ExpansionTile(
         initiallyExpanded: true,

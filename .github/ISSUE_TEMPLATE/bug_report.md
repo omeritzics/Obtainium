@@ -10,7 +10,7 @@ assignees: ''
 **Prerequisites**
 <!-- Please ensure your request is not part of an existing issue. -->
 <!-- Please ensure you have checked the Updatium Wiki. -->
-<!-- Please ensure your request is an actual bug and not intended behaviour (this is frequently the case for issues involving version strings and the HTML source. -->
+<!-- Please ensure your request is an actual bug and not intended behavior (this is frequently the case for issues involving version strings and the HTML source. -->
 
 **Describe the bug**
 <!-- A clear and concise description of what the bug is. -->
