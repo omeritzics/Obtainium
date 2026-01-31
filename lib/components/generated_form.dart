@@ -669,7 +669,7 @@ class _GeneratedFormState extends State<GeneratedForm> {
                           true
                       ? Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: TextButton.icon(
+                          child: FilledButton.tonal.icon(
                             onPressed: onAddPressed,
                             icon: const Icon(Icons.add),
                             label: Text(
@@ -745,9 +745,10 @@ class _GeneratedFormState extends State<GeneratedForm> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      TextButton.icon(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Theme.of(context).colorScheme.error,
+                      FilledButton.tonal.icon(
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all(
+                              Theme.of(context).colorScheme.error),
                         ),
                         onPressed: (values[fieldKey].length > 0)
                             ? () {
@@ -775,7 +776,7 @@ class _GeneratedFormState extends State<GeneratedForm> {
               child: Row(
                 children: [
                   Expanded(
-                    child: ElevatedButton.icon(
+                    child: FilledButton.tonal.icon(
                       onPressed: () {
                         values[fieldKey].add(
                           getDefaultValuesFromFormItems(

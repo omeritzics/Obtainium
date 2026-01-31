@@ -5,7 +5,7 @@
 [![Dependency review](https://github.com/omeritzics/Updatium/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/dependency-review.yml)
 [![OSV-Scanner](https://github.com/omeritzics/Updatium/actions/workflows/osv-scanner.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/osv-scanner.yml)
 
-Update your Android apps directly from the APK source. Forked from [Obtainium](https://github.com/ImranR98/Obtainium) due to the developer's problematic political views and his terrible behaviour towards Jewish people who wanted to contribute to his app.
+Update your Android apps directly from the APK source. Forked from [Obtainium](https://github.com/ImranR98/Obtainium) due to the developer's problematic political views and his terrible behavior towards Jewish people who wanted to contribute to his app.
 
 Updatium allows you to install and update apps directly from their releases pages or APK sources, and receive notifications when new releases are available.
 

@@ -15,13 +15,16 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return SliverAppBar(
       pinned: true,
       automaticallyImplyLeading: false,
-      expandedHeight: 100,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
+      elevation: 0,
+      expandedHeight: 112,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        titlePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         title: Text(
           widget.title,
-          style: TextStyle(
-            color: Theme.of(context).textTheme.bodyMedium!.color,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: Theme.of(context).textTheme.bodyMedium?.color,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
