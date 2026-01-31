@@ -1134,7 +1134,6 @@ class SourceProvider {
     CoolApk(),
     RockMods(),
     LiteAPKs(),
-    Moddroid(),
     Jenkins(),
     APKMirror(),
     TelegramApp(),
