@@ -168,8 +168,6 @@ class AppsPageState extends State<AppsPage> {
 
   var sourceProvider = SourceProvider();
 
-  final TextEditingController _searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     var appsProvider = context.watch<AppsProvider>();
@@ -752,83 +750,102 @@ class AppsPageState extends State<AppsPage> {
           listedApps[index].app.installedVersion != null &&
           listedApps[index].app.installedVersion !=
               listedApps[index].app.latestVersion;
-      return Card(
-        elevation: 0,
-        color: Theme.of(context).colorScheme.surfaceContainerLow,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24.0),
+      var transparent = Theme.of(
+        context,
+      ).colorScheme.surface.withAlpha(0).value;
+      final categories = listedApps[index].app.categories;
+      final stops = _categoryStops(categories);
+
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: LinearGradient(
+            stops: stops,
+            begin: const Alignment(-1, -1),
+            end: const Alignment(1, 1),
+            colors: [
+              ...listedApps[index].app.categories.map(
+                (e) => Color(
+                  settingsProvider.categories[e] ?? transparent,
+                ).withAlpha(40),
+              ),
+              Color(transparent),
+            ],
+          ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(24.0),
-            onTap: () {
-              if (selectedAppIds.isNotEmpty) {
-                toggleAppSelected(listedApps[index].app);
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AppPage(appId: listedApps[index].app.id),
-                  ),
-                );
-              }
-            },
-            onLongPress: () {
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            if (selectedAppIds.isNotEmpty) {
               toggleAppSelected(listedApps[index].app);
-            },
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                if (selectedAppIds.contains(listedApps[index].app.id))
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24.0),
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                      ),
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      AppPage(appId: listedApps[index].app.id),
+                ),
+              );
+            }
+          },
+          onLongPress: () {
+            toggleAppSelected(listedApps[index].app);
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              if (selectedAppIds.contains(listedApps[index].app.id))
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withOpacity(0.2),
                     ),
                   ),
-                if (listedApps[index].app.pinned)
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.push_pin,
-                        size: 16,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                ),
+              if (listedApps[index].app.pinned)
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.push_pin,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                if (hasUpdate)
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.circle,
-                        size: 10,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                ),
+              if (hasUpdate)
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.circle,
+                      size: 10,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 6),
-                    SizedBox(
-                      height: 64,
-                      width: 64,
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: getAppIcon(index),
-                      ),
+                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    height: 64,
+                    width: 64,
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: getAppIcon(index),
                     ),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Flexible(
                       child: Text(
                         listedApps[index].name,
                         textAlign: TextAlign.center,
@@ -840,9 +857,11 @@ class AppsPageState extends State<AppsPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 2),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  ),
+                  const SizedBox(height: 2),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Flexible(
                       child: Text(
                         listedApps[index].author,
                         textAlign: TextAlign.center,
@@ -851,12 +870,16 @@ class AppsPageState extends State<AppsPage> {
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 11),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Builder(builder: (ctx) {
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Builder(builder: (ctx) {
                       final ai = listedApps[index];
                       final app = ai.app;
                       final isInstalled = app.installedVersion != null;
-                      final hasUpdateLocal = isInstalled && app.installedVersion != app.latestVersion;
+                      final hasUpdateLocal = isInstalled &&
+                          app.installedVersion != app.latestVersion;
                       final isTrackOnly = app.additionalSettings['trackOnly'] == true;
 
                       if (isTrackOnly) {
@@ -924,26 +947,26 @@ class AppsPageState extends State<AppsPage> {
                         ],
                       );
                     }),
-                  ],
-                ),
-                if (listedApps[index].downloadProgress != null)
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24.0),
-                        color: Colors.black45,
-                      ),
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          value: listedApps[index].downloadProgress! >= 0
-                              ? listedApps[index].downloadProgress! / 100
-                              : null,
-                        ),
+                  ),
+                ],
+              ),
+              if (listedApps[index].downloadProgress != null)
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.black45,
+                    ),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        value: listedApps[index].downloadProgress! >= 0
+                            ? listedApps[index].downloadProgress! / 100
+                            : null,
                       ),
                     ),
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
       );
@@ -997,7 +1020,7 @@ class AppsPageState extends State<AppsPage> {
         );
       }
 
-      // Fallback: original list behavior
+      // Fallback: original list behaviour
       var tiles = indices.map((i) => getSingleAppHorizTile(i)).toList();
       return ExpansionTile(
         initiallyExpanded: true,
@@ -1529,7 +1552,23 @@ class AppsPageState extends State<AppsPage> {
                   : Icons.grid_view_rounded,
             ),
           ),
-          // Search handled by the top SearchBar; filter dialog remains available
+          IconButton(
+            color: Theme.of(context).colorScheme.primary,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            tooltip: isFilterOff
+                ? tr('filterApps')
+                : '${tr('filter')} - ${tr('remove')}',
+            onPressed: isFilterOff
+                ? showFilterDialog
+                : () {
+                    setState(() {
+                      filter = AppsFilter();
+                    });
+                  },
+            icon: Icon(
+              isFilterOff ? Icons.search_rounded : Icons.search_off_rounded,
+            ),
+          ),
           const SizedBox(width: 10),
           const VerticalDivider(),
           Expanded(
@@ -1599,27 +1638,6 @@ class AppsPageState extends State<AppsPage> {
             controller: scrollController,
             slivers: <Widget>[
               CustomAppBar(title: tr('appsString')),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-                  child: SearchBar<String>(
-                    controller: _searchController,
-                    elevation: 0,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.surfaceContainerHigh,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28.0),
-                    ),
-                    hintText: tr('search'),
-                    onChanged: (value) {
-                      setState(() {
-                        filter.nameFilter = value ?? '';
-                      });
-                    },
-                    onTap: () {},
-                  ),
-                ),
-              ),
               ...getLoadingWidgets(),
               getDisplayedList(),
             ],
@@ -1630,13 +1648,6 @@ class AppsPageState extends State<AppsPage> {
           ? null
           : [getFilterButtonsRow()],
     );
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    scrollController.dispose();
-    super.dispose();
   }
 
   void openAppById(String appId) {

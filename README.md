@@ -1,5 +1,6 @@
 # ![Updatium Icon](./assets/graphics/icon_small.png) Updatium
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/omeritzics/Updatium)](https://github.com/omeritzics/Updatium/releases/latest)
 [![Nightly Build](https://github.com/omeritzics/Updatium/actions/workflows/nightly.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/nightly.yml)
 [![Dependency review](https://github.com/omeritzics/Updatium/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/dependency-review.yml)
 [![OSV-Scanner](https://github.com/omeritzics/Updatium/actions/workflows/osv-scanner.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/osv-scanner.yml)
@@ -38,6 +39,8 @@ Currently supported App sources:
 - Direct APK Link
 - "HTML" (Fallback): Any other URL that returns an HTML page with links to APK files
 ## Download
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/omeritzics/Updatium)](https://github.com/omeritzics/Updatium/releases/latest)
+
 [![Download Nightly APK](https://img.shields.io/badge/Download-Nightly_APK-green?style=for-the-badge&logo=android)](https://github.com/omeritzics/Updatium/releases/tag/nightly-build)
 
 ## Limitations
